@@ -49,6 +49,21 @@ class TextCalculatorTest {
         return UNICODE_BLOCKS[RANDOM.nextInt(NUMBER_OF_BLOCKS_TO_CHOOSE_FROM)];
     }
 
+    @Test
+    void testRandomUnicodeCharsRejectsNegativeLength() {
+        Character.UnicodeBlock block = chooseBlock();
+        int badLen = -RANDOM.nextInt(128) - 1;
+        String msg = "Bad length " + badLen + " should cause exception";
+        Throwable t = assertThrows(NegativeArraySizeException.class, () -> {
+            String badResult = TextCalculator.randomUnicodeChars(badLen, block);
+            System.out.println(msg + " not given result \"" + badResult + "\"");
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
     private static void assertCharIsFromBlock(char ch, Character.UnicodeBlock expected) {
         Character.UnicodeBlock actual = Character.UnicodeBlock.of(ch);
         String msg = "Character '" + ch + "' (" + Character.getName(ch)
