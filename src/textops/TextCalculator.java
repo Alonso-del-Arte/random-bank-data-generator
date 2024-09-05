@@ -14,10 +14,6 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static String randomUnicodeChars(int len, Character.UnicodeBlock block) {
-        if (len < 0) {
-            String excMsg = "Length " + len + " is not valid";
-            throw new NegativeArraySizeException(excMsg);
-        }
         char[] characters = new char[len];
         Arrays.fill(characters, 'X');
         return new String(characters);
