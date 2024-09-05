@@ -56,7 +56,23 @@ class TextCalculatorTest {
         String msg = "Bad length " + badLen + " should cause exception";
         Throwable t = assertThrows(NegativeArraySizeException.class, () -> {
             String badResult = TextCalculator.randomUnicodeChars(badLen, block);
-            System.out.println(msg + " not given result \"" + badResult + "\"");
+            System.out.println(msg + ", not given result \"" + badResult + "\"");
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should contain bad length " + badLen;
+        assert excMsg.contains(Integer.toString(badLen)) : containsMsg;
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testRandomUnicodeCharsDefaultBlockRejectsNegativeLength() {
+        int badLen = -RANDOM.nextInt(128) - 1;
+        String msg = "Bad length " + badLen + " should cause exception";
+        Throwable t = assertThrows(NegativeArraySizeException.class, () -> {
+            String badResult = TextCalculator.randomUnicodeChars(badLen);
+            System.out.println(msg + ", not given result \"" + badResult + "\"");
         }, msg);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
