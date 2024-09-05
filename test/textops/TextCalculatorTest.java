@@ -61,6 +61,8 @@ class TextCalculatorTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should contain bad length " + badLen;
+        assert excMsg.contains(Integer.toString(badLen)) : containsMsg;
         System.out.println("\"" + excMsg + "\"");
     }
 
