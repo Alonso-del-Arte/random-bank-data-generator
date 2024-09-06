@@ -85,11 +85,13 @@ class TextCalculatorTest {
         for (int i = 0; i < numberOfCalls; i++) {
             String s = TextCalculator.randomASCIIChars(len);
             assertAllPrintingASCIICharacters(s);
+            assertEquals(len, s.length());
             results.add(s);
         }
-        System.out.println("After " + numberOfCalls
-                + " randomASCIIChars() calls, got results " + results);
         int actual = results.size();
+        System.out.println("After " + numberOfCalls
+                + " randomASCIIChars() calls, got " + actual + " results "
+                + results);
         String msg = "Expected at least " + expected + " distinct results, got "
                 + actual;
         assert actual >= expected : msg;
