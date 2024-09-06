@@ -23,7 +23,7 @@ public class TextCalculator {
             char ch = (char) (RANDOM.nextInt(95) + 32);
             characters[i] = ch;
         }
-        return "SORRY";// new String(characters);
+        return new String(characters);
     }
 
     // TODO: Write tests for this
