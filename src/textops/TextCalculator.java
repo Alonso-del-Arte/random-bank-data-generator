@@ -9,6 +9,10 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static String randomASCIIChars(int len) {
+        if (len < 0) {
+            String excMsg = "Length " + len + " is not valid";
+            throw new NegativeArraySizeException(excMsg);
+        }
         return "SORRY, NOT IMPLEMENTED YET";
     }
     // TODO: Write tests for this
