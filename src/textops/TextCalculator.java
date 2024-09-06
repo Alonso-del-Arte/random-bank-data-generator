@@ -14,14 +14,10 @@ public class TextCalculator {
      * @param len How long the result should be. For example, 25. May be 0, but
      *            preferably greater.
      * @return A {@code String} with as many characters as specified by {@code
-     * len}.
+     * len}. For example, "K$k1A6LQuRa@RDTkimg#$_w'1".
      * @throws NegativeArraySizeException If {@code len} is negative.
      */
     public static String randomASCIIChars(int len) {
-        if (len < 0) {
-            String excMsg = "Length " + len + " is not valid";
-            throw new NegativeArraySizeException(excMsg);
-        }
         char[] characters = new char[len];
         for (int i = 0; i < len; i++) {
             char ch = (char) (RANDOM.nextInt(95) + 32);
