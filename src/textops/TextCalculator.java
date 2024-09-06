@@ -43,12 +43,12 @@ public class TextCalculator {
     }
 
     // TODO: Write tests for this
-    public static String leftPad(String s) {
+    public static String leftPad(String s, int len) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
     // TODO: Write tests for this
-    public static String rightPad(String s) {
+    public static String rightPad(String s, int len) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
