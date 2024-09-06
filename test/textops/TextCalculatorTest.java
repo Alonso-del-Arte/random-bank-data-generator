@@ -49,6 +49,16 @@ class TextCalculatorTest {
         return UNICODE_BLOCKS[RANDOM.nextInt(NUMBER_OF_BLOCKS_TO_CHOOSE_FROM)];
     }
 
+    private void assertAllPrintingASCIICharacters(String s) {
+        char[] characters = s.toCharArray();
+        for (char ch : characters) {
+            String msg = "Character '" + ch + "' (" + Integer.toHexString(ch)
+                    + ") should be a printing ASCII character";
+            assert Character.UnicodeBlock.of(ch).equals(BASIC_LATIN) : msg;
+            assert !Character.isISOControl(ch) : msg;
+        }
+    }
+
     @Test
     void testRandomASCIICharsRejectsNegativeLength() {
         int badLen = -RANDOM.nextInt(128) - 1;
@@ -63,6 +73,26 @@ class TextCalculatorTest {
         String containsMsg = "Exception message should contain bad length " + badLen;
         assert excMsg.contains(Integer.toString(badLen)) : containsMsg;
         System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testRandomASCIIChars() {
+        System.out.println("randomASCIIChars");
+        int len = RANDOM.nextInt(16) + 4;
+        int numberOfCalls = RANDOM.nextInt(32) + 8;
+        int expected = 3 * numberOfCalls / 5;
+        Set<String> results = new HashSet<>(numberOfCalls);
+        for (int i = 0; i < numberOfCalls; i++) {
+            String s = TextCalculator.randomASCIIChars(len);
+            assertAllPrintingASCIICharacters(s);
+            results.add(s);
+        }
+        System.out.println("After " + numberOfCalls
+                + " randomASCIIChars() calls, got results " + results);
+        int actual = results.size();
+        String msg = "Expected at least " + expected + " distinct results, got "
+                + actual;
+        assert actual >= expected : msg;
     }
 
     @Test
