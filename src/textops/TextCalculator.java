@@ -8,6 +8,10 @@ import java.util.Random;
 public class TextCalculator {
 
     // TODO: Write tests for this
+    public static String randomASCIIChars(int len) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+    // TODO: Write tests for this
     public static String randomUnicodeChars(int len) {
         if (len < 0) {
             String excMsg = "Length " + len + " is not valid";
