@@ -3,6 +3,7 @@ package textops;
 import static currency.CurrencyAmountTest.RANDOM;
 
 import static java.lang.Character.UnicodeBlock.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -150,6 +151,17 @@ class TextCalculatorTest {
         for (char ch : compChars) {
             assertCharIsFromBlock(ch, block);
         }
+    }
+    
+    @Test
+    void testLeftPadLeavesUnchanged() {
+        LocalDateTime curr = LocalDateTime.now();
+        String expected = curr + " should be unchanged";
+        int len = expected.length();
+        String actual = TextCalculator.leftPad(expected, len);
+        String msg = "String \"" + expected
+                + "\" should be unchanged after left pad length " + len;
+        assertEquals(expected, actual, msg);
     }
 
 }
