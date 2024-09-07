@@ -4,6 +4,7 @@ import static currency.CurrencyAmountTest.RANDOM;
 
 import static java.lang.Character.UnicodeBlock.*;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -152,7 +153,7 @@ class TextCalculatorTest {
             assertCharIsFromBlock(ch, block);
         }
     }
-    
+
     @Test
     void testLeftPadLeavesUnchanged() {
         LocalDateTime curr = LocalDateTime.now();
@@ -162,6 +163,20 @@ class TextCalculatorTest {
         String msg = "String \"" + expected
                 + "\" should be unchanged after left pad length " + len;
         assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testLeftPad() {
+        System.out.println("leftPad");
+        String s = Integer.toString(RANDOM.nextInt());
+        int paddingLength = RANDOM.nextInt(8) + 2;
+        int len = paddingLength + s.length();
+        char[] padding = new char[paddingLength];
+        Arrays.fill(padding, ' ');
+        String pad = new String(padding);
+        String expected = pad + s;
+        String actual = TextCalculator.leftPad(s, len);
+        assertEquals(expected, actual);
     }
 
 }
