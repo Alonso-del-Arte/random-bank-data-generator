@@ -44,7 +44,7 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static String leftPad(String s, int len) {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return s;
     }
 
     // TODO: Write tests for this
