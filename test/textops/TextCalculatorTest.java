@@ -190,4 +190,19 @@ class TextCalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testUnnecessaryLeftPadDoesNotCauseException() {
+        LocalDateTime curr = LocalDateTime.now();
+        String expected = curr + " should be unchanged";
+        int len = expected.length();
+        int underLen = len - RANDOM.nextInt(len) - 1;
+        char paddingCharacter = choosePaddingCharacter();
+        String msg = "String \"" + expected
+                + "\" should be unchanged after left pad length " + underLen;
+        assertDoesNotThrow(() -> {
+            String actual = TextCalculator.leftPad(expected, underLen, paddingCharacter);
+            assertEquals(expected, actual, msg);
+        }, msg);
+    }
+
 }
