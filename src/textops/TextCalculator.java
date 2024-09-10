@@ -42,10 +42,20 @@ public class TextCalculator {
         return new String(characters);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Pads a {@code String} with a specified character.
+     * @param s The {@code String} to pad. For example, "Hello, world!".
+     * @param len The length the padded {@code String} should be. For example,
+     *            16.
+     * @param pad The character to pad with. For example, '_' (underscore).
+     * @return The padded {@code String}. For example, "___Hello, world!".
+     */
     public static String leftPad(String s, int len, char pad) {
-        int deficit;
-        return s;
+        int deficit = len - s.length();
+        char[] padding = new char[deficit];
+        Arrays.fill(padding, pad);
+        String prefix = new String(padding);
+        return prefix + s;
     }
 
     // TODO: Write tests for this
