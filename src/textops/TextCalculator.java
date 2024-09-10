@@ -55,7 +55,7 @@ public class TextCalculator {
         char[] padding = new char[deficit];
         Arrays.fill(padding, pad);
         String prefix = new String(padding);
-        return prefix + s;
+        return "SORRY, NOT IMPLEMENTED YET";// prefix + s;
     }
 
     // TODO: Write tests for this
