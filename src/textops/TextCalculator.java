@@ -52,6 +52,7 @@ public class TextCalculator {
      */
     public static String leftPad(String s, int len, char pad) {
         int deficit = len - s.length();
+        if (deficit <= 0) return s;
         char[] padding = new char[deficit];
         Arrays.fill(padding, pad);
         String prefix = new String(padding);
