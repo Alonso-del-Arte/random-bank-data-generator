@@ -13,6 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TextCalculatorTest {
 
+    private static final char[] PADDING_CHARACTERS = {' ', '0', 'X', '_', 'x'};
+
+    private static final int NUMBER_OF_PADDING_CHARACTERS
+            = PADDING_CHARACTERS.length;
+
     /**
      * A somewhat arbitrary selection of Unicode blocks from the Basic
      * Multilingual Plane (BMP) to be used in testing.
@@ -51,7 +56,7 @@ class TextCalculatorTest {
         return UNICODE_BLOCKS[RANDOM.nextInt(NUMBER_OF_BLOCKS_TO_CHOOSE_FROM)];
     }
 
-    private void assertAllPrintingASCIICharacters(String s) {
+    private static void assertAllPrintingASCIICharacters(String s) {
         char[] characters = s.toCharArray();
         for (char ch : characters) {
             String msg = "Character '" + ch + "' (" + Integer.toHexString(ch)
@@ -59,6 +64,10 @@ class TextCalculatorTest {
             assert Character.UnicodeBlock.of(ch).equals(BASIC_LATIN) : msg;
             assert !Character.isISOControl(ch) : msg;
         }
+    }
+
+    private static char choosePaddingCharacter() {
+        return PADDING_CHARACTERS[RANDOM.nextInt(NUMBER_OF_PADDING_CHARACTERS)];
     }
 
     @Test
@@ -159,7 +168,8 @@ class TextCalculatorTest {
         LocalDateTime curr = LocalDateTime.now();
         String expected = curr + " should be unchanged";
         int len = expected.length();
-        String actual = TextCalculator.leftPad(expected, len, ' ');
+        char paddingCharacter = choosePaddingCharacter();
+        String actual = TextCalculator.leftPad(expected, len, paddingCharacter);
         String msg = "String \"" + expected
                 + "\" should be unchanged after left pad length " + len;
         assertEquals(expected, actual, msg);
@@ -172,11 +182,11 @@ class TextCalculatorTest {
         int paddingLength = RANDOM.nextInt(8) + 2;
         int len = paddingLength + s.length();
         char[] padding = new char[paddingLength];
-        char padder = ' ';
-        Arrays.fill(padding, padder);
+        char paddingCharacter = choosePaddingCharacter();
+        Arrays.fill(padding, paddingCharacter);
         String pad = new String(padding);
         String expected = pad + s;
-        String actual = TextCalculator.leftPad(s, len, padder);
+        String actual = TextCalculator.leftPad(s, len, paddingCharacter);
         assertEquals(expected, actual);
     }
 
