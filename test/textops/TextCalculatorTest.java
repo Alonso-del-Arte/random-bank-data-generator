@@ -159,7 +159,7 @@ class TextCalculatorTest {
         LocalDateTime curr = LocalDateTime.now();
         String expected = curr + " should be unchanged";
         int len = expected.length();
-        String actual = TextCalculator.leftPad(expected, len);
+        String actual = TextCalculator.leftPad(expected, len, ' ');
         String msg = "String \"" + expected
                 + "\" should be unchanged after left pad length " + len;
         assertEquals(expected, actual, msg);
@@ -172,10 +172,11 @@ class TextCalculatorTest {
         int paddingLength = RANDOM.nextInt(8) + 2;
         int len = paddingLength + s.length();
         char[] padding = new char[paddingLength];
-        Arrays.fill(padding, ' ');
+        char padder = ' ';
+        Arrays.fill(padding, padder);
         String pad = new String(padding);
         String expected = pad + s;
-        String actual = TextCalculator.leftPad(s, len);
+        String actual = TextCalculator.leftPad(s, len, padder);
         assertEquals(expected, actual);
     }
 
