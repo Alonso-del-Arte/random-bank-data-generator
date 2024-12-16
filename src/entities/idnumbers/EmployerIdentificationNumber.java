@@ -4,9 +4,8 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
 
     private static final long serialVersionUID = 17808292273192961L;
 
-    // TODO: Write tests for this
     static boolean correctEINDashPlacement(String s) {
-        return s.indexOf('-') > 1;
+        return s.indexOf('-') == 2;
     }
 
     // TODO: Write tests for this
