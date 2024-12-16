@@ -22,10 +22,21 @@ class EmployerIdentificationNumberTest {
     }
 
     @Test
-    void testIncorrectEINDashPlacement() {
+    void testIncorrectEINDashPlacementPositionZero() {
         String intermediate = TextCalculator.leftPad(
                 Integer.toString(RANDOM.nextInt(1000000000)), 9, '0');
         String s = '-' + intermediate;
+        String msg = "Badly formed EIN " + s
+                + " should be found to have incorrect dash placement";
+        assert !EmployerIdentificationNumber.correctEINDashPlacement(s) : msg;
+    }
+
+    @Test
+    void testIncorrectEINDashPlacementPositionOne() {
+        String intermediate = TextCalculator.leftPad(
+                Integer.toString(RANDOM.nextInt(100000000)), 8, '0');
+        String prefix = Integer.toString(RANDOM.nextInt(10)) + '-';
+        String s = prefix + intermediate;
         String msg = "Badly formed EIN " + s
                 + " should be found to have incorrect dash placement";
         assert !EmployerIdentificationNumber.correctEINDashPlacement(s) : msg;
