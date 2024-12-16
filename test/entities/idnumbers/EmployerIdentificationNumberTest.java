@@ -57,4 +57,15 @@ class EmployerIdentificationNumberTest {
         }
     }
 
+    @Test
+    void testIncorrectEINDashPlacementPositionLast() {
+        String intermediate = TextCalculator.leftPad(
+                Integer.toString(RANDOM.nextInt(1000000000)), 9, '0'
+        );
+        String s = intermediate + '-';
+        String msg = "Badly formed EIN " + s
+                + " should be found to have incorrect dash placement";
+        assert !EmployerIdentificationNumber.correctEINDashPlacement(s) : msg;
+    }
+
 }
