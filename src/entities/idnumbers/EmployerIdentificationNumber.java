@@ -2,7 +2,6 @@ package entities.idnumbers;
 
 import java.io.Serial;
 
-import org.w3c.dom.Text;
 import textops.TextCalculator;
 
 public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
