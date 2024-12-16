@@ -68,4 +68,15 @@ class EmployerIdentificationNumberTest {
         assert !EmployerIdentificationNumber.correctEINDashPlacement(s) : msg;
     }
 
+    @Test
+    void testToString() {
+        System.out.println("toString");
+        int number = RANDOM.nextInt(1000000000);
+        EmployerIdentificationNumber instance = new EmployerIdentificationNumber(number);
+        String s = TextCalculator.leftPad(Integer.toString(number), 9, '0');
+        String expected = s.substring(0, 2) + '-' + s.substring(2);
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
+
 }
