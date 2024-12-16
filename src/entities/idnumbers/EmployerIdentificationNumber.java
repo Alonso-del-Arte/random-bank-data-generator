@@ -6,7 +6,7 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
 
     // TODO: Write tests for this
     static boolean correctEINDashPlacement(String s) {
-        return s.indexOf('-') != 0;
+        return s.indexOf('-') > 1;
     }
 
     // TODO: Write tests for this
