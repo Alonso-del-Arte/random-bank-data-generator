@@ -183,4 +183,31 @@ class CurrencyChooserTest {
         assert expected <= actual : msg;
     }
 
+    @Test
+    public void testChooseCurrencyOtherThan() {
+        System.out.println("chooseCurrencyOtherThan");
+        Currency someCurrency
+                = CurrencyChooser.chooseCurrencyOtherThan(DOLLARS);
+        int numberOfTries = 40;
+        Set<Currency> samples = new HashSet<>();
+        int sampleNumber = 0;
+        String currencyDisplayName = someCurrency.getDisplayName();
+        while (sampleNumber < numberOfTries) {
+            Currency sample
+                    = CurrencyChooser.chooseCurrencyOtherThan(someCurrency);
+            String msg = "Chosen currency " + sample.getDisplayName()
+                    + " expected to not be " + currencyDisplayName;
+            assert sample != someCurrency : msg;
+            samples.add(sample);
+            sampleNumber++;
+        }
+        int expected = 11 * numberOfTries / 20;
+        int actual = samples.size();
+        String msg = "Trying to pick " + numberOfTries + " other than "
+                + currencyDisplayName + " gave " + actual
+                + " distinct, should've given more than " + expected
+                + " distinct";
+        assert expected < actual : msg;
+    }
+
 }
