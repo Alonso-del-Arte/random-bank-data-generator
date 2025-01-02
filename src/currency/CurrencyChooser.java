@@ -101,7 +101,12 @@ public class CurrencyChooser {
             case 0 -> Currency.getInstance("JPY");
             case 2 -> Currency.getInstance("USD");
             case 3 -> Currency.getInstance("LYD");
-            default -> Currency.getInstance("CLF");
+            case 4 -> Currency.getInstance("CLF");
+            default -> {
+                String excMsg = "No available currency has " + fractionDigits
+                        + " fraction digits";
+                throw new NoSuchElementException(excMsg);
+            }
         };
     }
 
