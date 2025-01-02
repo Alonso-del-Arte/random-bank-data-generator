@@ -98,7 +98,12 @@ public class CurrencyChooser {
 
     public static Currency chooseCurrency(int fractionDigits) {
         return switch (fractionDigits) {
-            case 0 -> Currency.getInstance("JPY");
+            case 0 -> {
+                List<Currency> currencies
+                        = new ArrayList<>(CURRENCIES_DIGITS_MAP.get(0));
+                int index = RANDOM.nextInt(currencies.size());
+                yield currencies.get(index);
+            }
             case 2 -> Currency.getInstance("USD");
             case 3 -> Currency.getInstance("LYD");
             case 4 -> Currency.getInstance("CLF");
