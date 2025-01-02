@@ -97,10 +97,14 @@ public class CurrencyChooser {
     }
 
     public static Currency chooseCurrency(int fractionDigits) {
-        if (fractionDigits == 0) {
-            return Currency.getInstance("JPY");
-        } else {
-            return Currency.getInstance("USD");
+        switch (fractionDigits) {
+            case 0:
+                return Currency.getInstance("JPY");
+            case 2:
+                return Currency.getInstance("USD");
+            case 3:
+            default:
+                return Currency.getInstance("LYD");
         }
     }
 
