@@ -83,7 +83,7 @@ public class CurrencyChooser {
     }
 
     public static boolean isSuitableCurrency(Currency currency) {
-        return true;// CURRENCIES.contains(currency);
+        return CURRENCIES.contains(currency);
     }
 
     // TODO: Write tests for this
