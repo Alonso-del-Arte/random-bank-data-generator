@@ -89,12 +89,25 @@ class CurrencyChooserTest {
 
     @Test
     public void testGetSuitableCurrencies() {
+        System.out.println("getSuitableCurrencies");
         Set<Currency> currencies = Currency.getAvailableCurrencies();
         Set<Currency> expected = currencies.stream()
                 .filter(CurrencyChooserTest::accept)
                 .collect(Collectors.toSet());
         Set<Currency> actual = CurrencyChooser.getSuitableCurrencies();
         assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testIsSuitableCurrency() {
+        System.out.println("isSuitableCurrency");
+        Set<Currency> currencies = CurrencyChooser.getSuitableCurrencies();
+        for (Currency currency : currencies) {
+            String msg = "Currency " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode()
+                    + ") should be considered suitable";
+            assert CurrencyChooser.isSuitableCurrency(currency) : msg;
+        }
     }
 
 }
