@@ -82,9 +82,8 @@ public class CurrencyChooser {
         return new HashSet<>(CURRENCIES);
     }
 
-    // TODO: Write tests for this
     public static boolean isSuitableCurrency(Currency currency) {
-        return false;
+        return CURRENCIES.contains(currency);
     }
 
     // TODO: Write tests for this
