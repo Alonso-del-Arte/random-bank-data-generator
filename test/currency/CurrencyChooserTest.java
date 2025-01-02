@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -248,6 +249,32 @@ class CurrencyChooserTest {
         String message = "Chosen currency " + currency.getDisplayName()
                 + " should have " + expected + " default fraction digits";
         assertEquals(expected, actual, message);
+    }
+
+    @Test
+    public void testUnavailableFractionDigitsCauseException() {
+        Random random = new Random();
+        int bound = 128;
+        int unlikelyFractionDigits = bound + random.nextInt(bound);
+        String msg = "Asking for currency with " + unlikelyFractionDigits
+                + " fraction digits should cause exception";
+        Throwable t = assertThrows(NoSuchElementException.class, () -> {
+            Currency badCurrency
+                    = CurrencyChooser.chooseCurrency(unlikelyFractionDigits);
+            System.out.println("Somehow asking for currency with "
+                    + unlikelyFractionDigits + " fraction digits gave "
+                    + badCurrency.getDisplayName() + " ("
+                    + badCurrency.getCurrencyCode() + "), which only has "
+                    + badCurrency.getDefaultFractionDigits()
+                    + " fraction digits");
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+        String digitString = Integer.toString(unlikelyFractionDigits);
+        String containsMsg = "Exception message should include \"" + digitString
+                + "\"";
+        assert excMsg.contains(digitString) : containsMsg;
     }
 
 }
