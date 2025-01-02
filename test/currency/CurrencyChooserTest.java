@@ -95,7 +95,7 @@ class CurrencyChooserTest {
                 .filter(CurrencyChooserTest::accept)
                 .collect(Collectors.toSet());
         Set<Currency> actual = CurrencyChooser.getSuitableCurrencies();
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -121,6 +121,19 @@ class CurrencyChooserTest {
                     + ") should not be considered suitable";
             assert !CurrencyChooser.isSuitableCurrency(currency) : msg;
         }
+    }
+
+    @Test
+    public void testChoosePseudocurrency() {
+        System.out.println("choosePseudocurrency");
+        int initialCapacity = PSEUDO_CURRENCIES.size();
+        int numberOfCalls = initialCapacity * 10;
+        Set<Currency> actual = new HashSet<>(initialCapacity);
+        for (int i = 0; i < numberOfCalls; i++) {
+            Currency pseudocurrency = CurrencyChooser.choosePseudocurrency();
+            actual.add(pseudocurrency);
+        }
+        assertEquals(PSEUDO_CURRENCIES, actual);
     }
 
 }
