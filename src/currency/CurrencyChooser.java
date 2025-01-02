@@ -86,15 +86,14 @@ public class CurrencyChooser {
         return CURRENCIES.contains(currency);
     }
 
-    // TODO: Write tests for this
     public static Currency choosePseudocurrency() {
         int index = RANDOM.nextInt(PSEUDO_CURRENCIES_LIST.size());
         return PSEUDO_CURRENCIES_LIST.get(index);
     }
 
-    // TODO: Write tests for this
     public static Currency chooseCurrency() {
-        return Currency.getInstance("XTS");
+        int index = RANDOM.nextInt(CURRENCIES.size());
+        return CURRENCIES.get(index);
     }
 
     // TODO: Write tests for this
