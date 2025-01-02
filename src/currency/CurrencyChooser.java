@@ -88,7 +88,8 @@ public class CurrencyChooser {
 
     // TODO: Write tests for this
     public static Currency choosePseudocurrency() {
-        return Currency.getInstance("USD");
+        int index = RANDOM.nextInt(PSEUDO_CURRENCIES_LIST.size());
+        return PSEUDO_CURRENCIES_LIST.get(index);
     }
 
     // TODO: Write tests for this
