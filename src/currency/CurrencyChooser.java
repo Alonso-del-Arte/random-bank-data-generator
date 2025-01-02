@@ -98,7 +98,7 @@ public class CurrencyChooser {
 
     // TODO: Write tests for this
     public static Currency chooseCurrency(int fractionDigits) {
-        return Currency.getInstance("EUR");
+        return Currency.getInstance("JPY");
     }
 
     // TODO: Write tests for this
