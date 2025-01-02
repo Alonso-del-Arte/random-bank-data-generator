@@ -96,9 +96,12 @@ public class CurrencyChooser {
         return CURRENCIES.get(index);
     }
 
-    // TODO: Write tests for this
     public static Currency chooseCurrency(int fractionDigits) {
-        return Currency.getInstance("JPY");
+        if (fractionDigits == 0) {
+            return Currency.getInstance("JPY");
+        } else {
+            return Currency.getInstance("USD");
+        }
     }
 
     // TODO: Write tests for this
