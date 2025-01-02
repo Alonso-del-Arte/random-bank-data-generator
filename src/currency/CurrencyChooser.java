@@ -100,7 +100,8 @@ public class CurrencyChooser {
         return switch (fractionDigits) {
             case 0 -> Currency.getInstance("JPY");
             case 2 -> Currency.getInstance("USD");
-            default -> Currency.getInstance("LYD");
+            case 3 -> Currency.getInstance("LYD");
+            default -> Currency.getInstance("CLF");
         };
     }
 
