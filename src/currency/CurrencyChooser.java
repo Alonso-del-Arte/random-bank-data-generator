@@ -97,15 +97,11 @@ public class CurrencyChooser {
     }
 
     public static Currency chooseCurrency(int fractionDigits) {
-        switch (fractionDigits) {
-            case 0:
-                return Currency.getInstance("JPY");
-            case 2:
-                return Currency.getInstance("USD");
-            case 3:
-            default:
-                return Currency.getInstance("LYD");
-        }
+        return switch (fractionDigits) {
+            case 0 -> Currency.getInstance("JPY");
+            case 2 -> Currency.getInstance("USD");
+            default -> Currency.getInstance("LYD");
+        };
     }
 
     // TODO: Write tests for this
