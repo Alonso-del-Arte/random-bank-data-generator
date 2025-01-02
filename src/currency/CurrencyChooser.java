@@ -14,9 +14,72 @@ import java.util.function.Predicate;
 
 public class CurrencyChooser {
 
-    // TODO: Write tests for this
+    static final Random RANDOM = new Random();
+
+    private static final List<Currency> CURRENCIES
+            = new ArrayList<>(Currency.getAvailableCurrencies());
+
+    private static final Set<Currency> PSEUDO_CURRENCIES = new HashSet<>();
+
+    private static final List<Currency> PSEUDO_CURRENCIES_LIST;
+
+    private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
+
+    private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
+
+    private static final String[] OTHER_EXCLUSION_CODES = {};
+
+    private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP
+            = new HashMap<>();
+
+    static {
+        final String nineteenthCenturyYearIndicator = "\u002818";
+        final String twentiethCenturyYearIndicator = "\u002819";
+        final String twentyFirstCenturyYearIndicator = "\u002820";
+        for (Currency currency : CURRENCIES) {
+            int fractionDigits = currency.getDefaultFractionDigits();
+            if (fractionDigits < 0) {
+                PSEUDO_CURRENCIES.add(currency);
+            } else {
+                String dispName = currency.getDisplayName();
+                if (dispName.contains(nineteenthCenturyYearIndicator)
+                        || dispName.contains(twentiethCenturyYearIndicator)
+                        || dispName.contains(twentyFirstCenturyYearIndicator))
+                {
+                    HISTORICAL_CURRENCIES.add(currency);
+                } else {
+                    Set<Currency> digitGroupedSet;
+                    if (CURRENCIES_DIGITS_MAP.containsKey(fractionDigits)) {
+                        digitGroupedSet = CURRENCIES_DIGITS_MAP
+                                .get(fractionDigits);
+                    } else {
+                        digitGroupedSet = new HashSet<>();
+                        CURRENCIES_DIGITS_MAP.put(fractionDigits,
+                                digitGroupedSet);
+                    }
+                    if (Arrays.binarySearch(OTHER_EXCLUSION_CODES,
+                            currency.getCurrencyCode()) < 0) {
+                        digitGroupedSet.add(currency);
+                    }
+                }
+            }
+        }
+        for (String exclusionCode : OTHER_EXCLUSION_CODES) {
+            try {
+                Currency currency = Currency.getInstance(exclusionCode);
+                OTHER_EXCLUSIONS.add(currency);
+            } catch (IllegalArgumentException iae) {
+                System.err.println("\"" + iae.getMessage() + "\"");
+            }
+        }
+        CURRENCIES.removeAll(PSEUDO_CURRENCIES);
+        CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
+        CURRENCIES.removeAll(OTHER_EXCLUSIONS);
+        PSEUDO_CURRENCIES_LIST = new ArrayList<>(PSEUDO_CURRENCIES);
+    }
+
     public static Set<Currency> getSuitableCurrencies() {
-        return new HashSet<>();
+        return new HashSet<>(CURRENCIES);
     }
 
     // TODO: Write tests for this
