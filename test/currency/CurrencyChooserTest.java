@@ -277,4 +277,20 @@ class CurrencyChooserTest {
         assert excMsg.contains(digitString) : containsMsg;
     }
 
+    @Test
+    public void testChooseNoCentsCurrencyRandomlyEnough() {
+        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(0);
+        int total = noCentCurrencies.size();
+        Set<Currency> chosenCurrencies = new HashSet<>();
+        for (int i = 0; i < total; i++) {
+            chosenCurrencies.add(CurrencyChooser.chooseCurrency(0));
+        }
+        int expected = total / 3;
+        int actual = chosenCurrencies.size();
+        String msg = "Out of " + total
+                + " currencies with no divisions, at least " + expected
+                + " should've been chosen, " + actual + " were chosen";
+        assert actual >= expected : msg;
+    }
+
 }
