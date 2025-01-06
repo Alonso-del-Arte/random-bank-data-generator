@@ -293,4 +293,22 @@ class CurrencyChooserTest {
         assert actual >= expected : msg;
     }
 
+    @Test
+    public void testChooseCentCurrencyRandomlyEnough() {
+        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(2);
+        int total = noCentCurrencies.size();
+        Set<Currency> chosenCurrencies = new HashSet<>();
+        int maxCallCount = total / 3;
+        int expected = maxCallCount / 8;
+        for (int i = 0; i < maxCallCount; i++) {
+            chosenCurrencies.add(CurrencyChooser.chooseCurrency(3));
+        }
+        int actual = chosenCurrencies.size();
+        String msg = "Out of " + total
+                + " currencies dividing into 100 cents, at least " + expected
+                + " should've been chosen after " + maxCallCount + " calls, "
+                + actual + " were chosen";
+        assert actual >= expected : msg;
+    }
+
 }
