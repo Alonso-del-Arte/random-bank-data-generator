@@ -277,40 +277,52 @@ class CurrencyChooserTest {
         assert excMsg.contains(digitString) : containsMsg;
     }
 
-    @org.junit.jupiter.api.Disabled
     @Test
     public void testChooseNoCentsCurrencyRandomlyEnough() {
-        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(0);
+        int fractionDigits = 0;
+        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(fractionDigits);
         int total = noCentCurrencies.size();
         Set<Currency> chosenCurrencies = new HashSet<>();
         for (int i = 0; i < total; i++) {
-            chosenCurrencies.add(CurrencyChooser.chooseCurrency(0));
+            Currency currency = CurrencyChooser.chooseCurrency(fractionDigits);
+            String message = "Currency " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ") expected to have "
+                    + fractionDigits + " fraction digits";
+            assertEquals(currency.getDefaultFractionDigits(), fractionDigits,
+                    message);
+            chosenCurrencies.add(currency);
         }
-        int expected = total / 3;
+        int minimum = total / 3;
         int actual = chosenCurrencies.size();
         String msg = "Out of " + total
-                + " currencies with no divisions, at least " + expected
+                + " currencies with no divisions, at least " + minimum
                 + " should've been chosen, " + actual + " were chosen";
-        assert actual >= expected : msg;
+        assert actual >= minimum : msg;
     }
 
-    @org.junit.jupiter.api.Disabled
     @Test
     public void testChooseCentCurrencyRandomlyEnough() {
-        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(2);
+        int fractionDigits = 2;
+        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(fractionDigits);
         int total = noCentCurrencies.size();
         Set<Currency> chosenCurrencies = new HashSet<>();
         int maxCallCount = total / 3;
-        int expected = maxCallCount / 8;
         for (int i = 0; i < maxCallCount; i++) {
-            chosenCurrencies.add(CurrencyChooser.chooseCurrency(2));
+            Currency currency = CurrencyChooser.chooseCurrency(fractionDigits);
+            String message = "Currency " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ") expected to have "
+                    + fractionDigits + " fraction digits";
+            assertEquals(currency.getDefaultFractionDigits(), fractionDigits,
+                    message);
+            chosenCurrencies.add(currency);
         }
+        int minimum = maxCallCount / 8;
         int actual = chosenCurrencies.size();
         String msg = "Out of " + total
-                + " currencies dividing into 100 cents, at least " + expected
+                + " currencies dividing into 100 cents, at least " + minimum
                 + " should've been chosen after " + maxCallCount + " calls, "
                 + actual + " were chosen";
-        assert actual >= expected : msg;
+        assert actual >= minimum : msg;
     }
 
 }
