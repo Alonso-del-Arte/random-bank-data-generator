@@ -1,5 +1,7 @@
 package currency;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashMap;
@@ -367,6 +369,31 @@ class CurrencyChooserTest {
             callsSoFar++;
         }
         assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    public void testChooseCurrencyByBadPredicateCausesException() {
+        String invalidDisplayName = "Invalid display name "
+                + System.currentTimeMillis();
+        Predicate<Currency> predicate
+                = (Currency cur) -> cur.getDisplayName()
+                .equals(invalidDisplayName);
+        Duration allottedTime = Duration.of(10, ChronoUnit.SECONDS);
+        String msg = "Bad predicate for invalid display name \""
+                + invalidDisplayName + "\" should not take more than "
+                + allottedTime.toString() + " to cause exception";
+        assertTimeoutPreemptively(allottedTime, () -> {
+            Throwable t = assertThrows(NoSuchElementException.class, () -> {
+                Currency currency = CurrencyChooser.chooseCurrency(predicate);
+                System.out.println("Search for \"" + invalidDisplayName
+                        + "\" somehow gave " + currency.getDisplayName() + " ("
+                        + currency.getCurrencyCode() + ")");
+            }, msg);
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Exception message should not be null";
+            assert !excMsg.isBlank() : "Exception message should not be blank";
+            System.out.println("\"" + excMsg + "\"");
+        }, msg);
     }
 
 }
