@@ -325,4 +325,28 @@ class CurrencyChooserTest {
         assert actual >= minimum : msg;
     }
 
+    @Test
+    public void testChooseDarahimCurrencyRandomlyEnough() {
+        int fractionDigits = 3;
+        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(fractionDigits);
+        int total = noCentCurrencies.size();
+        Set<Currency> chosenCurrencies = new HashSet<>();
+        for (int i = 0; i < total; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency(fractionDigits);
+            String message = "Currency " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ") expected to have "
+                    + fractionDigits + " fraction digits";
+            assertEquals(currency.getDefaultFractionDigits(), fractionDigits,
+                    message);
+            chosenCurrencies.add(currency);
+        }
+        int minimum = total / 2;
+        int actual = chosenCurrencies.size();
+        String msg = "Out of " + total
+                + " currencies dividing into 1,000 darahim, at least "
+                + minimum + " should've been chosen, " + actual
+                + " were chosen";
+        assert actual >= minimum : msg;
+    }
+
 }
