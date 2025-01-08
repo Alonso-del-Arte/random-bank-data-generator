@@ -96,6 +96,27 @@ public class CurrencyChooser {
         return CURRENCIES.get(index);
     }
 
+    /**
+     * Chooses a currency with a specified number of default fraction digits.
+     * Thus, a currency that divides into 100 cents (corresponding to 2 default
+     * fraction digits) can be chosen.
+     * @param fractionDigits How many fraction digits the currency should have.
+     * Examples: 2, 3, 0, 4, 7, &minus;6.
+     * @return A currency with the specified number of fraction digits.
+     * Examples: For 2, the Guatemalan quetzal (GTQ), one of which divides into
+     * 100 centavos; for 3, the Omani rial (OMR), one of which divides into
+     * 1,000 baisa; for 0, the Luxembourgian franc, one of which does not
+     * normally divide into any kind of cent, unlike the Swiss franc; and for 4,
+     * the only available option might be the Chilean unit of account (CLF),
+     * which, however, does not have any kind of circulating bills or coins
+     * associated with it.
+     * @throws NoSuchElementException If there are no currencies for
+     * {@code fractionDigits}. In the examples given above, 7 would almost
+     * certainly cause this exception, as such a currency is unlikely to be on
+     * the list of available currencies, and &minus;6 definitely would, as
+     * {@code Currency} instances with negative default fraction digits are
+     * ignored by this chooser.
+     */
     public static Currency chooseCurrency(int fractionDigits) {
         if (CURRENCIES_DIGITS_MAP.containsKey(fractionDigits)) {
             List<Currency> currencies
