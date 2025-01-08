@@ -1,5 +1,7 @@
 package currency;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
@@ -16,8 +18,14 @@ public class CurrencyChooser {
 
     static final Random RANDOM = new Random();
 
+    private static final Set<Currency> ALL_CURRENCIES
+            = Currency.getAvailableCurrencies();
+
+    private static final int MAX_NUMBER_OF_PREDICATE_MATCH_ATTEMPTS
+            = 3 * ALL_CURRENCIES.size();
+
     private static final List<Currency> CURRENCIES
-            = new ArrayList<>(Currency.getAvailableCurrencies());
+            = new ArrayList<>(ALL_CURRENCIES);
 
     private static final Set<Currency> PSEUDO_CURRENCIES = new HashSet<>();
 
@@ -137,15 +145,27 @@ public class CurrencyChooser {
      * should contain the word "dollar".
      * @return A currency satisfying the predicate. For the example predicate,
      * for example, the Surinamese dollar (SRD).
+     * @throws NoSuchElementException If no match for the predicate is found
+     * after a reasonable number of attempts.
      */
     public static Currency chooseCurrency(Predicate<Currency> predicate) {
         boolean found = false;
+        int attemptsSoFar = 0;
         Currency currency = chooseCurrency();
-        while (!found) {
+        while (!found
+                && attemptsSoFar < MAX_NUMBER_OF_PREDICATE_MATCH_ATTEMPTS) {
             currency = chooseCurrency();
+            attemptsSoFar++;
             found = predicate.test(currency);
         }
-        return currency;
+        if (found) {
+            return currency;
+        } else {
+            String excMsg = "No currency matching predicate found after "
+                    + attemptsSoFar + " attempts from pool of "
+                    + CURRENCIES.size() + " suitable currencies";
+            throw new NoSuchElementException(excMsg);
+        }
     }
 
     // TODO: Write tests for this
