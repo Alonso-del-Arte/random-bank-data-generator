@@ -110,7 +110,12 @@ public class CurrencyChooser {
                 int index = RANDOM.nextInt(currencies.size());
                 yield currencies.get(index);
             }
-            case 3 -> Currency.getInstance("LYD");
+            case 3 ->  {
+                List<Currency> currencies
+                        = new ArrayList<>(CURRENCIES_DIGITS_MAP.get(3));
+                int index = RANDOM.nextInt(currencies.size());
+                yield currencies.get(index);
+            }
             case 4 -> Currency.getInstance("CLF");
             default -> {
                 String excMsg = "No available currency has " + fractionDigits
