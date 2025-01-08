@@ -349,4 +349,24 @@ class CurrencyChooserTest {
         assert actual >= minimum : msg;
     }
 
+    @Test
+    public void testChooseCurrencyByPredicate() {
+        int remainder = ((int) System.currentTimeMillis()) % 16;
+        Predicate<Currency> predicate
+                = (currency) -> currency.getNumericCode() % 16 == remainder;
+        Set<Currency> expected = CURRENCIES.stream().filter(predicate)
+                .filter(CurrencyChooserTest::accept)
+                .collect(Collectors.toSet());
+        Set<Currency> actual = new HashSet<>();
+        String msg = "Choosing currencies with numeric code " + remainder
+                + " modulo 16";
+        int totalNumberOfCalls = 20 * expected.size();
+        int callsSoFar = 0;
+        while (callsSoFar < totalNumberOfCalls) {
+            actual.add(CurrencyChooser.chooseCurrency(predicate));
+            callsSoFar++;
+        }
+        assertEquals(expected, actual, msg);
+    }
+
 }
