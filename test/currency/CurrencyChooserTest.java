@@ -42,8 +42,8 @@ class CurrencyChooserTest {
             "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL",
             "LUF", "MTL", "NLG", "PTE", "SIT" */};
 
-    private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "CHE",
-            "CHW", "USN", "USS"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV",
+            "CHE", "CHW", "USN", "USS"};
 
     static {
         for (Currency currency : CURRENCIES) {
@@ -490,6 +490,18 @@ class CurrencyChooserTest {
             String msg = "Currency " + currency.getDisplayName()
                     + " should not be " + wirFrancDisplayName;
             assertNotEquals(wirFranc, currency, msg);
+        }
+    }
+
+    @Test
+    public void testBolivianMVDOLExcluded() {
+        Currency mvDol = Currency.getInstance("BOV");
+        String mvDolDisplayName = mvDol.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName()
+                    + " should not be " + mvDolDisplayName;
+            assertNotEquals(mvDol, currency, msg);
         }
     }
 
