@@ -81,7 +81,7 @@ public class CurrencyChooser {
             }
         }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
-//        CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
+        CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
         CURRENCIES.removeAll(OTHER_EXCLUSIONS);
         PSEUDO_CURRENCIES_LIST = new ArrayList<>(PSEUDO_CURRENCIES);
     }
