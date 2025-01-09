@@ -407,4 +407,17 @@ class CurrencyChooserTest {
         }
     }
 
+    @Test
+    public void testHistoricalCurrenciesExcludedFromFractDigitSpecs() {
+        for (int places = 2; places < 5; places++) {
+            for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+                Currency currency = CurrencyChooser.chooseCurrency(places);
+                String msg = "Currency " + currency.getDisplayName() + " ("
+                        + currency.getCurrencyCode() + ") with " + places
+                        + " places should not be a historical currency";
+                assert !isHistoricalCurrency(currency) : msg;
+            }
+        }
+    }
+
 }
