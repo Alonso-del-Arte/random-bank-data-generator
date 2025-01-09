@@ -42,7 +42,7 @@ class CurrencyChooserTest {
             "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL",
             "LUF", "MTL", "NLG", "PTE", "SIT" */};
 
-    private static final String[] OTHER_EXCLUSION_CODES = {};
+    private static final String[] OTHER_EXCLUSION_CODES = {"USS"};
 
     static {
         for (Currency currency : CURRENCIES) {
@@ -417,6 +417,18 @@ class CurrencyChooserTest {
                         + " places should not be a historical currency";
                 assert !isHistoricalCurrency(currency) : msg;
             }
+        }
+    }
+
+    @Test
+    public void testSameDayUSDollarExcluded() {
+        Currency sameDayDollar = Currency.getInstance("USS");
+        String sameDayDollarDisplayName = sameDayDollar.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName()
+                    + " should not be " + sameDayDollarDisplayName;
+            assertNotEquals(sameDayDollar, currency, msg);
         }
     }
 
