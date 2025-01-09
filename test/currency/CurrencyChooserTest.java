@@ -69,12 +69,12 @@ class CurrencyChooserTest {
         return Arrays.binarySearch(EURO_REPLACED_EXCLUSION_CODES, key) > -1;
     }
 
-    private static boolean isHistoricalCurrency(Currency currency) {
+    private static boolean isNotHistoricalCurrency(Currency currency) {
         String displayName = currency.getDisplayName();
-        return displayName.contains("(18")
-                || displayName.contains("(19")
-                || displayName.contains("(20")
-                || isEuroReplacedCurrency(currency);
+        return !displayName.contains("(18")
+                && !displayName.contains("(19")
+                && !displayName.contains("(20")
+                && !isEuroReplacedCurrency(currency);
     }
 
     private static boolean isPseudoCurrency(Currency currency) {
@@ -87,7 +87,7 @@ class CurrencyChooserTest {
     }
 
     private static boolean accept(Currency currency) {
-        return !isHistoricalCurrency(currency) && !isPseudoCurrency(currency)
+        return isNotHistoricalCurrency(currency) && !isPseudoCurrency(currency)
                 && !shouldOtherwiseBeExcluded(currency);
     }
 
@@ -404,7 +404,7 @@ class CurrencyChooserTest {
             String msg = "Currency " + currency.getDisplayName() + " ("
                     + currency.getCurrencyCode()
                     + ") should not be a historical currency";
-            assert !isHistoricalCurrency(currency) : msg;
+            assert isNotHistoricalCurrency(currency) : msg;
         }
     }
 
@@ -416,7 +416,7 @@ class CurrencyChooserTest {
                 String msg = "Currency " + currency.getDisplayName() + " ("
                         + currency.getCurrencyCode() + ") with " + places
                         + " places should not be a historical currency";
-                assert !isHistoricalCurrency(currency) : msg;
+                assert isNotHistoricalCurrency(currency) : msg;
             }
         }
     }
