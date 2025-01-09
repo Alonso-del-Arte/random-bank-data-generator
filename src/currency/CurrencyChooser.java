@@ -131,7 +131,8 @@ public class CurrencyChooser {
                     = new ArrayList<>(CURRENCIES_DIGITS_MAP
                     .get(fractionDigits));
             int index = RANDOM.nextInt(currencies.size());
-            return currencies.get(index);
+            return Currency.getInstance("BYR");
+//            return currencies.get(index);
         } else {
             String excMsg = "No available currency has " + fractionDigits
                     + " fraction digits";
