@@ -35,15 +35,15 @@ public class CurrencyChooser {
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
 
-    private static final String[] OTHER_EXCLUSION_CODES = {"USN", "USS"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "USN", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP
             = new HashMap<>();
 
     static {
-        final String nineteenthCenturyYearIndicator = "\u002818";
-        final String twentiethCenturyYearIndicator = "\u002819";
-        final String twentyFirstCenturyYearIndicator = "\u002820";
+        final String nineteenthCenturyYearIndicator = "(18";
+        final String twentiethCenturyYearIndicator = "(19";
+        final String twentyFirstCenturyYearIndicator = "(20";
         for (Currency currency : CURRENCIES) {
             int fractionDigits = currency.getDefaultFractionDigits();
             if (fractionDigits < 0) {
