@@ -396,4 +396,15 @@ class CurrencyChooserTest {
         }, msg);
     }
 
+    @Test
+    public void testHistoricalCurrenciesExcluded() {
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode()
+                    + ") should not be a historical currency";
+            assert !isHistoricalCurrency(currency) : msg;
+        }
+    }
+
 }
