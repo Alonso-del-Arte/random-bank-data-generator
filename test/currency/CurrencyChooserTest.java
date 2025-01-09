@@ -38,9 +38,9 @@ class CurrencyChooserTest {
             = NUMBER_OF_CALLS_MULTIPLIER_FOR_EXCLUSION_SEARCH
             * TOTAL_NUMBER_OF_CURRENCIES;
 
-    private static final String[] EURO_REPLACED_EXCLUSION_CODES = {/* "ADP", "ATS",
+    private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS",
             "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL",
-            "LUF", "MTL", "NLG", "PTE", "SIT" */};
+            "LUF", "MTL", "NLG", "PTE", "SIT"};
 
     private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV",
             "CHE", "CHW", "USN", "USS"};
@@ -502,6 +502,20 @@ class CurrencyChooserTest {
             String msg = "Currency " + currency.getDisplayName()
                     + " should not be " + mvDolDisplayName;
             assertNotEquals(mvDol, currency, msg);
+        }
+    }
+
+    @Test
+    public void testExcludeEuropeanCurrenciesReplacedByEuro() {
+        for (String currencyCode : EURO_REPLACED_EXCLUSION_CODES) {
+            Currency excludedCurrency = Currency.getInstance(currencyCode);
+            String exclCurrDisplayName = excludedCurrency.getDisplayName();
+            for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+                Currency currency = CurrencyChooser.chooseCurrency();
+                String msg = "Currency " + currency.getDisplayName()
+                        + " should not be " + exclCurrDisplayName;
+                assertNotEquals(excludedCurrency, currency, msg);
+            }
         }
     }
 
