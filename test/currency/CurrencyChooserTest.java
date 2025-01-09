@@ -40,7 +40,7 @@ class CurrencyChooserTest {
 
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS",
             "BEF", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD",
-            "IEP", "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
+            "GWP", "IEP", "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
 
     private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV",
             "CHE", "CHW", "USN", "USS"};
@@ -514,6 +514,18 @@ class CurrencyChooserTest {
             String msg = "Currency " + currency.getDisplayName()
                     + " should not be " + unitsDisplayName;
             assertNotEquals(unitsRealValue, currency, msg);
+        }
+    }
+
+    @Test
+    public void testGuineaBissauPesoExcluded() {
+        Currency pesos = Currency.getInstance("GWP");
+        String pesosDisplayName = pesos.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName()
+                    + " should not be " + pesosDisplayName;
+            assertNotEquals(pesos, currency, msg);
         }
     }
 
