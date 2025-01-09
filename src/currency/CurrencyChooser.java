@@ -1,7 +1,5 @@
 package currency;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
@@ -38,7 +36,7 @@ public class CurrencyChooser {
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "AYM",
             "BEF", "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK",
             "ESP", "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MGF",
-            "MTL", "NLG", "PTE", "SIT", "USN", "USS"};
+            "MTL", "MXV", "NLG", "PTE", "SIT", "USN", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP
             = new HashMap<>();
