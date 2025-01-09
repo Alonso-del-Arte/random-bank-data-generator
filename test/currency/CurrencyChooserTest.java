@@ -39,11 +39,11 @@ class CurrencyChooserTest {
             * TOTAL_NUMBER_OF_CURRENCIES;
 
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS",
-            "BEF", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD",
-            "GWP", "IEP", "ITL", "LUF", "MGF", "MTL", "NLG", "PTE", "SIT"};
+            "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP",
+            "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
 
     private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV",
-            "CHE", "CHW", "USN", "USS"};
+            "CHE", "CHW", "COU", "GWP", "MGF", "USN", "USS"};
 
     static {
         for (Currency currency : CURRENCIES) {
@@ -99,7 +99,14 @@ class CurrencyChooserTest {
                 .filter(CurrencyChooserTest::accept)
                 .collect(Collectors.toSet());
         Set<Currency> actual = CurrencyChooser.getSuitableCurrencies();
-        assertEquals(expected, actual);
+        Set<Currency> difference = new HashSet<>(expected);
+        difference.removeAll(actual);
+        Set<Currency> diffRevDir = new HashSet<>(actual);
+        diffRevDir.removeAll(expected);
+        difference.addAll(diffRevDir);
+        String message = "Currencies found in one set but not the other were "
+                + difference;
+        assertEquals(expected, actual, message);
     }
 
     @Test
