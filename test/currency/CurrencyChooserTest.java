@@ -42,7 +42,7 @@ class CurrencyChooserTest {
             "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL",
             "LUF", "MTL", "NLG", "PTE", "SIT" */};
 
-    private static final String[] OTHER_EXCLUSION_CODES = {"USS"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "USN", "USS"};
 
     static {
         for (Currency currency : CURRENCIES) {
@@ -441,6 +441,18 @@ class CurrencyChooserTest {
             String msg = "Currency " + currency.getDisplayName()
                     + " should not be " + nextDayDollarDisplayName;
             assertNotEquals(nextDayDollar, currency, msg);
+        }
+    }
+
+    @Test
+    public void testImproperAzerbaijanManatExcluded() {
+        Currency improperManat = Currency.getInstance("AYM");
+        String improperManatDisplayName = improperManat.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName()
+                    + " should not be " + improperManatDisplayName;
+            assertNotEquals(improperManat, currency, msg);
         }
     }
 
