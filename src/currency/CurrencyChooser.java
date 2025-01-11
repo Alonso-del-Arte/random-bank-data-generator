@@ -37,7 +37,7 @@ public class CurrencyChooser {
             "BEF", "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK",
             "ESP", "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MGF",
             "MTL", "MXV", "NLG", "PTE", "SIT", "SRG", "STN", "TPE", "USN",
-            "USS", "UYI", "VED"};
+            "USS", "UYI", "VED", "ZWN"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP
             = new HashMap<>();
