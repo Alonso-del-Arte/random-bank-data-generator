@@ -25,4 +25,22 @@ class CurrencyPairTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testConstructorRejectsNullToCurrency() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        String msg = "Currency pair with " + from.getDisplayName() + " ("
+                + from.getCurrencyCode()
+                + ") and null To currency should cause NPE";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            CurrencyPair instance = new CurrencyPair(from, null);
+            System.out.println(msg + ", not created instance "
+                    + instance.getClass().getName() + '@'
+                    + Integer.toHexString(System.identityHashCode(instance)));
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
