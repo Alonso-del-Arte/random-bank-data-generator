@@ -12,6 +12,14 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
 
+/**
+ * Chooses currencies to be used in the testing of other classes in the
+ * {@code currency} package. Functions are provided to choose currencies
+ * pseudorandomly, choose currencies with a specified number of subdivisions
+ * (e.g., 100 cents, 1,000 mills), and to choose currencies other than a
+ * specified currency.
+ * @author Alonso del Arte
+ */
 public class CurrencyChooser {
 
     static final Random RANDOM = new Random();
@@ -88,19 +96,177 @@ public class CurrencyChooser {
         PSEUDO_CURRENCIES_LIST = new ArrayList<>(PSEUDO_CURRENCIES);
     }
 
+    /**
+     * Gives the set of currencies suitable for the {@link CurrencyAmount}
+     * constructor. Hopefully all these currencies are also suitable for online
+     * foreign exchange rate APIs.
+     * @return A set of all available currencies, minus historical currencies
+     * such as the original bol&iacute;var (VEB, 1871 &mdash; 2008) or the old
+     * bol&iacute;var (VEF, 2008 &mdash; 2018) which was replaced by the
+     * bol&iacute;var soverano (VED), and also excluding metals like gold (XAU)
+     * and silver (XAG).
+     */
     public static Set<Currency> getSuitableCurrencies() {
         return new HashSet<>(CURRENCIES);
     }
 
+    /**
+     * Tells whether or not a currency is suitable for the {@link
+     * CurrencyAmount} constructor. If a currency's identified as historical in
+     * the Java runtime currency information file, or if it's a precious metal
+     * (e.g., gold, silver, platinum), or if it's for testing purposes only, it
+     * will not be considered suitable. There are a few other exclusions.
+     * @param currency The currency to check. Two examples: the old Venezuelan
+     * bol&iacute;var (VEB), which was valid from 1871 to 2008; and the modern
+     * Venezuelan bol&iacute;var (VES), technically valid since 2018 &mdash; for
+     * what it's worth, however, you might be better off with U.&nbsp;S. dollars
+     * in Venezuela.
+     * @return True if the currency's suitable, false otherwise. In the
+     * examples, this function returns false for VEB (currency conversion APIs
+     * don't give exchange rates for conversions to and from this currency) and
+     * true for VES (one euro exchanges to 39.65 bol&iacute;vares as of May 21,
+     * 2024).
+     */
     public static boolean isSuitableCurrency(Currency currency) {
         return CURRENCIES.contains(currency);
     }
 
+    /**
+     * Chooses a pseudocurrency. Pseudocurrencies differ from standard
+     * currencies in that their values are not determined by a government bank.
+     * @return A pseudocurrency. For example, gold (XAU).
+     */
     public static Currency choosePseudocurrency() {
         int index = RANDOM.nextInt(PSEUDO_CURRENCIES_LIST.size());
         return PSEUDO_CURRENCIES_LIST.get(index);
     }
 
+    /**
+     * Chooses a currency suitable for the {@link CurrencyAmount} constructor.
+     * Also tries not to choose a currency that might not be supported by an
+     * online currency conversion API, such as historical currencies (like the
+     * old Russian ruble, RUR) that are marked as historical in the Java
+     * runtime's currency information file by having a range of years in their
+     * display names (e.g., 1991 &mdash; 1998 for the old Russian ruble), and
+     * the following specific currencies:
+     * <ul>
+     * <li>The Azerbaijan manat was improperly given the currency code AYM in
+     * 2005. The ISO-4217 rules require that the 3-letter code start with the
+     * 2-letter ISO-3166 code for the country, in this case AZ. It was removed
+     * the next year, but remains in Java's currency information file.</li>
+     * <li>The Bulgarian hard lev (BGL), I'm not sure how it differs from the
+     * Bulgarian lev (BGN).</li>
+     * <li>The Bolivian MVDOL (BOV), a monetary unit managed by the Banco
+     * Central de Bolivia. The MVDOL correlates the modern boliviano (BOB) to
+     * the United States dollar (USD). The MVDOL is used for financial
+     * instruments like treasury bills. From what I understand, it's not used
+     * for everyday expenses like buying groceries, nor for tourists' expenses,
+     * like booking a hotel.</li>
+     * <li>The WIR euro (CHE), a "community currency" that is equal in value to
+     * the euro (EUR), but is not traded outside of Switzerland.</li>
+     * <li>The WIR franc (CHW), a "community currency" that is equal in value to
+     * the Swiss franc (CHF).</li>
+     * <li>The Guinea-Bissau peso (GWP) was the official currency of
+     * Guinea-Bissau from 1976 to 1997. It was originally traded at par with the
+     * Portuguese escudo (PTE), but it was already overvalued at that rate. In
+     * 1997, it was replaced by the West African CFA franc (XOF).</li>
+     * <li>The Malagasy franc (MGF) was the official currency of Madagascar
+     * until 2005. It has been phased out in favor of the Malagasy ariary
+     * (MGA).</li>
+     * <li>The Surinamese guilder (SRG) was the currency of Suriname until 2004,
+     * when it was replaced by the Surinamese dollar (SRD) at a rate of a
+     * thousand guilder for one dollar.</li>
+     * <li>The S&atilde;o Tom&eacute; &amp; Pr&iacute;ncipe dobra (STN) is still
+     * a valid currency, as far as I can tell, but Manny's Currency Converter
+     * does not recognize it, instead recognizing the earlier dobra (STD), which
+     * was valid from 1977 to 2017.</li>
+     * <li>The Timorese escudo (TPE) was the official currency of Portuguese
+     * Timor prior to occupation by Indonesia.</li>
+     * <li>The same day U.&nbsp;S. dollar (USS) and the next day U.&nbsp;S.
+     * dollar (USN), which serve special purposes in some contexts but are
+     * generally not recognized by currency conversion APIs.</li>
+     * <li>The so-called "bolivar dig&iacute;tal is excluded because, despite
+     * its official standing, is not recognized by some currency conversion
+     * APIs.</li>
+     * <li>The Zimbabwean dollar (ZWN) is in limbo as far as Java's runtime is
+     * concerned. Although another Zimbabwean dollar (ZWL) is recognized by
+     * Manny's free currency conversion API, Java's currency information file
+     * lists it as a historical currency that was valid only in 2009. Whatever
+     * the case may be, tourists are perhaps best served bringing U.&nbsp;S.
+     * dollars.</li>
+     * </ul>
+     * <p>Also, the former currencies of the European nations that now use the
+     * euro (EUR) are not marked as historical in the currency information file.
+     * In the case of the founding nations of the eurozone, the euro was
+     * introduced in 1999 but the old national currency continued to be valid
+     * until 2002. Some of the old notes and coins can still be exchanged to
+     * euros, but this varies from country to country. These are the
+     * euro-replaced currencies this currency chooser specifically excludes:</p>
+     * <ul>
+     * <li>The Andorran peseta (ADP) was a currency of Andorra in the
+     * 20<sup>th</sup> Century. It was pegged to the Spanish peseta (ESP) at
+     * 1:1.</li>
+     * <li>The Austrian schilling (ATS) was the official currency of Austria
+     * from 1925 to 2002 except during World War II and shortly before. The old
+     * notes and coins can be exchanged for euros indefinitely.</li>
+     * <li>The Belgian franc (BEF) was the official currency of Belgium from
+     * 1832 to 2002. The old coins can no longer be exchanged for euros, but
+     * there's no time limit for exchanging the old notes.</li>
+     * <li>The Cypriot pound (CYP) was a currency of Cyprus until 2008, when it
+     * was replaced by the euro. The old notes and coins can no longer be
+     * exchanged for euros.</li>
+     * <li>The German mark (DEM) was the official currency of West Germany from
+     * 1948 to 1990 and of unified Germany from 1990 to 2002. The old notes and
+     * coins can be exchanged for euros indefinitely.</li>
+     * <li>The Estonian kroon (EEK) was the official currency of Estonia from
+     * 1992 to 2011. The old notes and coins can be exchanged for euros at the
+     * country's central bank indefinitely.</li>
+     * <li>The Spanish peseta (ESP) was the official currency of Spain from 1868
+     * to 2002. After June 30, 2021, the old notes and coins can no longer be
+     * exchanged for euros.</li>
+     * <li>The Finnish markka (FIM) was the official currency of Finland from
+     * 1860 to 2002. The old notes and coins can no longer be exchanged for
+     * euros.</li>
+     * <li>The French franc (FRF) was the official currency of France from 1960
+     * to 2002, though its history dates back to 1795 and earlier. The old notes
+     * and coins can no longer be exchanged for euros.</li>
+     * <li>The Greek drachma (GRD) was valid until 2002, as was the case with
+     * the currencies of several other countries that joined the eurozone in
+     * 1999. The old notes and coins can no longer be exchanged for euros.</li>
+     * <li>The Irish pound (IEP) was the official currency of Ireland  until
+     * 2002. Old Irish pound notes and coins can be exchanged for euros at the
+     * Central Bank of Ireland indefinitely.</li>
+     * <li>The Italian lira (ITL) was the only official currency of Italy from
+     * 1861 to 1999. The old notes and coins can no longer be exchanged for
+     * euros.</li>
+     * <li>The Luxembourgian franc (LUF) was the official currency of Luxembourg
+     * from 1854 to 2002 except during World War II. But even after the war,
+     * some other countries' currencies were accepted in Luxembourg. That
+     * nation's residents have been characterized as enthusiastic adopters of
+     * the euro, which was introduced in 1999. The old coins can no longer be
+     * exchanged for euros. However, the old notes can be exchanged
+     * indefinitely.</li>
+     * <li>The Maltese lira (MTL) was valid until 2008. Malta joined the
+     * European Union in 2004, after most of the other nations of the union had
+     * phased out their own old currencies. So the phasing out period for the
+     * lira was pretty much the whole year 2008. The old notes and coins can no
+     * longer be exchanged for euros.</li>
+     * <li>The Dutch guilder (NLG), also called the florin, was valid until
+     * 2002. The old coins can no longer be exchanged for euros. However, the
+     * old notes can exchanged until January 1, 2032, with some conditions.</li>
+     * <li>The Portuguese escudo (PTE) was the official currency of Portugal
+     * from 1911 to 2002. The old notes and coins can no longer be exchanged for
+     * euros.</li>
+     * <li>The Slovenian tolar (SIT) was the official currency of Slovenia from
+     * 1991 to 2007. The old coins can no longer be exchanged for euros, but the
+     * old notes can be exchanged for euros indefinitely.</li>
+     * </ul>
+     * <p>I have not yet verified this is the complete list of euro-replaced
+     * currencies.</p>
+     * @return A currency with default fraction digits of at least 0. For
+     * example, the Kyrgystani som (KGS), which like most world currencies by
+     * default has two fractional digits. A som is divided into 100 tyin.
+     */
     public static Currency chooseCurrency() {
         int index = RANDOM.nextInt(CURRENCIES.size());
         return CURRENCIES.get(index);
@@ -170,7 +336,18 @@ public class CurrencyChooser {
         }
     }
 
-    // TODO: Write tests for this
+    /**
+     * Chooses a currency suitable for the {@link CurrencyAmount} constructor
+     * other than the specified currency.
+     * @param currency The currency not to choose. For example, the U.&nbsp;S.
+     * dollar (USD). Pseudo-currencies like gold (XAU) may be used, but then the
+     * effect is the same as calling {@link #chooseCurrency()} without any
+     * parameters.
+     * @return A currency other than {@code currency}. For example, given USD,
+     * this function might return the Panamanian balboa (PAB). For what it's
+     * worth, the balboa is one of two official currencies of Panama, the other
+     * is the U.&nbsp;S. dollar.
+     */
     public static Currency chooseCurrencyOtherThan(Currency currency) {
         Currency otherCurrency = currency;
         while (otherCurrency == currency) {
