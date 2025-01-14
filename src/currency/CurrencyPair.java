@@ -20,8 +20,8 @@ public class CurrencyPair {
     }
 
     public CurrencyPair(Currency from, Currency to) {
-        if (from == null) {
-            String excMsg = "From currency must not be null";
+        if (from == null || to == null) {
+            String excMsg = "From and To currencies must not be null";
             throw new NullPointerException(excMsg);
         }
     }
