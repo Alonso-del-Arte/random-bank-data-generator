@@ -20,6 +20,18 @@ class CurrencyPairTest {
     }
 
     @Test
+    public void testGetToCurrency() {
+        System.out.println("getToCurrency");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency expected = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair instance = new CurrencyPair(from, expected);
+        Currency actual = instance.getToCurrency();
+        String message = "Expected " + expected.getDisplayName() + ", got "
+                + actual.getDisplayName();
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     public void testConstructorRejectsNullFromCurrency() {
         Currency to = CurrencyChooser.chooseCurrency();
         String msg = "Currency pair with null From currency and "
