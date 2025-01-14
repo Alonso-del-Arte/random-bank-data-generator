@@ -4,15 +4,14 @@ import java.util.Currency;
 
 public class CurrencyPair {
 
-    private final Currency source;
+    private final Currency source, target;
 
     public Currency getFromCurrency() {
         return this.source;
     }
 
-    // TODO: Write tests for this
     public Currency getToCurrency() {
-        return Currency.getInstance("XTS");
+        return this.target;
     }
 
     // TODO: Write tests for this
@@ -26,6 +25,7 @@ public class CurrencyPair {
             throw new NullPointerException(excMsg);
         }
         this.source = from;
+        this.target = to;
     }
 
 }
