@@ -8,6 +8,18 @@ import org.junit.jupiter.api.Test;
 class CurrencyPairTest {
 
     @Test
+    public void testGetFromCurrency() {
+        System.out.println("getFromCurrency");
+        Currency expected = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(expected);
+        CurrencyPair instance = new CurrencyPair(expected, to);
+        Currency actual = instance.getFromCurrency();
+        String message = "Expected " + expected.getDisplayName() + ", got "
+                + actual.getDisplayName();
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     public void testConstructorRejectsNullFromCurrency() {
         Currency to = CurrencyChooser.chooseCurrency();
         String msg = "Currency pair with null From currency and "
