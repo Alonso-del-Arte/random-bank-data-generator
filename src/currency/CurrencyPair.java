@@ -20,7 +20,10 @@ public class CurrencyPair {
     }
 
     public CurrencyPair(Currency from, Currency to) {
-        // TODO: Write tests for this
+        if (from == null) {
+            String excMsg = "From currency must not be null";
+            throw new NullPointerException(excMsg);
+        }
     }
 
 }
