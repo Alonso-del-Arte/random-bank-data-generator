@@ -1,6 +1,10 @@
 package currency;
 
+import static currency.CurrencyChooser.RANDOM;
+
 import java.util.Currency;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -111,6 +115,26 @@ class CurrencyPairTest {
         CurrencyPair somePair = new CurrencyPair(from, to);
         CurrencyPair samePair = new CurrencyPair(from, to);
         assertEquals(samePair, somePair);
+    }
+
+    @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        int initialCapacity = RANDOM.nextInt(64) + 16;
+        Set<CurrencyPair> pairs = new HashSet<>(initialCapacity);
+        Set<Integer> hashes = new HashSet<>(initialCapacity);
+        for (int i = 0; i < initialCapacity; i++) {
+            Currency from = CurrencyChooser.chooseCurrency();
+            Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+            CurrencyPair pair = new CurrencyPair(from, to);
+            pairs.add(pair);
+            hashes.add(pair.hashCode());
+        }
+        int expected = pairs.size();
+        String message = "Set of " + expected
+                + " currency pairs should have as many hashes";
+        int actual = hashes.size();
+        assertEquals(expected, actual, message);
     }
 
     @Test
