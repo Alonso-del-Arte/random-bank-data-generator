@@ -26,11 +26,6 @@ public class CurrencyPair {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return obj instanceof CurrencyPair;
-    }
-
-    @Override
     public int hashCode() {
         return 0;
     }
