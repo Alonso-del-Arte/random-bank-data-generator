@@ -104,6 +104,16 @@ class CurrencyPairTest {
     }
 
     @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair somePair = new CurrencyPair(from, to);
+        CurrencyPair samePair = new CurrencyPair(from, to);
+        assertEquals(samePair, somePair);
+    }
+
+    @Test
     public void testFlip() {
         System.out.println("flip");
         Currency from = CurrencyChooser.chooseCurrency();
