@@ -27,7 +27,7 @@ public class CurrencyPair {
 
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof CurrencyPair;
     }
 
     @Override
