@@ -26,6 +26,22 @@ public class CurrencyPair {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        CurrencyPair other = (CurrencyPair) obj;
+        return this.source.equals(other.source)
+                && this.target.equals(other.target);
+    }
+
+    @Override
     public int hashCode() {
         return 0;
     }
