@@ -19,6 +19,12 @@ public class CurrencyPair {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return this.source.getCurrencyCode() + '_'
+                + this.target.getCurrencyCode();
+    }
+
     public CurrencyPair(Currency from, Currency to) {
         if (from == null || to == null) {
             String excMsg = "From and To currencies must not be null";
