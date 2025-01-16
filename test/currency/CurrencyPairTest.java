@@ -93,6 +93,17 @@ class CurrencyPairTest {
     }
 
     @Test
+    public void testNotEqualsDiffToCurrency() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency toA = CurrencyChooser.chooseCurrency();
+        Currency toB = CurrencyChooser.chooseCurrency();
+        CurrencyPair somePair = new CurrencyPair(from, toA);
+        CurrencyPair diffPair = new CurrencyPair(from, toB);
+        String message = somePair + " should not match " + diffPair;
+        assertNotEquals(diffPair, somePair, message);
+    }
+
+    @Test
     public void testFlip() {
         System.out.println("flip");
         Currency from = CurrencyChooser.chooseCurrency();
