@@ -43,6 +43,14 @@ class CurrencyPairTest {
     }
 
     @Test
+    public void testReferentialEquality() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair somePair = new CurrencyPair(from, to);
+        assert somePair.equals(somePair) : "Instance should be equal to itself";
+    }
+
+    @Test
     public void testFlip() {
         System.out.println("flip");
         Currency from = CurrencyChooser.chooseCurrency();
