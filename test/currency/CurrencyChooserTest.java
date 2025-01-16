@@ -650,4 +650,27 @@ class CurrencyChooserTest {
         }
     }
 
+    @Test
+    public void testChoosePairOtherThan() {
+        System.out.println("choosePairOtherThan");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrency();
+        CurrencyPair pair = new CurrencyPair(from, to);
+        Set<CurrencyPair> pairs
+                = new HashSet<>(NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH);
+        String msgPart = " should not be " + pair;
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            CurrencyPair other = CurrencyChooser.choosePairOtherThan(pair);
+            String message = other + msgPart;
+            assertNotEquals(pair, other, message);
+            pairs.add(other);
+        }
+        int minimum = 3 * NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH / 5;
+        int actual = pairs.size();
+        String msg = "After " + NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH
+                + " calls, there should be at least " + minimum
+                + " distinct currency pairs";
+        assert actual >= minimum : msg;
+    }
+
 }
