@@ -32,6 +32,20 @@ class CurrencyPairTest {
     }
 
     @Test
+    public void testFlip() {
+        System.out.println("flip");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair instance = new CurrencyPair(from, to);
+        CurrencyPair expected = new CurrencyPair(to, from);
+        CurrencyPair actual = instance.flip();
+        String message = "Expected from " + from.getDisplayName() + " to "
+                + to.getDisplayName() + " to flip to from "
+                + to.getDisplayName() + " to " + from.getDisplayName();
+        assertEquals(actual, expected, message);
+    }
+
+    @Test
     public void testConstructorRejectsNullFromCurrency() {
         Currency to = CurrencyChooser.chooseCurrency();
         String msg = "Currency pair with null From currency and "
