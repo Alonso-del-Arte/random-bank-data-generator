@@ -32,6 +32,17 @@ class CurrencyPairTest {
     }
 
     @Test
+    public void testToString() {
+        System.out.println("toString");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair instance = new CurrencyPair(from, to);
+        String expected = from.getCurrencyCode() + '_' + to.getCurrencyCode();
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+
+    @Test
     public void testFlip() {
         System.out.println("flip");
         Currency from = CurrencyChooser.chooseCurrency();
