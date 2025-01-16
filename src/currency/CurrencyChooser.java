@@ -356,4 +356,12 @@ public class CurrencyChooser {
         return otherCurrency;
     }
 
+    public static CurrencyPair choosePairOtherThan(CurrencyPair pair) {
+        return pair;
+    }
+
+    // TODO: Write tests for this
+    public static Set<CurrencyPair> choosePairs(int numberOfPairs) {
+        return new HashSet<>();
+    }
 }
