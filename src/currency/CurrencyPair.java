@@ -43,7 +43,8 @@ public class CurrencyPair {
 
     @Override
     public int hashCode() {
-        return 0;
+        return (this.source.getNumericCode() << 16)
+                + this.target.getNumericCode();
     }
 
     public CurrencyPair(Currency from, Currency to) {
