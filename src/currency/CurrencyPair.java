@@ -25,6 +25,16 @@ public class CurrencyPair {
                 + this.target.getCurrencyCode();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     public CurrencyPair(Currency from, Currency to) {
         if (from == null || to == null) {
             String excMsg = "From and To currencies must not be null";
