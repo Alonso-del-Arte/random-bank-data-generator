@@ -39,7 +39,7 @@ class CurrencyPairTest {
         CurrencyPair instance = new CurrencyPair(from, to);
         String expected = from.getCurrencyCode() + '_' + to.getCurrencyCode();
         String actual = instance.toString();
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
