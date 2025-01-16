@@ -50,6 +50,20 @@ class CurrencyPairTest {
         assert somePair.equals(somePair) : "Instance should be equal to itself";
     }
 
+    private static Object provideNull() {
+        return null;
+    }
+
+    @Test
+    public void testNotEqualsNull() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair somePair = new CurrencyPair(from, to);
+        Object obj = provideNull();
+        String msg = "Pair " + somePair.toString() + " should not equal null";
+        assert !somePair.equals(obj) : msg;
+    }
+
     @Test
     public void testFlip() {
         System.out.println("flip");
