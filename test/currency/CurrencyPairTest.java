@@ -60,8 +60,25 @@ class CurrencyPairTest {
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair somePair = new CurrencyPair(from, to);
         Object obj = provideNull();
-        String msg = "Pair " + somePair.toString() + " should not equal null";
+        String msg = "Pair " + somePair + " should not equal null";
         assert !somePair.equals(obj) : msg;
+    }
+
+    private static Object passThrough(Object obj) {
+        return obj;
+    }
+
+    @Test
+    public void testNotEqualsDiffClass() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair pair = new CurrencyPair(from, to);
+        String msg = "Pair " + pair + " should not equal " + from + " nor "
+                + to;
+        Object objA = passThrough(from);
+        Object objB = passThrough(to);
+        assert !pair.equals(objA) : msg;
+        assert !pair.equals(objB) : msg;
     }
 
     @Test
