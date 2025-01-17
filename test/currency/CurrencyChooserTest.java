@@ -67,6 +67,14 @@ class CurrencyChooserTest {
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
     }
 
+    @Test
+    void testMaximumNumberOfPairsConstant() {
+        int expected = 128;
+        int actual = CurrencyChooser.MAXIMUM_NUMBER_OF_PAIRS;
+        String message = "Maximum number of pairs should be " + expected;
+        assertEquals(expected, actual, message);
+    }
+
     private static boolean isEuroReplacedCurrency(Currency currency) {
         String key = currency.getCurrencyCode();
         return Arrays.binarySearch(EURO_REPLACED_EXCLUSION_CODES, key) > -1;
