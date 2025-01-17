@@ -22,6 +22,9 @@ import java.util.function.Predicate;
  */
 public class CurrencyChooser {
 
+    // TODO: Write test for this
+    public static final int MAXIMUM_NUMBER_OF_PAIRS = -1;
+
     static final Random RANDOM = new Random();
 
     private static final Set<Currency> ALL_CURRENCIES
