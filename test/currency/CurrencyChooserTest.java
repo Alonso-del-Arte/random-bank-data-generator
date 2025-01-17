@@ -19,6 +19,8 @@ import org.junit.jupiter.api.Test;
 
 class CurrencyChooserTest {
 
+    private static final Random RANDOM = new Random();
+
     private static final Set<Currency> CURRENCIES
             = Currency.getAvailableCurrencies();
 
@@ -264,9 +266,8 @@ class CurrencyChooserTest {
 
     @Test
     public void testUnavailableFractionDigitsCauseException() {
-        Random random = new Random();
         int bound = 128;
-        int unlikelyFractionDigits = bound + random.nextInt(bound);
+        int unlikelyFractionDigits = bound + RANDOM.nextInt(bound);
         String msg = "Asking for currency with " + unlikelyFractionDigits
                 + " fraction digits should cause exception";
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
