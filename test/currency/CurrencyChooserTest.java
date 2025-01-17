@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 class CurrencyChooserTest {
 
-    private static final Random RANDOM = new Random();
+    static final Random RANDOM = new Random();
 
     private static final Set<Currency> CURRENCIES
             = Currency.getAvailableCurrencies();
