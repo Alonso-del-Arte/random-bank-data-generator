@@ -1,6 +1,6 @@
 package currency;
 
-import static currency.CurrencyChooser.RANDOM;
+import static currency.CurrencyChooserTest.RANDOM;
 
 import java.util.Currency;
 import java.util.HashSet;
