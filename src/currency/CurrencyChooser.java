@@ -22,8 +22,12 @@ import java.util.function.Predicate;
  */
 public class CurrencyChooser {
 
-    // TODO: Write test for this
-    public static final int MAXIMUM_NUMBER_OF_PAIRS = -1;
+    /**
+     * The maximum number of currency pairs that {@link #choosePairs(int)
+     * choosePairs()} can return. This is an arbitrary limit. The theoretical
+     * limit is much higher, but unlikely to be of practical use.
+     */
+    public static final int MAXIMUM_NUMBER_OF_PAIRS = 128;
 
     static final Random RANDOM = new Random();
 
