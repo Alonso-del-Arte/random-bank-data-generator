@@ -700,4 +700,24 @@ class CurrencyChooserTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testChoosePairsRejectsExcessiveSize() {
+        int badSize = CurrencyChooser.MAXIMUM_NUMBER_OF_PAIRS
+                + RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        String message = "choosePairs() should reject number of pairs "
+                + badSize + " as it is greater than MAXIMUM_NUMBER_OF_PAIRS "
+                + CurrencyChooser.MAXIMUM_NUMBER_OF_PAIRS;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            Set<CurrencyPair> badResult = CurrencyChooser.choosePairs(badSize);
+            System.out.println(message + ", not given result " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(badSize);
+        String containsMsg = "Exception message should contain \"" + numStr + "\"";
+        assert excMsg.contains(numStr) : containsMsg;
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
