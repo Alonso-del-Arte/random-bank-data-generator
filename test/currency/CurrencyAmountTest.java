@@ -36,7 +36,7 @@ public class CurrencyAmountTest {
         String message = "Trying to instantiate " + centsAmount
                 + " with pseudocurrency " + displayName + " (" + currencyCode
                 + ") should cause an exception";
-        Throwable t = assertThrows(NullPointerException.class, () -> {
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             CurrencyAmount badAmount = new CurrencyAmount(centsAmount,
                     badCurrency);
             System.out.println(message + ", not created instance "
