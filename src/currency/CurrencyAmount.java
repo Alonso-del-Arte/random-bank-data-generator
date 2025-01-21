@@ -64,6 +64,12 @@ public class CurrencyAmount {
             String excMsg = "Currency should not be null";
             throw new NullPointerException(excMsg);
         }
+        if (currency.getDefaultFractionDigits() < 0) {
+            String excMsg = "Currency " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode()
+                    + ") is not valid for this constructor";
+            throw new IllegalArgumentException(excMsg);
+        }
         //
     }
 
