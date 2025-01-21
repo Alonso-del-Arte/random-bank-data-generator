@@ -1,5 +1,6 @@
 package currency;
 
+import java.util.Currency;
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,31 @@ public class CurrencyAmountTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsPseudocurrency() {
+        int centsAmount = RANDOM.nextInt();
+        Currency badCurrency = CurrencyChooser.choosePseudocurrency();
+        String displayName = badCurrency.getDisplayName();
+        String currencyCode = badCurrency.getCurrencyCode();
+        String message = "Trying to instantiate " + centsAmount
+                + " with pseudocurrency " + displayName + " (" + currencyCode
+                + ") should cause an exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            CurrencyAmount badAmount = new CurrencyAmount(centsAmount,
+                    badCurrency);
+            System.out.println(message + ", not created instance "
+                    + badAmount.getClass().getName() + '@'
+                    + Integer.toHexString(badAmount.hashCode()));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should include currency code "
+                + currencyCode + " for " + displayName;
+        assert excMsg.contains(currencyCode) : containsMsg;
         System.out.println("\"" + excMsg + "\"");
     }
 
