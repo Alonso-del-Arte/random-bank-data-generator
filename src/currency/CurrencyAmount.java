@@ -60,6 +60,10 @@ public class CurrencyAmount {
 
     // TODO: Write tests for this
     public CurrencyAmount(long centsAmount, Currency currency) {
+        if (currency == null) {
+            String excMsg = "Currency should not be null";
+            throw new NullPointerException(excMsg);
+        }
         //
     }
 
