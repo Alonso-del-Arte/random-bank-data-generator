@@ -4,6 +4,8 @@ import java.util.Currency;
 
 public class CurrencyAmount {
 
+    private final long totalCents;
+
     // TODO: Write tests for this
     public long getAmountInCents() {
         return Long.MIN_VALUE;
@@ -54,7 +56,11 @@ public class CurrencyAmount {
         return new CurrencyAmount(-1L, Currency.getInstance("XCD"));
     }
 
-    // TODO: Override equals(), hashCode(), toString()
+    public String toString() {
+        return "$0.0" + this.totalCents;
+    }
+
+    // TODO: Override equals(), hashCode()
 
     // TODO: Make Comparable<CurrencyAmount>, override compareTo()
 
@@ -70,7 +76,7 @@ public class CurrencyAmount {
                     + ") is not valid for this constructor";
             throw new IllegalArgumentException(excMsg);
         }
-        //
+        this.totalCents = centsAmount;
     }
 
 }
