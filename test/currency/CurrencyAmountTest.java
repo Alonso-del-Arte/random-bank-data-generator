@@ -24,6 +24,16 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testToStringTenToNinetyNineCentsOfDollar() {
+        for (short cents = 10; cents < 100; cents++) {
+            CurrencyAmount amount = new CurrencyAmount(cents, DOLLARS);
+            String expected = "$0." + cents;
+            String actual = amount.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
