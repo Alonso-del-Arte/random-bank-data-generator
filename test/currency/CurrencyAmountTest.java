@@ -1,6 +1,7 @@
 package currency;
 
 import java.util.Currency;
+import java.util.Locale;
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CurrencyAmountTest {
 
     public static final Random RANDOM = new Random();
+
+    private static final Currency DOLLARS = Currency.getInstance(Locale.US);
+
+    @Test
+    void testToStringZeroToNineCentsOfDollar() {
+        for (short cents = 0; cents < 10; cents++) {
+            CurrencyAmount amount = new CurrencyAmount(cents, DOLLARS);
+            String expected = "$0.0" + cents;
+            String actual = amount.toString();
+            assertEquals(expected, actual);
+        }
+    }
 
     @Test
     void testConstructorRejectsNullCurrency() {
