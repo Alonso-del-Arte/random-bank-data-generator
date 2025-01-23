@@ -57,7 +57,11 @@ public class CurrencyAmount {
     }
 
     public String toString() {
-        return "$0.0" + this.totalCents;
+        String intermediate = Long.toString(this.totalCents);
+        if (intermediate.length() == 1) {
+            intermediate = '0' + intermediate;
+        }
+        return "$0." + intermediate;
     }
 
     // TODO: Override equals(), hashCode()
