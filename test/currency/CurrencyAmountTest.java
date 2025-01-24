@@ -78,6 +78,20 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    public void testToStringNegativeDollarAmountPlusTenToNinetyNineCents() {
+        int dollarQty = RANDOM.nextInt(1000) + 1;
+        int dollarsInCents = dollarQty * 100;
+        String partial = MINUS_SIGN + "$" + dollarQty + '.';
+        for (short cents = 10; cents < 99; cents++) {
+            CurrencyAmount amount = new CurrencyAmount(-dollarsInCents - cents,
+                    DOLLARS);
+            String expected = partial + cents;
+            String actual = amount.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
