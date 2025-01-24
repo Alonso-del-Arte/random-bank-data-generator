@@ -3,6 +3,7 @@ package currency;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.Random;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +15,16 @@ public class CurrencyAmountTest {
     private static final Currency DOLLARS = Currency.getInstance(Locale.US);
 
     private static final char MINUS_SIGN = '−';
+
+    /**
+     * Criterion for a currency other than United States dollars with a symbol
+     * other than its 3-letter ISO-4217 code and having two default fraction
+     * digits.
+     */
+    private static final Predicate<Currency> CRITERION_A
+            = currency -> !currency.equals(DOLLARS)
+            && !currency.getSymbol().equals(currency.getCurrencyCode())
+            && currency.getDefaultFractionDigits() == 2;
 
     @Test
     void testToStringZeroToNineCentsOfDollar() {
