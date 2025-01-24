@@ -4,6 +4,8 @@ import java.util.Currency;
 
 public class CurrencyAmount {
 
+    private static final char MINUS_SIGN = '−';
+
     private final long totalCents;
 
     // TODO: Write tests for this
@@ -56,7 +58,19 @@ public class CurrencyAmount {
         return new CurrencyAmount(-1L, Currency.getInstance("XCD"));
     }
 
+    private String toStringNegative() {
+        long absoluteCents = -this.totalCents;
+        long withoutCents = absoluteCents / 100;
+        String initial = MINUS_SIGN + "$" + withoutCents + '.';
+        long centsPart = absoluteCents % 100;
+        String centsStr = "0" + centsPart;
+        return initial + centsStr;
+    }
+
     public String toString() {
+        if (this.totalCents < 0) {
+            return this.toStringNegative();
+        }
         if (this.totalCents < 10) {
             return "$0.0" + this.totalCents;
         }
