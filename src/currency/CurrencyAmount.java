@@ -63,7 +63,8 @@ public class CurrencyAmount {
         long withoutCents = absoluteCents / 100;
         String initial = MINUS_SIGN + "$" + withoutCents + '.';
         long centsPart = absoluteCents % 100;
-        String centsStr = "0" + centsPart;
+        String centsStr = (centsPart < 10) ? "0" + centsPart
+                : Long.toString(centsPart);
         return initial + centsStr;
     }
 
