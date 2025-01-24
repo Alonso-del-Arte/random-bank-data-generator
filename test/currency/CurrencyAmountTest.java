@@ -13,6 +13,8 @@ public class CurrencyAmountTest {
 
     private static final Currency DOLLARS = Currency.getInstance(Locale.US);
 
+    private static final char MINUS_SIGN = '−';
+
     @Test
     void testToStringZeroToNineCentsOfDollar() {
         for (short cents = 0; cents < 10; cents++) {
@@ -54,6 +56,20 @@ public class CurrencyAmountTest {
         String partial = "$" + dollarQty + '.';
         for (short cents = 10; cents < 100; cents++) {
             CurrencyAmount amount = new CurrencyAmount(dollarsInCents + cents,
+                    DOLLARS);
+            String expected = partial + cents;
+            String actual = amount.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
+    public void testToStringNegativeDollarAmountPlusZeroToNineCents() {
+        int dollarQty = RANDOM.nextInt(1000) + 1;
+        int dollarsInCents = dollarQty * 100;
+        String partial = MINUS_SIGN + "$" + dollarQty + ".0";
+        for (short cents = 0; cents < 9; cents++) {
+            CurrencyAmount amount = new CurrencyAmount(-dollarsInCents - cents,
                     DOLLARS);
             String expected = partial + cents;
             String actual = amount.toString();
