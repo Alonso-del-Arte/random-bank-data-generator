@@ -133,6 +133,24 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testToStringUnitsPlusZeroToNineCentsOfOtherCurrency() {
+        Currency currency = CurrencyChooser.chooseCurrency(CRITERION_A);
+        String symbol = currency.getSymbol();
+        int unitsQty = RANDOM.nextInt(1000) + 1;
+        int unitsInCents = unitsQty * 100;
+        String partial = symbol + unitsQty + ".0";
+        for (short cents = 0; cents < 10; cents++) {
+            CurrencyAmount amount = new CurrencyAmount(unitsInCents + cents, currency);
+            String expected = partial + cents;
+            String actual = amount.toString();
+            String message = "toString() for " + unitsQty + " units and "
+                    + cents + " cents of " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
