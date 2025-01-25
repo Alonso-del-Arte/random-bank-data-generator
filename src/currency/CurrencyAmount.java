@@ -68,7 +68,14 @@ public class CurrencyAmount {
         if (this.totalCents < 10) {
             return this.currencyID.getSymbol() + "0.0" + this.totalCents;
         }
-        return this.currencyID.getSymbol() + "0." + this.totalCents;
+        if (this.totalCents < 100) {
+            return this.currencyID.getSymbol() + "0." + this.totalCents;
+        }
+        long withoutCents = this.totalCents / 100;
+        String initial = this.currencyID.getSymbol() + withoutCents + ".";
+        long centsPart = this.totalCents % 100;
+        String centsStr = "0" + centsPart;
+        return initial + centsStr;
     }
 
     private String toStringNegative() {
