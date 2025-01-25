@@ -1,12 +1,17 @@
 package currency;
 
 import java.util.Currency;
+import java.util.Locale;
 
 public class CurrencyAmount {
 
     private static final char MINUS_SIGN = '−';
 
+    private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
+
     private final long totalCents;
+
+    private final Currency currencyID;
 
     // TODO: Write tests for this
     public long getAmountInCents() {
@@ -58,6 +63,11 @@ public class CurrencyAmount {
         return new CurrencyAmount(-1L, Currency.getInstance("XCD"));
     }
 
+    // TODO: Hold off on refactoring these toString() helpers
+    private String toStringNotUSDollars() {
+        return this.currencyID.getSymbol() + "0.0" + this.totalCents;
+    }
+
     private String toStringNegative() {
         long absoluteCents = -this.totalCents;
         long withoutCents = absoluteCents / 100;
@@ -69,6 +79,9 @@ public class CurrencyAmount {
     }
 
     public String toString() {
+        if (!this.currencyID.equals(U_S_DOLLARS)) {
+            return this.toStringNotUSDollars();
+        }
         if (this.totalCents < 0) {
             return this.toStringNegative();
         }
@@ -103,6 +116,7 @@ public class CurrencyAmount {
             throw new IllegalArgumentException(excMsg);
         }
         this.totalCents = centsAmount;
+        this.currencyID = currency;
     }
 
 }
