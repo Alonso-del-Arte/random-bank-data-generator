@@ -74,7 +74,8 @@ public class CurrencyAmount {
         long withoutCents = this.totalCents / 100;
         String initial = this.currencyID.getSymbol() + withoutCents + ".";
         long centsPart = this.totalCents % 100;
-        String centsStr = "0" + centsPart;
+        String centsStr = (centsPart < 10) ? "0" + centsPart
+                : Long.toString(centsPart);
         return initial + centsStr;
     }
 
