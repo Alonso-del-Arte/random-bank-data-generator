@@ -118,6 +118,21 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testToStringTenToNinetyNineCentsOfOtherCurrency() {
+        Currency currency = CurrencyChooser.chooseCurrency(CRITERION_A);
+        String symbol = currency.getSymbol();
+        for (short cents = 10; cents < 100; cents++) {
+            CurrencyAmount amount = new CurrencyAmount(cents, currency);
+            String expected = symbol + "0." + cents;
+            String actual = amount.toString();
+            String message = "toString() for " + cents + " cents of "
+                    + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
