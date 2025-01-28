@@ -75,6 +75,10 @@ public class CurrencyAmount {
         return this.currencyID.getSymbol() + this.totalCents;
     }
 
+    private String toStringSubdividedInDarahim() {
+        return this.currencyID.getSymbol() + "0.00" + this.totalCents;
+    }
+
     private String toStringNotUSDollarsNegative() {
         long absoluteCents = -this.totalCents;
         long withoutCents = absoluteCents / 100;
@@ -89,6 +93,9 @@ public class CurrencyAmount {
     private String toStringNotUSDollars() {
         if (this.currencyID.getDefaultFractionDigits() == 0) {
             return this.toStringCurrencyNoSubdivisions();
+        }
+        if (this.currencyID.getDefaultFractionDigits() == 3) {
+            return this.toStringSubdividedInDarahim();
         }
         if (this.totalCents < 0) {
             return this.toStringNotUSDollarsNegative();
