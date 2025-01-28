@@ -201,6 +201,18 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testToStringCurrencyNoCentsOrMilles() {
+        Currency currency = CurrencyChooser.chooseCurrency(0);
+        int units = RANDOM.nextInt(8192);
+        CurrencyAmount instance = new CurrencyAmount(units, currency);
+        String expected = currency.getSymbol() + units;
+        String actual = instance.toString();
+        String message = units + " units of " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode() + ')';
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
