@@ -64,7 +64,20 @@ public class CurrencyAmount {
     }
 
     // TODO: Hold off on refactoring these toString() helpers
+    private String toStringNotUSDollarsNegative() {
+        long absoluteCents = -this.totalCents;
+        long withoutCents = absoluteCents / 100;
+        String initial = MINUS_SIGN + this.currencyID.getSymbol() + withoutCents
+                + '.';
+        long centsPart = absoluteCents % 100;
+        String centsStr = "0" + centsPart;
+        return initial + centsStr;
+    }
+
     private String toStringNotUSDollars() {
+        if (this.totalCents < 0) {
+            return this.toStringNotUSDollarsNegative();
+        }
         if (this.totalCents < 10) {
             return this.currencyID.getSymbol() + "0.0" + this.totalCents;
         }
