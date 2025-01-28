@@ -169,6 +169,22 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    public void testToStringNegativeUnitsOfOtherCurrencyPlusZeroToNineCents() {
+        Currency currency = CurrencyChooser.chooseCurrency(CRITERION_A);
+        String symbol = currency.getSymbol();
+        int unitsQty = RANDOM.nextInt(1000) + 1;
+        int unitsInCents = unitsQty * 100;
+        String partial = MINUS_SIGN + symbol + unitsQty + ".0";
+        for (short cents = 0; cents < 9; cents++) {
+            CurrencyAmount amount = new CurrencyAmount(-unitsInCents - cents,
+                    currency);
+            String expected = partial + cents;
+            String actual = amount.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
