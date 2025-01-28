@@ -70,7 +70,8 @@ public class CurrencyAmount {
         String initial = MINUS_SIGN + this.currencyID.getSymbol() + withoutCents
                 + '.';
         long centsPart = absoluteCents % 100;
-        String centsStr = "0" + centsPart;
+        String centsStr = (centsPart < 10) ? "0" + centsPart
+                : Long.toString(centsPart);
         return initial + centsStr;
     }
 
