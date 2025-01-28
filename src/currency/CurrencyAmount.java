@@ -64,7 +64,14 @@ public class CurrencyAmount {
     }
 
     // TODO: Hold off on refactoring these toString() helpers
+    private String toStringCurrencyNoSubdivisionsNegative() {
+        return MINUS_SIGN + this.currencyID.getSymbol() + (-this.totalCents);
+    }
+
     private String toStringCurrencyNoSubdivisions() {
+        if (this.totalCents < 0) {
+            return this.toStringCurrencyNoSubdivisionsNegative();
+        }
         return this.currencyID.getSymbol() + this.totalCents;
     }
 
