@@ -185,7 +185,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testToStringNegativeUnitsOfOtherCurrencyPlusTenToNinetyNineCents() {
+    public void testToStringNegativeUnitsPlusTenToNinetyNineCents() {
         Currency currency = CurrencyChooser.chooseCurrency(CRITERION_A);
         String symbol = currency.getSymbol();
         int unitsQty = RANDOM.nextInt(1000) + 1;
