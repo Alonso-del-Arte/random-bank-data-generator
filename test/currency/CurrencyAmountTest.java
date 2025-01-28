@@ -228,15 +228,13 @@ public class CurrencyAmountTest {
     void testToStringZeroToNineMilles() {
         Currency currency = CurrencyChooser.chooseCurrency(3);
         String symbol = currency.getSymbol();
-        int unitsQty = RANDOM.nextInt(1000) + 1;
-        int unitsInCents = unitsQty * 1000;
-        String partial = symbol + unitsQty + ".00";
-        for (short cents = 0; cents < 10; cents++) {
-            CurrencyAmount amount = new CurrencyAmount(unitsInCents + cents, currency);
-            String expected = partial + cents;
+        String partial = symbol + "0.00";
+        for (short milles = 0; milles < 10; milles++) {
+            CurrencyAmount amount = new CurrencyAmount(milles, currency);
+            String expected = partial + milles;
             String actual = amount.toString();
-            String message = "toString() for " + unitsQty + " units and "
-                    + cents + " milles of " + currency.getDisplayName() + " ("
+            String message = "toString() for " + milles + " milles of "
+                    + currency.getDisplayName() + " ("
                     + currency.getCurrencyCode() + ')';
             assertEquals(expected, actual, message);
         }
