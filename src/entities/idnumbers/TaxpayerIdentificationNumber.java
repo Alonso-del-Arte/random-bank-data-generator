@@ -10,6 +10,9 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
     @Serial
     private static final long serialVersionUID = 17808292273192960L;
 
+    // TODO: Write a test for this
+    public static final int UPPER_NUMBER_LIMIT = -1;
+
     /**
      * Provides an offset for the hash code function. The idea here is that a
      * subclass will provide the same offset for all its instances, to separate
