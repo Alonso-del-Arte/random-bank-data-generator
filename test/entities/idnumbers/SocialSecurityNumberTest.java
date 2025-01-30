@@ -18,7 +18,7 @@ class SocialSecurityNumberTest {
 
     @Test
     void testConstructorRejectsNegativeNumbers() {
-        int badNum = -RANDOM.nextInt(1000000000) - 1;
+        int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             SocialSecurityNumber badInstance = new SocialSecurityNumber(badNum);
