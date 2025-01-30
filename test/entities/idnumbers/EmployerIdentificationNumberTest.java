@@ -10,6 +10,13 @@ import textops.TextCalculator;
 class EmployerIdentificationNumberTest {
 
     @Test
+    void testUpperNumberLimitConstant() {
+        int expected = 1000000000;
+        int actual = EmployerIdentificationNumber.UPPER_NUMBER_LIMIT;
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testCorrectEINDashPlacement() {
         System.out.println("correctEINDashPlacement");
         String intermediate = TextCalculator.leftPad(
