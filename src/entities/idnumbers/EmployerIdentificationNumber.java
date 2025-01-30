@@ -9,6 +9,9 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
     @Serial
     private static final long serialVersionUID = 17808292273192961L;
 
+    // TODO: Write a test for this
+    public static final int UPPER_NUMBER_LIMIT = -1000000000;
+
     final int num;
 
     static boolean correctEINDashPlacement(String s) {
