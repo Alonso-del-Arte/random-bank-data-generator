@@ -37,13 +37,9 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
 
     public EmployerIdentificationNumber(int number) {
         super(number);
-        if (number < 0) {
-            String excMsg = "Number " + number + " should not be negative";
-            throw new IllegalArgumentException(excMsg);
-        }
-        if (number >= UPPER_NUMBER_LIMIT) {
-            String excMsg = "Number " + number + " ought to be less than "
-                    + UPPER_NUMBER_LIMIT;
+        if (number < 0 || number >= UPPER_NUMBER_LIMIT) {
+            String excMsg = "Number " + number + " is outside range 0 to "
+                    + (UPPER_NUMBER_LIMIT - 1);
             throw new IllegalArgumentException(excMsg);
         }
         this.num = number;
