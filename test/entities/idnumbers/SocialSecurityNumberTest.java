@@ -9,11 +9,28 @@ class SocialSecurityNumberTest {
 
     static final Random RANDOM = new Random(~System.currentTimeMillis());
 
+    private static final int AREA_AND_GROUP_MODULUS = 100000;
+
+    private static final int SERIAL_MODULUS = 10000;
+
     @Test
     void testUpperNumberLimitConstant() {
         int expected = 1000000000;
         int actual = SocialSecurityNumber.UPPER_NUMBER_LIMIT;
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToRedactedStringSerial0000To0009() {
+        int areaAndGroup = RANDOM.nextInt(AREA_AND_GROUP_MODULUS)
+                * SERIAL_MODULUS;
+        int serialStop = areaAndGroup + 10;
+        for (int number = areaAndGroup; number < serialStop; number++) {
+            SocialSecurityNumber instance = new SocialSecurityNumber(number);
+            String expected = "***-**-000" + (number % 10);
+            String actual = instance.toRedactedString();
+            assertEquals(expected, actual);
+        }
     }
 
     @Test
