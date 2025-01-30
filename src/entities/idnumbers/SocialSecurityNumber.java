@@ -27,17 +27,16 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return 0;
     }
 
-    // TODO: Write tests for this
     public SocialSecurityNumber(int number) {
         super(number);
-//        if (number < 0) {
-//            String excMsg = "Number " + number + " should not be negative";
-//            throw new IllegalArgumentException(excMsg);
-//        }
-//        if (number >= UPPER_NUMBER_LIMIT) {
-//            String excMsg = "Number " + number + " is excessive";
-//            throw new IllegalArgumentException(excMsg);
-//        }
+        if (number < 0) {
+            String excMsg = "Number " + number + " should not be negative";
+            throw new IllegalArgumentException(excMsg);
+        }
+        if (number >= UPPER_NUMBER_LIMIT) {
+            String excMsg = "Number " + number + " is excessive";
+            throw new IllegalArgumentException(excMsg);
+        }
     }
 
 }
