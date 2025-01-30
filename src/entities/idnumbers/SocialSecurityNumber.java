@@ -34,6 +34,10 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
             String excMsg = "Number " + number + " should not be negative";
             throw new IllegalArgumentException(excMsg);
         }
+        if (number >= UPPER_NUMBER_LIMIT) {
+            String excMsg = "Number " + number + " is excessive";
+            throw new IllegalArgumentException(excMsg);
+        }
     }
 
 }
