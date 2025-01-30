@@ -10,6 +10,13 @@ class SocialSecurityNumberTest {
     static final Random RANDOM = new Random(~System.currentTimeMillis());
 
     @Test
+    void testUpperNumberLimitConstant() {
+        int expected = 1000000000;
+        int actual = SocialSecurityNumber.UPPER_NUMBER_LIMIT;
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = -RANDOM.nextInt(1000000000) - 1;
         String message = "Constructor should reject number " + badNum;
