@@ -5,6 +5,13 @@ import org.junit.jupiter.api.Test;
 
 class TaxpayerIdentificationNumberTest {
 
+    @Test
+    void testUpperNumberLimitConstant() {
+        int expected = 1000000000;
+        int actual = TaxpayerIdentificationNumber.UPPER_NUMBER_LIMIT;
+        assertEquals(expected, actual);
+    }
+
     private static class TaxpayerIdentificationNumberImpl
             extends TaxpayerIdentificationNumber {
 
