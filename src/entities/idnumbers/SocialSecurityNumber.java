@@ -27,14 +27,20 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return 0;
     }
 
+    /**
+     * Constructor.
+     * @param number The number. For example, 78051120, which corresponds to
+     *               078-05-1120, the Social Security Number originally issued
+     *               to Hilda Schrader Whitcher, an executive secretary at E. H.
+     *               Ferree, a wallet manufacturer.
+     * @throws IllegalArgumentException If {@code number} is negative, or if
+     * it's equal to or greater than {@link #UPPER_NUMBER_LIMIT}.
+     */
     public SocialSecurityNumber(int number) {
         super(number);
-        if (number < 0) {
-            String excMsg = "Number " + number + " should not be negative";
-            throw new IllegalArgumentException(excMsg);
-        }
-        if (number >= UPPER_NUMBER_LIMIT) {
-            String excMsg = "Number " + number + " is excessive";
+        if (number < 0 || number >= UPPER_NUMBER_LIMIT) {
+            String excMsg = "Number " + number + " is outside range 0 to "
+                    + (UPPER_NUMBER_LIMIT - 1);
             throw new IllegalArgumentException(excMsg);
         }
     }
