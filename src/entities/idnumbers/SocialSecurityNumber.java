@@ -27,6 +27,11 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return 0;
     }
 
+    // TODO: Write tests for this
+    public String toRedactedString() {
+        return "078-05-1120";
+    }
+
     /**
      * Constructor.
      * @param number The number. For example, 78051120, which corresponds to
