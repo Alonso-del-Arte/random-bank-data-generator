@@ -16,8 +16,6 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
      */
     public static final int UPPER_NUMBER_LIMIT = 1000000000;
 
-    final int num;
-
     static boolean correctEINDashPlacement(String s) {
         return s.indexOf('-') == 2;
     }
@@ -37,7 +35,6 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
 
     public EmployerIdentificationNumber(int number) {
         super(number);
-        this.num = number;
     }
 
 }

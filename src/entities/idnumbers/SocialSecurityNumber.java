@@ -16,8 +16,6 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
      */
     public static final int UPPER_NUMBER_LIMIT = 1000000000;
 
-    private final int num;
-
     // TODO: Write tests for this
     static boolean correctSSNDashPlacement(String s) {
         return false;
@@ -45,7 +43,6 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
      */
     public SocialSecurityNumber(int number) {
         super(number);
-        this.num = number;
     }
 
 }

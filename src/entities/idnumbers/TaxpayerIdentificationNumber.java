@@ -16,6 +16,8 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
      */
     public static final int UPPER_NUMBER_LIMIT = 1000000000;
 
+    final int num;
+
     /**
      * Provides an offset for the hash code function. The idea here is that a
      * subclass will provide the same offset for all its instances, to separate
@@ -37,6 +39,7 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
                     + (UPPER_NUMBER_LIMIT - 1);
             throw new IllegalArgumentException(excMsg);
         }
+        this.num = number;
     }
 
 }
