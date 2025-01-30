@@ -35,7 +35,7 @@ class SocialSecurityNumberTest {
     }
 
     @Test
-    void testConstructorRejectsNegativeNumber() {
+    void testConstructorRejectsExcessiveNumber() {
         int badNum = SocialSecurityNumber.UPPER_NUMBER_LIMIT
                 + RANDOM.nextInt(Short.MAX_VALUE);
         String message = "Constructor should reject number " + badNum;
