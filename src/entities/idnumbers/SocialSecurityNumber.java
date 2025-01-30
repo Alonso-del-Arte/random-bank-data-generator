@@ -8,8 +8,13 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
     @Serial
     private static final long serialVersionUID = 17808292273192962L;
 
-    // TODO: Write a test for this
-    public static final int UPPER_NUMBER_LIMIT = -1;
+    /**
+     * The number one more than the theoretical maximum Social Security Number,
+     * 999-99-9999 (though that will probably never be assigned to anyone in
+     * real life). The constructor can use this constant to check its number
+     * parameter.
+     */
+    public static final int UPPER_NUMBER_LIMIT = 1000000000;
 
     // TODO: Write tests for this
     static boolean correctSSNDashPlacement(String s) {
