@@ -15,6 +15,12 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
         return s.indexOf('-') == 2;
     }
 
+    // TODO: Write tests for this
+    @Override
+    int hashCodeOffset() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         String intermediate = TextCalculator.leftPad(Integer.toString(this.num),
