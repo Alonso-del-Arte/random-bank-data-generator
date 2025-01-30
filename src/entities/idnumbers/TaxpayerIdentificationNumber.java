@@ -31,10 +31,14 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
         return 0;
     }
 
-    // TODO: Write tests for this
     TaxpayerIdentificationNumber(int number) {
         if (number < 0) {
             String excMsg = "Number " + number + " should be positive instead";
+            throw new IllegalArgumentException(excMsg);
+        }
+        if (number >= UPPER_NUMBER_LIMIT) {
+            String excMsg = "Number " + number + " should be less than "
+                    + UPPER_NUMBER_LIMIT;
             throw new IllegalArgumentException(excMsg);
         }
     }
