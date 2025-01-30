@@ -32,13 +32,9 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
     }
 
     TaxpayerIdentificationNumber(int number) {
-        if (number < 0) {
-            String excMsg = "Number " + number + " should be positive instead";
-            throw new IllegalArgumentException(excMsg);
-        }
-        if (number >= UPPER_NUMBER_LIMIT) {
-            String excMsg = "Number " + number + " should be less than "
-                    + UPPER_NUMBER_LIMIT;
+        if (number < 0 || number >= UPPER_NUMBER_LIMIT) {
+            String excMsg = "Number " + number + " is outside of the range 0 to "
+                    + (UPPER_NUMBER_LIMIT - 1);
             throw new IllegalArgumentException(excMsg);
         }
     }
