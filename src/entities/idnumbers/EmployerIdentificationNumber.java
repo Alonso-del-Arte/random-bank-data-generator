@@ -38,6 +38,10 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
     // TODO: Write tests for this
     public EmployerIdentificationNumber(int number) {
         super(number);
+        if (number < 0) {
+            String excMsg = "Number " + number + " should not be negative";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.num = number;
     }
 
