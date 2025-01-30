@@ -8,8 +8,6 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
     @Serial
     private static final long serialVersionUID = 17808292273192962L;
 
-    private final int num;
-
     /**
      * The number one more than the theoretical maximum Social Security Number,
      * 999-99-9999 (though that will probably never be assigned to anyone in
@@ -17,6 +15,8 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
      * parameter.
      */
     public static final int UPPER_NUMBER_LIMIT = 1000000000;
+
+    private final int num;
 
     // TODO: Write tests for this
     static boolean correctSSNDashPlacement(String s) {
@@ -45,11 +45,6 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
      */
     public SocialSecurityNumber(int number) {
         super(number);
-        if (number < 0 || number >= UPPER_NUMBER_LIMIT) {
-            String excMsg = "Number " + number + " is outside range 0 to "
-                    + (UPPER_NUMBER_LIMIT - 1);
-            throw new IllegalArgumentException(excMsg);
-        }
         this.num = number;
     }
 
