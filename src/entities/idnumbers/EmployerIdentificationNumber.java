@@ -35,11 +35,15 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
         return intermediate.substring(0, 2) + '-' + intermediate.substring(2);
     }
 
-    // TODO: Write tests for this
     public EmployerIdentificationNumber(int number) {
         super(number);
         if (number < 0) {
             String excMsg = "Number " + number + " should not be negative";
+            throw new IllegalArgumentException(excMsg);
+        }
+        if (number >= UPPER_NUMBER_LIMIT) {
+            String excMsg = "Number " + number + " ought to be less than "
+                    + UPPER_NUMBER_LIMIT;
             throw new IllegalArgumentException(excMsg);
         }
         this.num = number;
