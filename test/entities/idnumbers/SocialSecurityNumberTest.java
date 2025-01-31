@@ -89,6 +89,31 @@ class SocialSecurityNumberTest {
         assertEquals(expected, actual, message);
     }
 
+    private static int chooseDiffSerial(int serial) {
+        int prop = serial;
+        while (prop == serial) {
+            prop = RANDOM.nextInt(SERIAL_MODULUS);
+        }
+        return prop;
+    }
+
+    @Test
+    void testDoesNotMatchLastFour() {
+        int areaAndGroupA = RANDOM.nextInt(AREA_AND_GROUP_MODULUS)
+                * SERIAL_MODULUS;
+        int areaAndGroupB = RANDOM.nextInt(AREA_AND_GROUP_MODULUS)
+                * SERIAL_MODULUS;
+        int serialA = RANDOM.nextInt(SERIAL_MODULUS);
+        int serialB = chooseDiffSerial(serialA);
+        SocialSecurityNumber ssnA = new SocialSecurityNumber(areaAndGroupA
+                + serialA);
+        SocialSecurityNumber ssnB = new SocialSecurityNumber(areaAndGroupB
+                + serialB);
+        String msg = ssnA.toRedactedString() + " should not match last four of "
+                + ssnB.toRedactedString();
+        assert !ssnA.matchesLastFour(ssnB) : msg;
+    }
+
     @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
