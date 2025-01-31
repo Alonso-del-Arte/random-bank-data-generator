@@ -37,9 +37,8 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return (short) (this.num % SERIAL_MODULUS);
     }
 
-    // TODO: Write tests for this
     public boolean matchesLastFour(SocialSecurityNumber other) {
-        return false;
+        return this.num == other.num;
     }
 
     public String toRedactedString() {
