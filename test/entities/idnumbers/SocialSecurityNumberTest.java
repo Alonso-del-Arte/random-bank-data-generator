@@ -34,6 +34,20 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testToRedactedStringSerial0010To0099() {
+        int areaAndGroup = RANDOM.nextInt(AREA_AND_GROUP_MODULUS)
+                * SERIAL_MODULUS;
+        int serialStart = areaAndGroup + 10;
+        int serialStop = areaAndGroup + 100;
+        for (int number = serialStart; number < serialStop; number++) {
+            SocialSecurityNumber instance = new SocialSecurityNumber(number);
+            String expected = "***-**-00" + (number % 100);
+            String actual = instance.toRedactedString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
