@@ -10,7 +10,9 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
     @Serial
     private static final long serialVersionUID = 17808292273192962L;
 
-    public static final String AREA_AND_GROUP_REDACTION = "***-**-";
+    private static final String AREA_AND_GROUP_REDACTION = "***-**-";
+
+    private static final int SERIAL_MODULUS = 10000;
 
     /**
      * The number one more than the theoretical maximum Social Security Number,
@@ -31,9 +33,8 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return 0;
     }
 
-    // TODO: Write tests for this
     public short getLastFour() {
-        return Short.MIN_VALUE;
+        return (short) (this.num % SERIAL_MODULUS);
     }
 
     // TODO: Write tests for this
