@@ -115,6 +115,15 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testMatchesLastFourWhenAlsoMatchesFirstFive() {
+        int number = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber instance = new SocialSecurityNumber(number);
+        String msg = "SSN from " + number
+                + " should match last four of SSN from same number";
+        assert instance.matchesLastFour(instance) : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
