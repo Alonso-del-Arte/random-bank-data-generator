@@ -29,7 +29,11 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     // TODO: Write tests for this
     public String toRedactedString() {
-        return "***-**-000" + (this.num % 10);
+        int serial = this.num % 10000;
+        if (serial < 10) {
+            return "***-**-000" + (this.num % 10);
+        }
+        return "***-**-00" + (this.num % 100);
     }
 
     /**
