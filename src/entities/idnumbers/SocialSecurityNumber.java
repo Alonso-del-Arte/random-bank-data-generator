@@ -31,6 +31,16 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return 0;
     }
 
+    // TODO: Write tests for this
+    public short getLastFour() {
+        return Short.MIN_VALUE;
+    }
+
+    // TODO: Write tests for this
+    public boolean matchesLastFour(SocialSecurityNumber other) {
+        return false;
+    }
+
     public String toRedactedString() {
         int serial = this.num % 10000;
         String last4 = leftPad(Integer.toString(serial), 4, '0');
