@@ -39,7 +39,7 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     // TODO: Write tests for this
     public boolean matchesLastFour(SocialSecurityNumber other) {
-        return false;
+        return true;
     }
 
     public String toRedactedString() {
