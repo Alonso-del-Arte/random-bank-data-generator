@@ -3,10 +3,14 @@ package entities.idnumbers;
 import java.io.Serial;
 import java.text.DecimalFormat;
 
+import static textops.TextCalculator.leftPad;
+
 public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     @Serial
     private static final long serialVersionUID = 17808292273192962L;
+
+    public static final String AREA_AND_GROUP_REDACTION = "***-**-";
 
     /**
      * The number one more than the theoretical maximum Social Security Number,
@@ -29,16 +33,8 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     public String toRedactedString() {
         int serial = this.num % 10000;
-        if (serial < 10) {
-            return "***-**-000" + (this.num % 10);
-        }
-        if (serial < 100) {
-            return "***-**-00" + (this.num % 100);
-        }
-        if (serial < 1000) {
-            return "***-**-0" + (this.num % 1000);
-        }
-        return "***-**-" + (this.num % 10000);
+        String last4 = leftPad(Integer.toString(serial), 4, '0');
+        return AREA_AND_GROUP_REDACTION + last4;
     }
 
     /**
