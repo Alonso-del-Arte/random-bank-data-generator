@@ -35,7 +35,10 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         if (serial < 100) {
             return "***-**-00" + (this.num % 100);
         }
-        return "***-**-0" + (this.num % 1000);
+        if (serial < 1000) {
+            return "***-**-0" + (this.num % 1000);
+        }
+        return "***-**-" + (this.num % 10000);
     }
 
     /**
