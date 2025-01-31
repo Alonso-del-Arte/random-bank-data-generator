@@ -77,6 +77,19 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testGetLastFour() {
+        System.out.println("getLastFour");
+        int areaAndGroup = RANDOM.nextInt(AREA_AND_GROUP_MODULUS)
+                * SERIAL_MODULUS;
+        short expected = (short) RANDOM.nextInt(SERIAL_MODULUS);
+        int number = areaAndGroup + expected;
+        SocialSecurityNumber instance = new SocialSecurityNumber(number);
+        short actual = instance.getLastFour();
+        String message = "Getting last four of " + instance.toRedactedString();
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
