@@ -62,6 +62,21 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testToRedactedString() {
+        System.out.println("toRedactedString");
+        int areaAndGroup = RANDOM.nextInt(AREA_AND_GROUP_MODULUS)
+                * SERIAL_MODULUS;
+        int serialStart = areaAndGroup + 1000;
+        int serialStop = areaAndGroup + 10000;
+        for (int number = serialStart; number < serialStop; number++) {
+            SocialSecurityNumber instance = new SocialSecurityNumber(number);
+            String expected = "***-**-" + (number % 10000);
+            String actual = instance.toRedactedString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
