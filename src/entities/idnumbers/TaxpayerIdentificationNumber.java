@@ -2,8 +2,6 @@ package entities.idnumbers;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 
 public abstract class TaxpayerIdentificationNumber implements Serializable {
 
