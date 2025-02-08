@@ -1,7 +1,6 @@
 package entities.idnumbers;
 
 import java.io.Serial;
-import java.text.DecimalFormat;
 
 import static textops.TextCalculator.leftPad;
 
