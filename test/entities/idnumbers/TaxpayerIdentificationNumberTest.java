@@ -1,5 +1,6 @@
 package entities.idnumbers;
 
+import java.io.Serial;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,6 +59,9 @@ class TaxpayerIdentificationNumberTest {
 
     private static class TaxpayerIdentificationNumberImpl
             extends TaxpayerIdentificationNumber {
+
+        @Serial
+        private static final long serialVersionUID = 17808292273192961L;
 
         @Override
         int hashCodeOffset() {
