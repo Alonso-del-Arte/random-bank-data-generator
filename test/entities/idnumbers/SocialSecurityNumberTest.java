@@ -5,6 +5,8 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import static textops.TextCalculator.leftPad;
+
 class SocialSecurityNumberTest {
 
     static final Random RANDOM = new Random(~System.currentTimeMillis());
@@ -18,6 +20,19 @@ class SocialSecurityNumberTest {
         int expected = 1000000000;
         int actual = SocialSecurityNumber.UPPER_NUMBER_LIMIT;
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToString() {
+        System.out.println("toString");
+        int number = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber instance = new SocialSecurityNumber(number);
+        String dashless = leftPad(Integer.toString(number), 9, '0');
+        String expected = dashless.substring(0, 3) + '-'
+                + dashless.substring(3, 5) + '-' + dashless.substring(5);
+        String actual = instance.toString();
+        String message = "SSN without dashes is " + number;
+        assertEquals(expected, actual, message);
     }
 
     @Test
@@ -123,6 +138,7 @@ class SocialSecurityNumberTest {
         assert instance.matchesLastFour(instance) : msg;
     }
 
+    // TODO: Write main test for matchesLastFour()
     @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
