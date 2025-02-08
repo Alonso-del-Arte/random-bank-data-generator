@@ -41,6 +41,13 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return this.num == other.num;
     }
 
+    @Override
+    public String toString() {
+        String initial = leftPad(Integer.toString(this.num), 9, '0');
+        return initial.substring(0, 3) + '-' + initial.substring(3, 5) + '-'
+                + initial.substring(5);
+    }
+
     public String toRedactedString() {
         int serial = this.num % 10000;
         String last4 = leftPad(Integer.toString(serial), 4, '0');
