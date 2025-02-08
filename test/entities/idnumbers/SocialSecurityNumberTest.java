@@ -138,7 +138,29 @@ class SocialSecurityNumberTest {
         assert instance.matchesLastFour(instance) : msg;
     }
 
-    // TODO: Write main test for matchesLastFour()
+    private static int chooseDiffAreaAndGroup(int areaAndGroup) {
+        int propNum = areaAndGroup;
+        while (propNum == areaAndGroup) {
+            propNum = RANDOM.nextInt(AREA_AND_GROUP_MODULUS);
+        }
+        return propNum;
+    }
+
+    @Test
+    void testMatchesLastFour() {
+        System.out.println("matchesLastFour");
+        int areaAndGroupA = RANDOM.nextInt(AREA_AND_GROUP_MODULUS);
+        int areaAndGroupB = chooseDiffAreaAndGroup(areaAndGroupA);
+        int serial = RANDOM.nextInt(SERIAL_MODULUS);
+        SocialSecurityNumber numberA = new SocialSecurityNumber(areaAndGroupA
+                * SERIAL_MODULUS + serial);
+        SocialSecurityNumber numberB = new SocialSecurityNumber(areaAndGroupB
+                * SERIAL_MODULUS + serial);
+        String msg = "Last four of " + numberA + " should match last four of "
+                + numberB;
+        assert numberA.matchesLastFour(numberB) : msg;
+    }
+
     @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
