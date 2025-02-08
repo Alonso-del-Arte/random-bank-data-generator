@@ -38,7 +38,7 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
     }
 
     public boolean matchesLastFour(SocialSecurityNumber other) {
-        return this.num == other.num;
+        return (this.num % SERIAL_MODULUS) == (other.num % SERIAL_MODULUS);
     }
 
     @Override
