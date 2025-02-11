@@ -273,6 +273,65 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testUnitsOfCurrencyPlusZeroToNineMilles() {
+        Currency currency = CurrencyChooser.chooseCurrency(3);
+        int units = RANDOM.nextInt(1, 8192);
+        int unitsInMilles = units * 1000;
+        String symbol = currency.getSymbol();
+        String partial = symbol + units + ".00";
+        for (short milles = 0; milles < 10; milles++) {
+            int totalMilles = unitsInMilles + milles;
+            CurrencyAmount amount = new CurrencyAmount(totalMilles, currency);
+            String expected = partial + milles;
+            String actual = amount.toString();
+            String message = "toString() for " + totalMilles + " milles of "
+                    + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
+    void testUnitsOfCurrencyPlusTenToNinetyNineMilles() {
+        Currency currency = CurrencyChooser.chooseCurrency(3);
+        int units = RANDOM.nextInt(1, 8192);
+        int unitsInMilles = units * 1000;
+        String symbol = currency.getSymbol();
+        String partial = symbol + units + ".0";
+        for (short milles = 10; milles < 100; milles++) {
+            int totalMilles = unitsInMilles + milles;
+            CurrencyAmount amount = new CurrencyAmount(totalMilles, currency);
+            String expected = partial + milles;
+            String actual = amount.toString();
+            String message = "toString() for " + totalMilles + " milles of "
+                    + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
+    void testUnitsOfCurrencyPlusOneHundredToNineHundredNinetyNineMilles() {
+        Currency currency = CurrencyChooser.chooseCurrency(3);
+        int units = RANDOM.nextInt(1, 8192);
+        int unitsInMilles = units * 1000;
+        String symbol = currency.getSymbol();
+        String partial = symbol + units + ".";
+        for (short milles = 100; milles < 1000; milles++) {
+            int totalMilles = unitsInMilles + milles;
+            CurrencyAmount amount = new CurrencyAmount(totalMilles, currency);
+            String expected = partial + milles;
+            String actual = amount.toString();
+            String message = "toString() for " + totalMilles + " milles of "
+                    + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    // TODO: Write tests for negative amounts of currencies with milles
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
