@@ -82,7 +82,13 @@ public class CurrencyAmount {
         if (this.totalCents < 100) {
             return this.currencyID.getSymbol() + "0.0" + this.totalCents;
         }
-        return this.currencyID.getSymbol() + "0." + this.totalCents;
+        if (this.totalCents < 1000) {
+            return this.currencyID.getSymbol() + "0." + this.totalCents;
+        }
+        String numStr = Long.toString(this.totalCents);
+        int darahimBegin = numStr.length() - 3;
+        return this.currencyID.getSymbol() + numStr.substring(0, darahimBegin)
+                + '.' + numStr.substring(darahimBegin);
     }
 
     private String toStringNotUSDollarsNegative() {
