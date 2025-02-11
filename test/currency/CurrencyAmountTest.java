@@ -241,6 +241,22 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testToStringTenToNinetyNineMilles() {
+        Currency currency = CurrencyChooser.chooseCurrency(3);
+        String symbol = currency.getSymbol();
+        String partial = symbol + "0.0";
+        for (short milles = 10; milles < 100; milles++) {
+            CurrencyAmount amount = new CurrencyAmount(milles, currency);
+            String expected = partial + milles;
+            String actual = amount.toString();
+            String message = "toString() for " + milles + " milles of "
+                    + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
