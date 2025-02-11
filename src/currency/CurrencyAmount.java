@@ -79,7 +79,10 @@ public class CurrencyAmount {
         if (this.totalCents < 10) {
             return this.currencyID.getSymbol() + "0.00" + this.totalCents;
         }
-        return this.currencyID.getSymbol() + "0.0" + this.totalCents;
+        if (this.totalCents < 100) {
+            return this.currencyID.getSymbol() + "0.0" + this.totalCents;
+        }
+        return this.currencyID.getSymbol() + "0." + this.totalCents;
     }
 
     private String toStringNotUSDollarsNegative() {
