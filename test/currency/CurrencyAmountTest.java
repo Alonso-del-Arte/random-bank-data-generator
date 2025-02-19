@@ -378,6 +378,21 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testNotEqualsDiffClass() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        int centsAmount = RANDOM.nextInt();
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
+        CurrencyAmount amountDiffClass
+                = new CurrencyAmount(centsAmount, currency) {};
+        String msg = "Amount " + amount + " of currency "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ") of runtime class " + amount.getClass().getName()
+                + " should not equal same amount of class "
+                + amountDiffClass.getClass().getName();
+        assert !amount.equals(amountDiffClass) : msg;
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
