@@ -156,7 +156,17 @@ public class CurrencyAmount {
         return initial + centsStr;
     }
 
-    // TODO: Override equals(), hashCode()
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 
     // TODO: Make Comparable<CurrencyAmount>, override compareTo()
 
