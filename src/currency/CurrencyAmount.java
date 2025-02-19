@@ -156,10 +156,16 @@ public class CurrencyAmount {
         return initial + centsStr;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        return obj != null;
-//    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        return this.getClass().equals(obj.getClass());
+    }
 
     // TODO: Write tests for this
     @Override
