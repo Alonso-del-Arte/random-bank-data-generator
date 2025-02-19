@@ -156,10 +156,9 @@ public class CurrencyAmount {
         return initial + centsStr;
     }
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return true;
+        return obj != null;
     }
 
     // TODO: Write tests for this
