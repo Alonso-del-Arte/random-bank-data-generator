@@ -349,6 +349,14 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testReferentialEquality() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        int centsAmount = RANDOM.nextInt();
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
+        assertEquals(amount, amount);
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
