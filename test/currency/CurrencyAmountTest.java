@@ -348,12 +348,17 @@ public class CurrencyAmountTest {
         assertEquals(expected, actual, message);
     }
 
+    private static Object passThrough(Object obj) {
+        return obj;
+    }
+
     @Test
     void testReferentialEquality() {
         Currency currency = CurrencyChooser.chooseCurrency();
         int centsAmount = RANDOM.nextInt();
         CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
-        assertEquals(amount, amount);
+        Object sameRef = passThrough(amount);
+        assertEquals(amount, sameRef);
     }
 
     @Test
