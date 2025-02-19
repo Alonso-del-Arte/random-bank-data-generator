@@ -361,6 +361,22 @@ public class CurrencyAmountTest {
         assertEquals(amount, sameRef);
     }
 
+    private static Object provideNull() {
+        return null;
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        int centsAmount = RANDOM.nextInt();
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
+        Object obj = provideNull();
+        String msg = "Amount " + amount + " of currency "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ") should not equal null";
+        assert !amount.equals(obj) : msg;
+    }
+
     @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
