@@ -331,6 +331,23 @@ public class CurrencyAmountTest {
 
     // TODO: Write tests for negative amounts of currencies with milles
 
+    // TODO: Write tests for getAmountInCents(), getUnitAmount() and
+    //  getChangeAmount()
+
+    @Test
+    void testGetCurrency() {
+        System.out.println("getCurrency");
+        Currency expected = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        int centsAmount = RANDOM.nextInt(128000);
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, expected);
+        Currency actual = amount.getCurrency();
+        String message = "Currency of " + amount + " should be "
+                + expected.getDisplayName();
+        assertEquals(expected, actual, message);
+    }
+
     @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
