@@ -28,9 +28,8 @@ public class CurrencyAmount {
         return Short.MIN_VALUE;
     }
 
-    // TODO: Write tests for this
     public Currency getCurrency() {
-        return Currency.getInstance("XTS");
+        return this.currencyID;
     }
 
     // TODO: Write tests for this
