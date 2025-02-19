@@ -406,6 +406,19 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testNotEqualDiffAmount() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        int centsAmount = RANDOM.nextInt();
+        CurrencyAmount someAmount = new CurrencyAmount(centsAmount, currency);
+        CurrencyAmount diffAmount = new CurrencyAmount(centsAmount + 1,
+                currency);
+        String message = "Different amounts of same currency, "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ")";
+        assertNotEquals(someAmount, diffAmount, message);
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
