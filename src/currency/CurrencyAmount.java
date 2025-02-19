@@ -167,7 +167,11 @@ public class CurrencyAmount {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        return this.totalCents == ((CurrencyAmount) obj).totalCents;
+        CurrencyAmount other = (CurrencyAmount) obj;
+        if (this.totalCents != other.totalCents) {
+            return false;
+        }
+        return this.currencyID.equals(other.currencyID);
     }
 
     // TODO: Write tests for this
