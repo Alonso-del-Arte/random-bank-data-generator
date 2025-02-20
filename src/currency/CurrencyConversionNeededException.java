@@ -8,10 +8,11 @@ public class CurrencyConversionNeededException extends RuntimeException {
     @Serial
     private static final long serialVersionUID = 70580819529728L;
 
-    // TODO: Write tests for this
+    private final String msg;
+
     @Override
     public String getMessage() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.msg;
     }
 
     // TODO: Write tests for this
@@ -37,21 +38,21 @@ public class CurrencyConversionNeededException extends RuntimeException {
     // TODO: Write tests for this
     public CurrencyConversionNeededException(CurrencyAmount amount,
                                              Currency currency) {
-        //
+        this.msg = "SORRY, NOT IMPLEMENTED YET";
     }
 
 
     // TODO: Write tests for this
     public CurrencyConversionNeededException(CurrencyAmount amountA,
                                              CurrencyAmount amountB) {
-        //
+        this.msg = "SORRY, NOT IMPLEMENTED YET";
     }
 
     // TODO: Write tests for this
     public CurrencyConversionNeededException(CurrencyAmount amountA,
                                              CurrencyAmount amountB,
                                              String message) {
-        //
+        this.msg = message;
     }
 
 }
