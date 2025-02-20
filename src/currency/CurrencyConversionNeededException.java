@@ -8,9 +8,11 @@ public class CurrencyConversionNeededException extends RuntimeException {
     @Serial
     private static final long serialVersionUID = 70580819529728L;
 
+    private final CurrencyAmount amtA;
+
     // TODO: Write tests for this
     public CurrencyAmount getAmountA() {
-        return new CurrencyAmount(-1, Currency.getInstance("USD"));
+        return this.amtA;
     }
 
     // TODO: Write tests for this
@@ -32,6 +34,7 @@ public class CurrencyConversionNeededException extends RuntimeException {
     public CurrencyConversionNeededException(CurrencyAmount amount,
                                              Currency currency) {
         super("SORRY, NOT IMPLEMENTED YET");
+        this.amtA = new CurrencyAmount(-1, Currency.getInstance("USD"));
     }
 
 
@@ -39,6 +42,7 @@ public class CurrencyConversionNeededException extends RuntimeException {
     public CurrencyConversionNeededException(CurrencyAmount amountA,
                                              CurrencyAmount amountB) {
         super("SORRY, NOT IMPLEMENTED YET");
+        this.amtA = new CurrencyAmount(-1, Currency.getInstance("USD"));
     }
 
     // TODO: Write tests for this
@@ -46,6 +50,7 @@ public class CurrencyConversionNeededException extends RuntimeException {
                                              CurrencyAmount amountB,
                                              String message) {
         super(message);
+        this.amtA = amountA;
     }
 
 }
