@@ -39,4 +39,22 @@ class CurrencyConversionNeededExceptionTest {
         assertEquals(expected, actual);
     }
 
+    // TODO: Write tests for getMessage() on instances constructed from
+    //  auxiliary constructors
+
+    @Test
+    void testGetAmountA() {
+        System.out.println("getAmountA");
+        CurrencyAmount expected = makeAmount();
+        CurrencyAmount amountB = makeAmountDiffCurrency(expected.getCurrency());
+        CurrencyConversionNeededException instance
+                = new CurrencyConversionNeededException(expected, amountB,
+                DEFAULT_MESSAGE);
+        CurrencyAmount actual = instance.getAmountA();
+        String message = "Expecting amount of "
+                + expected.getCurrency().getDisplayName() + " ("
+                + expected.getCurrency().getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
 }
