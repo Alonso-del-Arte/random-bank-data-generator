@@ -3,9 +3,6 @@ package currency;
 import static currency.CurrencyAmountTest.RANDOM;
 
 import java.util.Currency;
-import java.util.Locale;
-import java.util.Random;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -123,6 +120,23 @@ class CurrencyConversionNeededExceptionTest {
             CurrencyConversionNeededException instance
                     = new CurrencyConversionNeededException(amountA, null,
                     DEFAULT_MESSAGE);
+            System.out.println(message + ", not created instance "
+                    + instance.getClass().getName() + '@'
+                    + Integer.toHexString(instance.hashCode()));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testFirstAuxConstructorRejectsNullAmountA() {
+        CurrencyAmount amountB = makeAmount();
+        String message = "Null amountA should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            CurrencyConversionNeededException instance
+                    = new CurrencyConversionNeededException(null, amountB);
             System.out.println(message + ", not created instance "
                     + instance.getClass().getName() + '@'
                     + Integer.toHexString(instance.hashCode()));
