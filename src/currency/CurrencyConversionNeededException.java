@@ -31,9 +31,14 @@ public class CurrencyConversionNeededException extends RuntimeException {
     }
 
     // TODO: Write tests for this
+    // TODO: Chain this constructor to first auxiliary constructor
     public CurrencyConversionNeededException(CurrencyAmount amount,
                                              Currency currency) {
         super("SORRY, NOT IMPLEMENTED YET");
+        if (amount == null) {
+            String excMsg = "Amount should not be null";
+            throw new NullPointerException(excMsg);
+        }
         this.amtA = new CurrencyAmount(-1, Currency.getInstance("USD"));
         this.amtB = this.amtA;
     }
