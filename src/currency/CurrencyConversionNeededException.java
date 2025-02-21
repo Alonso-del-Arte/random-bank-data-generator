@@ -56,6 +56,10 @@ public class CurrencyConversionNeededException extends RuntimeException {
             String excMsg = "Message should not be null";
             throw new NullPointerException(excMsg);
         }
+        if (amountA == null) {
+            String excMsg = "Amount A should not be null";
+            throw new NullPointerException(excMsg);
+        }
         this.amtA = amountA;
         this.amtB = amountB;
     }
