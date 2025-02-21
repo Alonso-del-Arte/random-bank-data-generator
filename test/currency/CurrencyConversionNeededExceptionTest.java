@@ -182,4 +182,22 @@ class CurrencyConversionNeededExceptionTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testSecondAuxConstructorRejectsNullCurrency() {
+        CurrencyAmount amountA = makeAmount();
+        String message = "Null currency should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            CurrencyConversionNeededException instance
+                    = new CurrencyConversionNeededException(amountA,
+                    (Currency) null);
+            System.out.println(message + ", not created instance "
+                    + instance.getClass().getName() + '@'
+                    + Integer.toHexString(instance.hashCode()));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
