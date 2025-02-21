@@ -44,12 +44,8 @@ public class CurrencyConversionNeededException extends RuntimeException {
     public CurrencyConversionNeededException(CurrencyAmount amountA,
                                              CurrencyAmount amountB) {
         super("SORRY, NOT IMPLEMENTED YET");
-        if (amountA == null) {
+        if (amountA == null || amountB == null) {
             String excMsg = "Amount A should not be null";
-            throw new NullPointerException(excMsg);
-        }
-        if (amountB == null) {
-            String excMsg = "Amount B should not be null";
             throw new NullPointerException(excMsg);
         }
         this.amtA = new CurrencyAmount(-1, Currency.getInstance("USD"));
