@@ -24,9 +24,8 @@ public class CurrencyConversionNeededException extends RuntimeException {
         return this.amtA.getCurrency();
     }
 
-    // TODO: Write tests for this
     public Currency getCurrencyB() {
-        return Currency.getInstance("XTS");
+        return this.amtB.getCurrency();
     }
 
     // TODO: Write tests for this
