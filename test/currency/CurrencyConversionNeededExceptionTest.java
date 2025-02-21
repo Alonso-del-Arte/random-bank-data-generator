@@ -79,13 +79,32 @@ class CurrencyConversionNeededExceptionTest {
     void testGetCurrencyA() {
         System.out.println("getCurrencyA");
         CurrencyAmount amountA = makeAmount();
+        Currency expected = amountA.getCurrency();
+        CurrencyAmount amountB = makeAmountDiffCurrency(expected);
+        CurrencyConversionNeededException instance
+                = new CurrencyConversionNeededException(amountA, amountB,
+                DEFAULT_MESSAGE);
+        Currency actual = instance.getCurrencyA();
+        String message = "Currency of " + amountA + " should be "
+                + expected.getDisplayName() + " (" + expected.getCurrencyCode()
+                + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    // TODO: Write tests for getCurrencyA() on instances from auxiliary
+    //  constructors
+
+    @Test
+    void testGetCurrencyB() {
+        System.out.println("getCurrencyB");
+        CurrencyAmount amountA = makeAmount();
         CurrencyAmount amountB = makeAmountDiffCurrency(amountA.getCurrency());
         CurrencyConversionNeededException instance
                 = new CurrencyConversionNeededException(amountA, amountB,
                 DEFAULT_MESSAGE);
-        Currency expected = amountA.getCurrency();
-        Currency actual = instance.getCurrencyA();
-        String message = "Currency of " + amountA + " should be "
+        Currency expected = amountB.getCurrency();
+        Currency actual = instance.getCurrencyB();
+        String message = "Currency of " + amountB + " should be "
                 + expected.getDisplayName() + " (" + expected.getCurrencyCode()
                 + ")";
         assertEquals(expected, actual, message);
