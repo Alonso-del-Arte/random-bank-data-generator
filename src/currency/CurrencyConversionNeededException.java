@@ -52,7 +52,7 @@ public class CurrencyConversionNeededException extends RuntimeException {
             throw new NullPointerException(excMsg);
         }
         this.amtA = amountA;
-        this.amtB = this.amtA;
+        this.amtB = amountB;
     }
 
     public CurrencyConversionNeededException(CurrencyAmount amountA,
