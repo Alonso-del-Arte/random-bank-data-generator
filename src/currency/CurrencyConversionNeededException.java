@@ -37,7 +37,7 @@ public class CurrencyConversionNeededException extends RuntimeException {
             String excMsg = "Amount, currency should not be null";
             throw new NullPointerException(excMsg);
         }
-        this.amtA = new CurrencyAmount(-1, Currency.getInstance("USD"));
+        this.amtA = amount;
         this.amtB = this.amtA;
     }
 
