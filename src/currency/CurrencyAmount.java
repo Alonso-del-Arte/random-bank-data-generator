@@ -74,6 +74,10 @@ public class CurrencyAmount {
         return this.currencyID.getSymbol() + this.totalSubunits;
     }
 
+    private String toStringDivideInTenThousandths() {
+        return this.currencyID.getSymbol() + "0.000" + this.totalSubunits;
+    }
+
     private String toStringSubdividedInDarahim() {
         if (this.totalSubunits < 10) {
             return this.currencyID.getSymbol() + "0.00" + this.totalSubunits;
@@ -107,6 +111,9 @@ public class CurrencyAmount {
         }
         if (this.currencyID.getDefaultFractionDigits() == 3) {
             return this.toStringSubdividedInDarahim();
+        }
+        if (this.currencyID.getDefaultFractionDigits() == 4) {
+            return this.toStringDivideInTenThousandths();
         }
         if (this.totalSubunits < 0) {
             return this.toStringNotUSDollarsNegative();
