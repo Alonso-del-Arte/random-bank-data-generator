@@ -331,6 +331,23 @@ public class CurrencyAmountTest {
 
     // TODO: Write tests for negative amounts of currencies with milles
 
+    @Test
+    void testToStringZeroToNineDivisionsOfCurrencyDivides10000() {
+        Currency currency = CurrencyChooser.chooseCurrency(4);
+        String symbol = currency.getSymbol();
+        String partial = symbol + "0.000";
+        for (short tenThousandths = 0; tenThousandths < 10; tenThousandths++) {
+            CurrencyAmount amount = new CurrencyAmount(tenThousandths,
+                    currency);
+            String expected = partial + tenThousandths;
+            String actual = amount.toString();
+            String message = "toString() for " + tenThousandths
+                    + " ten thousandths of " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
     // TODO: Write tests for getAmountInCents(), getUnitAmount() and
     //  getChangeAmount()
 
