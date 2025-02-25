@@ -422,6 +422,72 @@ public class CurrencyAmountTest {
         }
     }
 
+    @Test
+    void testToStringUnitsPlusTenToNinetyNineDivisionsOfCurrencyDivides10000() {
+        Currency currency = CurrencyChooser.chooseCurrency(4);
+        String symbol = currency.getSymbol();
+        int units = RANDOM.nextInt(1, 100);
+        String partial = symbol + units + ".00";
+        int unitsToSubunits = units * 10000;
+        for (short tenThousandths = 10; tenThousandths < 100;
+             tenThousandths++) {
+            CurrencyAmount amount
+                    = new CurrencyAmount(unitsToSubunits + tenThousandths,
+                    currency);
+            String expected = partial + tenThousandths;
+            String actual = amount.toString();
+            String message = "toString() for " + tenThousandths
+                    + " ten thousandths of " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
+    void testToStringUnitsPlus100To999DivisionsOfCurrencyDivides10000() {
+        Currency currency = CurrencyChooser.chooseCurrency(4);
+        String symbol = currency.getSymbol();
+        int units = RANDOM.nextInt(1, 100);
+        String partial = symbol + units + ".0";
+        int unitsToSubunits = units * 10000;
+        for (short tenThousandths = 100; tenThousandths < 1000;
+             tenThousandths++) {
+            CurrencyAmount amount
+                    = new CurrencyAmount(unitsToSubunits + tenThousandths,
+                    currency);
+            String expected = partial + tenThousandths;
+            String actual = amount.toString();
+            String message = "toString() for " + tenThousandths
+                    + " ten thousandths of " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
+    void testToStringUnitsPlus1000To9999DivisionsOfCurrencyDivides10000() {
+        Currency currency = CurrencyChooser.chooseCurrency(4);
+        String symbol = currency.getSymbol();
+        int units = RANDOM.nextInt(1, 100);
+        String partial = symbol + units + ".";
+        int unitsToSubunits = units * 10000;
+        for (short tenThousandths = 1000; tenThousandths < 10000;
+             tenThousandths++) {
+            CurrencyAmount amount
+                    = new CurrencyAmount(unitsToSubunits + tenThousandths,
+                    currency);
+            String expected = partial + tenThousandths;
+            String actual = amount.toString();
+            String message = "toString() for " + tenThousandths
+                    + " ten thousandths of " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    // TODO: Write toString() tests for negative amounts of currency with 4
+    //  default fraction digits
+
     // TODO: Write tests for getAmountInCents(), getUnitAmount() and
     //  getChangeAmount()
 
