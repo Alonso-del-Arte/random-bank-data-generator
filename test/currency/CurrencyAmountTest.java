@@ -402,6 +402,26 @@ public class CurrencyAmountTest {
         }
     }
 
+    @Test
+    void testToStringUnitsPlusZeroToNineDivisionsOfCurrencyDivides10000() {
+        Currency currency = CurrencyChooser.chooseCurrency(4);
+        String symbol = currency.getSymbol();
+        int units = RANDOM.nextInt(1, 100);
+        String partial = symbol + units + ".000";
+        int unitsToSubunits = units * 10000;
+        for (short tenThousandths = 0; tenThousandths < 10; tenThousandths++) {
+            CurrencyAmount amount
+                    = new CurrencyAmount(unitsToSubunits + tenThousandths,
+                    currency);
+            String expected = partial + tenThousandths;
+            String actual = amount.toString();
+            String message = "toString() for " + tenThousandths
+                    + " ten thousandths of " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
     // TODO: Write tests for getAmountInCents(), getUnitAmount() and
     //  getChangeAmount()
 
