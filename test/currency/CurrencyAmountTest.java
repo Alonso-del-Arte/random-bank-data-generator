@@ -366,6 +366,24 @@ public class CurrencyAmountTest {
         }
     }
 
+    @Test
+    void testToString100To999DivisionsOfCurrencyDivides10000() {
+        Currency currency = CurrencyChooser.chooseCurrency(4);
+        String symbol = currency.getSymbol();
+        String partial = symbol + "0.0";
+        for (short tenThousandths = 100; tenThousandths < 1000;
+             tenThousandths++) {
+            CurrencyAmount amount = new CurrencyAmount(tenThousandths,
+                    currency);
+            String expected = partial + tenThousandths;
+            String actual = amount.toString();
+            String message = "toString() for " + tenThousandths
+                    + " ten thousandths of " + currency.getDisplayName() + " ("
+                    + currency.getCurrencyCode() + ')';
+            assertEquals(expected, actual, message);
+        }
+    }
+
     // TODO: Write tests for getAmountInCents(), getUnitAmount() and
     //  getChangeAmount()
 
