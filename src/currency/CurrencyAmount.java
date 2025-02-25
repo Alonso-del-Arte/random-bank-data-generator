@@ -87,9 +87,10 @@ public class CurrencyAmount {
         if (this.totalSubunits < 10000) {
             return this.currencyID.getSymbol() + "0." + this.totalSubunits;
         }
-        long units = this.totalSubunits / 10000;
-        long tenThousandths = this.totalSubunits % 10000;
-        return this.currencyID.getSymbol() + units + ".000" + tenThousandths;
+        String numStr = Long.toString(this.totalSubunits);
+        int subdivsBegin = numStr.length() - 4;
+        return this.currencyID.getSymbol() + numStr.substring(0, subdivsBegin)
+                + '.' + numStr.substring(subdivsBegin);
     }
 
     private String toStringSubdividedInDarahim() {
