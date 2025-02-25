@@ -147,6 +147,24 @@ class CurrencyConversionNeededExceptionTest {
     }
 
     @Test
+    void testGetAmountBOnInstanceFromSecondAuxConstructor1000Milles() {
+        CurrencyAmount amountA = makeAmount();
+        Currency currA = amountA.getCurrency();
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.equals(currA)
+                        && cur.getDefaultFractionDigits() == 3
+        );
+        CurrencyConversionNeededException instance
+                = new CurrencyConversionNeededException(amountA, currency);
+        CurrencyAmount expected = new CurrencyAmount(1000, currency);
+        CurrencyAmount actual = instance.getAmountB();
+        String message = "As amount of currency " + currency.getDisplayName()
+                + " (" + currency.getCurrencyCode()
+                + ") was not specified, expecting one unit of that currency";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testGetCurrencyA() {
         System.out.println("getCurrencyA");
         CurrencyAmount amountA = makeAmount();
