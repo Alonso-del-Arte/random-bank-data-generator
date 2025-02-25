@@ -110,6 +110,24 @@ class CurrencyConversionNeededExceptionTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testGetAmountBOnInstanceFromSecondAuxConstructorNoSubunits() {
+        CurrencyAmount amountA = makeAmount();
+        Currency currA = amountA.getCurrency();
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.equals(currA)
+                        && cur.getDefaultFractionDigits() == 0
+        );
+        CurrencyConversionNeededException instance
+                = new CurrencyConversionNeededException(amountA, currency);
+        CurrencyAmount expected = new CurrencyAmount(1, currency);
+        CurrencyAmount actual = instance.getAmountB();
+        String message = "As amount of currency " + currency.getDisplayName()
+                + " (" + currency.getCurrencyCode()
+                + ") was not specified, expecting one unit of that currency";
+        assertEquals(expected, actual, message);
+    }
+
     // TODO: Write tests for getAmountB() on instances constructed from
     //  second auxiliary constructor
 
