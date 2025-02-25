@@ -28,7 +28,6 @@ public class CurrencyConversionNeededException extends RuntimeException {
         return this.amtB.getCurrency();
     }
 
-    // TODO: Write tests for this
     // TODO: Chain this constructor to first auxiliary constructor
     public CurrencyConversionNeededException(CurrencyAmount amount,
                                              Currency currency) {
@@ -38,7 +37,7 @@ public class CurrencyConversionNeededException extends RuntimeException {
             throw new NullPointerException(excMsg);
         }
         this.amtA = amount;
-        this.amtB = this.amtA;
+        this.amtB = new CurrencyAmount(1, currency);
     }
 
 
