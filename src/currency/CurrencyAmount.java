@@ -9,12 +9,12 @@ public class CurrencyAmount {
 
     private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
 
-    private final long totalCents;
+    private final long totalSubunits;
 
     private final Currency currencyID;
 
     // TODO: Write tests for this
-    public long getAmountInCents() {
+    public long getAmountInSubunits() {
         return Long.MIN_VALUE;
     }
 
@@ -64,34 +64,34 @@ public class CurrencyAmount {
 
     // TODO: Hold off on refactoring these toString() helpers
     private String toStringCurrencyNoSubdivisionsNegative() {
-        return MINUS_SIGN + this.currencyID.getSymbol() + (-this.totalCents);
+        return MINUS_SIGN + this.currencyID.getSymbol() + (-this.totalSubunits);
     }
 
     private String toStringCurrencyNoSubdivisions() {
-        if (this.totalCents < 0) {
+        if (this.totalSubunits < 0) {
             return this.toStringCurrencyNoSubdivisionsNegative();
         }
-        return this.currencyID.getSymbol() + this.totalCents;
+        return this.currencyID.getSymbol() + this.totalSubunits;
     }
 
     private String toStringSubdividedInDarahim() {
-        if (this.totalCents < 10) {
-            return this.currencyID.getSymbol() + "0.00" + this.totalCents;
+        if (this.totalSubunits < 10) {
+            return this.currencyID.getSymbol() + "0.00" + this.totalSubunits;
         }
-        if (this.totalCents < 100) {
-            return this.currencyID.getSymbol() + "0.0" + this.totalCents;
+        if (this.totalSubunits < 100) {
+            return this.currencyID.getSymbol() + "0.0" + this.totalSubunits;
         }
-        if (this.totalCents < 1000) {
-            return this.currencyID.getSymbol() + "0." + this.totalCents;
+        if (this.totalSubunits < 1000) {
+            return this.currencyID.getSymbol() + "0." + this.totalSubunits;
         }
-        String numStr = Long.toString(this.totalCents);
+        String numStr = Long.toString(this.totalSubunits);
         int darahimBegin = numStr.length() - 3;
         return this.currencyID.getSymbol() + numStr.substring(0, darahimBegin)
                 + '.' + numStr.substring(darahimBegin);
     }
 
     private String toStringNotUSDollarsNegative() {
-        long absoluteCents = -this.totalCents;
+        long absoluteCents = -this.totalSubunits;
         long withoutCents = absoluteCents / 100;
         String initial = MINUS_SIGN + this.currencyID.getSymbol() + withoutCents
                 + '.';
@@ -108,25 +108,25 @@ public class CurrencyAmount {
         if (this.currencyID.getDefaultFractionDigits() == 3) {
             return this.toStringSubdividedInDarahim();
         }
-        if (this.totalCents < 0) {
+        if (this.totalSubunits < 0) {
             return this.toStringNotUSDollarsNegative();
         }
-        if (this.totalCents < 10) {
-            return this.currencyID.getSymbol() + "0.0" + this.totalCents;
+        if (this.totalSubunits < 10) {
+            return this.currencyID.getSymbol() + "0.0" + this.totalSubunits;
         }
-        if (this.totalCents < 100) {
-            return this.currencyID.getSymbol() + "0." + this.totalCents;
+        if (this.totalSubunits < 100) {
+            return this.currencyID.getSymbol() + "0." + this.totalSubunits;
         }
-        long withoutCents = this.totalCents / 100;
+        long withoutCents = this.totalSubunits / 100;
         String initial = this.currencyID.getSymbol() + withoutCents + ".";
-        long centsPart = this.totalCents % 100;
+        long centsPart = this.totalSubunits % 100;
         String centsStr = (centsPart < 10) ? "0" + centsPart
                 : Long.toString(centsPart);
         return initial + centsStr;
     }
 
     private String toStringNegative() {
-        long absoluteCents = -this.totalCents;
+        long absoluteCents = -this.totalSubunits;
         long withoutCents = absoluteCents / 100;
         String initial = MINUS_SIGN + "$" + withoutCents + '.';
         long centsPart = absoluteCents % 100;
@@ -139,18 +139,18 @@ public class CurrencyAmount {
         if (!this.currencyID.equals(U_S_DOLLARS)) {
             return this.toStringNotUSDollars();
         }
-        if (this.totalCents < 0) {
+        if (this.totalSubunits < 0) {
             return this.toStringNegative();
         }
-        if (this.totalCents < 10) {
-            return "$0.0" + this.totalCents;
+        if (this.totalSubunits < 10) {
+            return "$0.0" + this.totalSubunits;
         }
-        if (this.totalCents < 100) {
-            return "$0." + this.totalCents;
+        if (this.totalSubunits < 100) {
+            return "$0." + this.totalSubunits;
         }
-        long withoutCents = this.totalCents / 100;
+        long withoutCents = this.totalSubunits / 100;
         String initial = '$' + Long.toString(withoutCents) + '.';
-        long centsPart = this.totalCents % 100;
+        long centsPart = this.totalSubunits % 100;
         String centsStr = (centsPart < 10) ? "0" + centsPart
                 : Long.toString(centsPart);
         return initial + centsStr;
@@ -168,7 +168,7 @@ public class CurrencyAmount {
             return false;
         }
         CurrencyAmount other = (CurrencyAmount) obj;
-        if (this.totalCents != other.totalCents) {
+        if (this.totalSubunits != other.totalSubunits) {
             return false;
         }
         return this.currencyID.equals(other.currencyID);
@@ -183,7 +183,7 @@ public class CurrencyAmount {
     // TODO: Make Comparable<CurrencyAmount>, override compareTo()
 
     // TODO: Write tests for this
-    public CurrencyAmount(long centsAmount, Currency currency) {
+    public CurrencyAmount(long amountInSubunits, Currency currency) {
         if (currency == null) {
             String excMsg = "Currency should not be null";
             throw new NullPointerException(excMsg);
@@ -194,7 +194,7 @@ public class CurrencyAmount {
                     + ") is not valid for this constructor";
             throw new IllegalArgumentException(excMsg);
         }
-        this.totalCents = centsAmount;
+        this.totalSubunits = amountInSubunits;
         this.currencyID = currency;
     }
 
