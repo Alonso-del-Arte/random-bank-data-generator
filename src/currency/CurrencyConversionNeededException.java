@@ -28,6 +28,15 @@ public class CurrencyConversionNeededException extends RuntimeException {
         return this.amtB.getCurrency();
     }
 
+    private static int subunitMultiplier(int fractionDigits) {
+        int multiplier = 1;
+        while (fractionDigits > 0) {
+            multiplier *= 10;
+            fractionDigits--;
+        }
+        return multiplier;
+    }
+
     // TODO: Chain this constructor to first auxiliary constructor
     public CurrencyConversionNeededException(CurrencyAmount amount,
                                              Currency currency) {
@@ -37,12 +46,8 @@ public class CurrencyConversionNeededException extends RuntimeException {
             throw new NullPointerException(excMsg);
         }
         this.amtA = amount;
-        int amountInSubunits = switch (currency.getDefaultFractionDigits()) {
-            case 0 -> 1;
-            case 2 -> 100;
-            case 3 -> 1000;
-            default -> 10000;
-        };
+        int amountInSubunits
+                = subunitMultiplier(currency.getDefaultFractionDigits());
         this.amtB = new CurrencyAmount(amountInSubunits, currency);
     }
 
