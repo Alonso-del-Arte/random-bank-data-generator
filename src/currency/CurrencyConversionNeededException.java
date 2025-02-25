@@ -40,7 +40,8 @@ public class CurrencyConversionNeededException extends RuntimeException {
         int amountInSubunits = switch (currency.getDefaultFractionDigits()) {
             case 0 -> 1;
             case 2 -> 100;
-            default -> 1000;
+            case 3 -> 1000;
+            default -> 10000;
         };
         this.amtB = new CurrencyAmount(amountInSubunits, currency);
     }
