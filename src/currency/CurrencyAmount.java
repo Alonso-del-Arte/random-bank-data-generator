@@ -78,7 +78,10 @@ public class CurrencyAmount {
         if (this.totalSubunits < 10) {
             return this.currencyID.getSymbol() + "0.000" + this.totalSubunits;
         }
-        return this.currencyID.getSymbol() + "0.00" + this.totalSubunits;
+        if (this.totalSubunits < 100) {
+            return this.currencyID.getSymbol() + "0.00" + this.totalSubunits;
+        }
+        return this.currencyID.getSymbol() + "0.0" + this.totalSubunits;
     }
 
     private String toStringSubdividedInDarahim() {
