@@ -37,7 +37,9 @@ public class CurrencyConversionNeededException extends RuntimeException {
             throw new NullPointerException(excMsg);
         }
         this.amtA = amount;
-        this.amtB = new CurrencyAmount(1, currency);
+        int amountInSubunits = (currency.getDefaultFractionDigits() == 0)
+                ? 1 : 100;
+        this.amtB = new CurrencyAmount(amountInSubunits, currency);
     }
 
 
