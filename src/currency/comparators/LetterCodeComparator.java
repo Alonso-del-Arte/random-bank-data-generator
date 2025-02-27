@@ -1,4 +1,13 @@
 package currency.comparators;
 
-public class LetterCodeComparator {
+import java.util.Comparator;
+import java.util.Currency;
+
+public class LetterCodeComparator implements Comparator<Currency> {
+
+    @Override
+    public int compare(Currency currencyA, Currency currencyB) {
+        return 0;
+    }
+    
 }
