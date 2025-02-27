@@ -7,7 +7,8 @@ public class NumericCodeComparator implements Comparator<Currency> {
 
     @Override
     public int compare(Currency currencyA, Currency currencyB) {
-        return 0;
+        return Integer.compare(currencyA.getNumericCode(),
+                currencyB.getNumericCode());
     }
 
 }
