@@ -21,7 +21,8 @@ public interface ExchangeRateProvider {
     double getRate(Currency source, Currency target);
 
     default double getRate(CurrencyPair currencies) {
-        return -0.0;
+        return this.getRate(currencies.getFromCurrency(),
+                currencies.getToCurrency());
     }
 
 }
