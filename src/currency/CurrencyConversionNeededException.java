@@ -60,10 +60,6 @@ public class CurrencyConversionNeededException extends RuntimeException {
     public CurrencyConversionNeededException(CurrencyAmount amountA,
                                              CurrencyAmount amountB) {
         super(makeMsgForFirstAuxConstructor(amountA, amountB));
-        if (amountA == null || amountB == null) {
-            String excMsg = "Amount A should not be null";
-            throw new NullPointerException(excMsg);
-        }
         this.amtA = amountA;
         this.amtB = amountB;
     }
