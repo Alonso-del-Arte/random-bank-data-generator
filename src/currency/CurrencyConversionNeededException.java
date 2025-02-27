@@ -10,12 +10,10 @@ public class CurrencyConversionNeededException extends RuntimeException {
 
     private final CurrencyAmount amtA, amtB;
 
-    // TODO: Write tests for this
     public CurrencyAmount getAmountA() {
         return this.amtA;
     }
 
-    // TODO: Write tests for this
     public CurrencyAmount getAmountB() {
         return this.amtB;
     }
