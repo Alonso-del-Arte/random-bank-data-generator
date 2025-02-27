@@ -13,6 +13,26 @@ class ExchangeRateProviderTest {
 
     private static final Random RANDOM = new Random();
 
+    @Test
+    public void testGetRate() {
+        System.out.println("getRate");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        ExchangeRateProviderImpl instance = new ExchangeRateProviderImpl();
+        double actual = instance.getRate(currencies);
+        String callMsg = "1-parameter getRate() should've called 2-parameter";
+        assert instance.nonDefaultGetRateCallCount == 1 : callMsg;
+        double expected = instance.mostRecentReturn;
+        double delta = 0.0001;
+        String message = "Inquiring exchange rate from " + from.getDisplayName()
+                + " (" + from.getCurrencyCode() + ") to " + to.getDisplayName()
+                + " (" + to.getCurrencyCode() + ")";
+        assertEquals(expected, actual, delta, message);
+        assertEquals(from, instance.mostRecentSource);
+        assertEquals(to, instance.mostRecentTarget);
+    }
+
     private static class ExchangeRateProviderImpl
             implements ExchangeRateProvider {
 
