@@ -6,9 +6,14 @@ import java.util.Currency;
 
 public class CurrencyConverter {
 
-    // TODO: Write tests for this
+    private final ExchangeRateProvider exchangeRateProvider;
+
+    /**
+     * Discloses the rate provider this converter is using.
+     * @return The rate provider given to the constructor.
+     */
     public ExchangeRateProvider getProvider() {
-        return null;
+        return this.exchangeRateProvider;
     }
 
     // TODO: Write tests for this
@@ -18,7 +23,7 @@ public class CurrencyConverter {
 
     // TODO: Write tests for this
     public CurrencyConverter(ExchangeRateProvider rateProvider) {
-        //
+        this.exchangeRateProvider = rateProvider;
     }
 
 }
