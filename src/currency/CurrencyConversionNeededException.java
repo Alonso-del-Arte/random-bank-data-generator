@@ -46,10 +46,6 @@ public class CurrencyConversionNeededException extends RuntimeException {
     public CurrencyConversionNeededException(CurrencyAmount amount,
                                              Currency currency) {
         super(makeMsgForSecondAuxConstructor(amount, currency));
-        if (amount == null || currency == null) {
-            String excMsg = "Amount, currency should not be null";
-            throw new NullPointerException(excMsg);
-        }
         this.amtA = amount;
         int amountInSubunits
                 = subunitMultiplier(currency.getDefaultFractionDigits());
