@@ -19,4 +19,14 @@ class CurrencyConverterTest {
     private static final Currency EAST_CARIBBEAN_DOLLARS
             = Currency.getInstance("XCD");
 
+    @Test
+    void testGetProvider() {
+        System.out.println("getProvider");
+        ExchangeRateProvider expected
+                = new ExchangeRateProviderTest.ExchangeRateProviderImpl();
+        CurrencyConverter instance = new CurrencyConverter(expected);
+        ExchangeRateProvider actual = instance.getProvider();
+        assertEquals(expected, actual);
+    }
+
 }
