@@ -35,10 +35,17 @@ public class CurrencyConversionNeededException extends RuntimeException {
         return multiplier;
     }
 
+    private static String makeMsgForSecondAuxConstructor(CurrencyAmount amt,
+                                                        Currency currency) {
+        return "Conversion needed for operation with " + amt.toString()
+                + " and " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode() + ")";
+    }
+
     // TODO: Chain this constructor to first auxiliary constructor
     public CurrencyConversionNeededException(CurrencyAmount amount,
                                              Currency currency) {
-        super("SORRY, NOT IMPLEMENTED YET");
+        super(makeMsgForSecondAuxConstructor(amount, currency));
         if (amount == null || currency == null) {
             String excMsg = "Amount, currency should not be null";
             throw new NullPointerException(excMsg);
@@ -54,7 +61,6 @@ public class CurrencyConversionNeededException extends RuntimeException {
         return "Conversion needed for operation with " + amtA.toString()
                 + " and " + amtB.toString();
     }
-
 
     // TODO: Chain this constructor to primary constructor
     public CurrencyConversionNeededException(CurrencyAmount amountA,
