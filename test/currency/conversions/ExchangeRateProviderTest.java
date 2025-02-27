@@ -33,8 +33,7 @@ class ExchangeRateProviderTest {
         assertEquals(to, instance.mostRecentTarget);
     }
 
-    private static class ExchangeRateProviderImpl
-            implements ExchangeRateProvider {
+    static class ExchangeRateProviderImpl implements ExchangeRateProvider {
 
         private int nonDefaultGetRateCallCount = 0;
 
