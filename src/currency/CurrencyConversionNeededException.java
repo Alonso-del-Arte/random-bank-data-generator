@@ -49,12 +49,17 @@ public class CurrencyConversionNeededException extends RuntimeException {
         this.amtB = new CurrencyAmount(amountInSubunits, currency);
     }
 
+    private static String makeMsgForFirstAuxConstructor(CurrencyAmount amtA,
+                                                        CurrencyAmount amtB) {
+        return "Conversion needed for operation with " + amtA.toString()
+                + " and " + amtB.toString();
+    }
 
-    // TODO: Write tests for this
+
     // TODO: Chain this constructor to primary constructor
     public CurrencyConversionNeededException(CurrencyAmount amountA,
                                              CurrencyAmount amountB) {
-        super("SORRY, NOT IMPLEMENTED YET");
+        super(makeMsgForFirstAuxConstructor(amountA, amountB));
         if (amountA == null || amountB == null) {
             String excMsg = "Amount A should not be null";
             throw new NullPointerException(excMsg);
