@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class ExchangeRateProviderTest {
 
-    private static final Random RANDOM = new Random();
+    static final Random RANDOM = new Random();
 
     @Test
     public void testGetRate() {
