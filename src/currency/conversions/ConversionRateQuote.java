@@ -6,10 +6,11 @@ import java.time.LocalDateTime;
 
 public class ConversionRateQuote {
 
+    private final CurrencyPair pair;
+
     // TODO: Write tests for this
     public CurrencyPair getCurrencies() {
-        return new CurrencyPair(java.util.Currency.getInstance("XTS"),
-                java.util.Currency.getInstance("XTS"));
+        return this.pair;
     }
 
     // TODO: Write tests for this
@@ -29,13 +30,14 @@ public class ConversionRateQuote {
 
     // TODO: Write tests for this
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
-        //
+        this.pair = new CurrencyPair(java.util.Currency.getInstance("XTS"),
+                java.util.Currency.getInstance("XTS"));
     }
 
     // TODO: Write tests for this
     public ConversionRateQuote(CurrencyPair currencies, double rate,
                                LocalDateTime date) {
-        //
+        this.pair = currencies;
     }
 
 }
