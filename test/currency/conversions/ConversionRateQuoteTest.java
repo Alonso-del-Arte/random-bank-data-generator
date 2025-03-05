@@ -53,4 +53,17 @@ class ConversionRateQuoteTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testGetRateFromAuxConstructor() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double expected = 0.5 + RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote instance = new ConversionRateQuote(currencies,
+                expected);
+        double actual = instance.getRate();
+        assertEquals(expected, actual);
+    }
+
 }
