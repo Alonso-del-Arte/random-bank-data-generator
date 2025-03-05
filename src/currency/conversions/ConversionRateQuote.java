@@ -28,10 +28,8 @@ public class ConversionRateQuote {
         return this;
     }
 
-    // TODO: Write tests for this
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
-        this.pair = new CurrencyPair(java.util.Currency.getInstance("XTS"),
-                java.util.Currency.getInstance("XTS"));
+        this.pair = currencies;
     }
 
     // TODO: Write tests for this
