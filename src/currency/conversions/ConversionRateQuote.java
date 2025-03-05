@@ -10,6 +10,8 @@ public class ConversionRateQuote {
 
     private final double conversionRate;
 
+    private final LocalDateTime fetchDate;
+
     public CurrencyPair getCurrencies() {
         return this.pair;
     }
@@ -20,7 +22,7 @@ public class ConversionRateQuote {
 
     // TODO: Write tests for this
     public LocalDateTime getDate() {
-        return LocalDateTime.now().minusYears(100);
+        return this.fetchDate;
     }
 
     // TODO: Write tests for this
@@ -31,6 +33,7 @@ public class ConversionRateQuote {
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
         this.pair = currencies;
         this.conversionRate = rate;
+        this.fetchDate = LocalDateTime.of(1970, 1, 12, 0, 0);
     }
 
     // TODO: Write tests for this
@@ -38,6 +41,7 @@ public class ConversionRateQuote {
                                LocalDateTime date) {
         this.pair = currencies;
         this.conversionRate = rate;
+        this.fetchDate = date;
     }
 
 }
