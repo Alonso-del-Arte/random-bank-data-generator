@@ -10,12 +10,10 @@ public class ConversionRateQuote {
 
     private final double conversionRate;
 
-    // TODO: Write tests for this
     public CurrencyPair getCurrencies() {
         return this.pair;
     }
 
-    // TODO: Write tests for this
     public double getRate() {
         return this.conversionRate;
     }
@@ -32,7 +30,7 @@ public class ConversionRateQuote {
 
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
         this.pair = currencies;
-        this.conversionRate = -1.0;
+        this.conversionRate = rate;
     }
 
     // TODO: Write tests for this
