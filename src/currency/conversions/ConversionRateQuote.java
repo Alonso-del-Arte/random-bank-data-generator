@@ -33,7 +33,7 @@ public class ConversionRateQuote {
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
         this.pair = currencies;
         this.conversionRate = rate;
-        this.fetchDate = LocalDateTime.of(1970, 1, 12, 0, 0);
+        this.fetchDate = LocalDateTime.now();
     }
 
     // TODO: Write tests for this
