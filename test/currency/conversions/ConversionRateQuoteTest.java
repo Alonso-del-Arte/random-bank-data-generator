@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 class ConversionRateQuoteTest {
 
     @Test
-    public void testGetCurrencies() {
+    void testGetCurrencies() {
         System.out.println("getCurrencies");
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
@@ -30,7 +30,7 @@ class ConversionRateQuoteTest {
     }
 
     @Test
-    public void testGetCurrenciesFromAuxConstructor() {
+    void testGetCurrenciesFromAuxConstructor() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair expected = new CurrencyPair(from, to);
@@ -41,7 +41,7 @@ class ConversionRateQuoteTest {
     }
 
     @Test
-    public void testGetRate() {
+    void testGetRate() {
         System.out.println("getRate");
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
@@ -55,7 +55,7 @@ class ConversionRateQuoteTest {
     }
 
     @Test
-    public void testGetRateFromAuxConstructor() {
+    void testGetRateFromAuxConstructor() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
@@ -68,7 +68,7 @@ class ConversionRateQuoteTest {
     }
 
     @Test
-    public void testGetDate() {
+    void testGetDate() {
         System.out.println("getDate");
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
