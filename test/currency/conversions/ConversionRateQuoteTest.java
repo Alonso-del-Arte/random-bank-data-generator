@@ -121,4 +121,20 @@ class ConversionRateQuoteTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testAuxConstructorRejectsNullCurrencyPair() {
+        double rate = RANDOM.nextDouble();
+        String message = "Using null currency pair should've caused NPE";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            ConversionRateQuote instance = new ConversionRateQuote(null, rate);
+            System.out.println(message + ", not created instance "
+                    + instance.getClass().getName() + '@'
+                    + Integer.toHexString(System.identityHashCode(instance)));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
