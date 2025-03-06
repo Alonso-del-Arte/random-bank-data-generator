@@ -45,6 +45,10 @@ public class ConversionRateQuote {
         if (currencies == null) {
             throw new NullPointerException("Currencies should not be null");
         }
+        if (rate == Double.NEGATIVE_INFINITY) {
+            String excMsg = "Rate " + rate + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.pair = currencies;
         this.conversionRate = rate;
         this.fetchDate = date;
