@@ -84,4 +84,23 @@ class ConversionRateQuoteTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testAuxConstructorFillsInCurrentDateTime() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = 1.0 + RANDOM.nextDouble();
+        ConversionRateQuote instance = new ConversionRateQuote(currencies,
+                rate);
+        LocalDateTime expected = LocalDateTime.now();
+        int minutes = 5;
+        LocalDateTime minimum = expected.minusMinutes(minutes);
+        LocalDateTime maximum = expected.plusMinutes(minutes);
+        LocalDateTime actual = instance.getDate();
+        String msg = "Timestamp " + actual + " should be at least " + minimum
+                + " and at most " + maximum;
+        assert actual.isAfter(minimum) : msg;
+        assert actual.isBefore(maximum) : msg;
+    }
+
 }
