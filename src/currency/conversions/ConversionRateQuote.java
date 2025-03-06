@@ -39,6 +39,9 @@ public class ConversionRateQuote {
     // TODO: Write tests for this
     public ConversionRateQuote(CurrencyPair currencies, double rate,
                                LocalDateTime date) {
+        if (currencies == null) {
+            throw new NullPointerException("Currencies should not be null");
+        }
         this.pair = currencies;
         this.conversionRate = rate;
         this.fetchDate = date;
