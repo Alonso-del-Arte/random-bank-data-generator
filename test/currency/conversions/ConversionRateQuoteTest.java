@@ -84,6 +84,22 @@ class ConversionRateQuoteTest {
         assertEquals(expected, actual);
     }
 
+    private static Object passThrough(Object object) {
+        return object;
+    }
+
+    @Test
+    void testReferentialEquality() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = 0.5 + RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote quote = new ConversionRateQuote(currencies, rate,
+                date);
+        assert quote.equals(passThrough(quote));
+    }
+
     @Test
     public void testAuxConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
