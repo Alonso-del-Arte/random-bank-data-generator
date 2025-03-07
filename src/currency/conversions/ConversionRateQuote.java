@@ -30,6 +30,16 @@ public class ConversionRateQuote {
         return this;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
         if (currencies == null) {
             throw new NullPointerException("Currencies should not be null");
