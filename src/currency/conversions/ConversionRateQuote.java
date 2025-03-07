@@ -20,14 +20,14 @@ public class ConversionRateQuote {
         return this.conversionRate;
     }
 
-    // TODO: Write tests for this
     public LocalDateTime getDate() {
         return this.fetchDate;
     }
 
-    // TODO: Write tests for this
     public ConversionRateQuote invert() {
-        return this;
+        CurrencyPair flipped = this.pair.flip();
+        double reciprocal = 1.0 / this.conversionRate;
+        return new ConversionRateQuote(flipped, reciprocal, this.fetchDate);
     }
 
     @Override
