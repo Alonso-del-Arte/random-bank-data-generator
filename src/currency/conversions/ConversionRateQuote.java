@@ -45,7 +45,10 @@ public class ConversionRateQuote {
         if (!this.pair.equals(((ConversionRateQuote) obj).pair)) {
             return false;
         }
-        return this.conversionRate == other.conversionRate;
+        if (this.conversionRate != other.conversionRate) {
+            return false;
+        }
+        return this.fetchDate.equals(other.fetchDate);
     }
 
     @Override
