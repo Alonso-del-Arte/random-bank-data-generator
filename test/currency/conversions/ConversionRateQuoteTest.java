@@ -245,6 +245,22 @@ class ConversionRateQuoteTest {
     }
 
     @Test
+    public void testToString() {
+        System.out.println("toString");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = 1.0 + RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now()
+                .minusMinutes(RANDOM.nextInt(60));
+        ConversionRateQuote instance = new ConversionRateQuote(currencies, rate,
+                date);
+        String expected = currencies + " at " + rate + " as of " + date;
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+
+    @Test
     public void testAuxConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
