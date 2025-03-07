@@ -205,6 +205,47 @@ class ConversionRateQuoteTest {
     }
 
     @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        int quartets = RANDOM.nextInt(16) + 4;
+        int initialCapacity = 4 * quartets;
+        Set<ConversionRateQuote> quotes = new HashSet<>(initialCapacity);
+        Set<Integer> hashes = new HashSet<>(initialCapacity);
+        LocalDateTime date = LocalDateTime.now();
+        for (int i = 0; i < initialCapacity; i++) {
+            Currency from = CurrencyChooser.chooseCurrency();
+            Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+            CurrencyPair currencies = new CurrencyPair(from, to);
+            double rate = 0.5 + RANDOM.nextDouble();
+            date = date.minusMinutes(i);
+            ConversionRateQuote quote1 = new ConversionRateQuote(currencies,
+                    rate, date);
+            quotes.add(quote1);
+            hashes.add(quote1.hashCode());
+            ConversionRateQuote quote2
+                    = new ConversionRateQuote(currencies.flip(), rate, date);
+            quotes.add(quote2);
+            hashes.add(quote2.hashCode());
+            ConversionRateQuote quote3 = new ConversionRateQuote(currencies,
+                    1.0 / rate, date);
+            quotes.add(quote3);
+            hashes.add(quote3.hashCode());
+            ConversionRateQuote quote4 = new ConversionRateQuote(currencies,
+                    rate, date.minusHours(i));
+            quotes.add(quote4);
+            hashes.add(quote4.hashCode());
+        }
+        int numberOfQuotes = quotes.size();
+        int minimum = 3 * numberOfQuotes / 5;
+        int actual = hashes.size();
+        String msg = "Given " + numberOfQuotes
+                + " quotes, there should be at least " + minimum
+                + " distinct hash codes, got " + actual + " distinct";
+        assert minimum <= actual : msg;
+        System.out.println(msg);
+    }
+
+    @Test
     public void testAuxConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
