@@ -32,7 +32,7 @@ public class ConversionRateQuote {
 
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof ConversionRateQuote;
     }
 
     @Override
