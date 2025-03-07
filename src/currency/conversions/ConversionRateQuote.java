@@ -59,6 +59,12 @@ public class ConversionRateQuote {
         return hash + this.fetchDate.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return this.pair.toString() + " at " + this.conversionRate + " as of "
+                + this.fetchDate.toString();
+    }
+
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
         if (currencies == null) {
             throw new NullPointerException("Currencies should not be null");
