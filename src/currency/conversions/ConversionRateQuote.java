@@ -32,7 +32,16 @@ public class ConversionRateQuote {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof ConversionRateQuote;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.pair.equals(((ConversionRateQuote) obj).pair);
     }
 
     @Override
