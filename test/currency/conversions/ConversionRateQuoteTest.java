@@ -167,6 +167,25 @@ class ConversionRateQuoteTest {
     }
 
     @Test
+    public void testNotEqualsDiffRate() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rateA = 0.5 + RANDOM.nextDouble();
+        double rateB = Double.longBitsToDouble(Double.doubleToLongBits(rateA)
+                + 1);
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote quoteA = new ConversionRateQuote(currencies, rateA,
+                date);
+        ConversionRateQuote quoteB = new ConversionRateQuote(currencies, rateB,
+                date);
+        String message = "Quote for " + currencies + " at a rate of " + rateA
+                + " on " + date
+                + " should not match quote for same currencies at " + rateB;
+        assertNotEquals(quoteA, quoteB, message);
+    }
+
+    @Test
     public void testAuxConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
