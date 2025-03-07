@@ -261,6 +261,24 @@ class ConversionRateQuoteTest {
     }
 
     @Test
+    public void testInvert() {
+        System.out.println("invert");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = 1.0 + RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote instance = new ConversionRateQuote(currencies,
+                rate, date);
+        CurrencyPair flippedPair = currencies.flip();
+        double invertedRate = 1.0 / rate;
+        ConversionRateQuote expected = new ConversionRateQuote(flippedPair,
+                invertedRate, date);
+        ConversionRateQuote actual = instance.invert();
+        assertEquals(actual, expected);
+    }
+
+    @Test
     public void testAuxConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
