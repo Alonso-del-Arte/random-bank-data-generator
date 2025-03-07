@@ -53,7 +53,10 @@ public class ConversionRateQuote {
 
     @Override
     public int hashCode() {
-        return 0;
+        int hash = 7 * this.pair.hashCode();
+        hash += (int) (Double.doubleToLongBits(this.conversionRate) >> 32);
+        hash *= 3;
+        return hash + this.fetchDate.hashCode();
     }
 
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
