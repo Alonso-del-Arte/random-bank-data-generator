@@ -24,7 +24,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
         SpecificCurrenciesSupport {
 
     public static final LocalDate DATE_OF_HARD_CODING
-            = LocalDate.of(2025, Month.MARCH, 29);
+            = LocalDate.of(2025, Month.MARCH, 3);
 
     // TODO: Write tests for this
     @Override
