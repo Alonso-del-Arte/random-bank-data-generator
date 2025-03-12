@@ -31,8 +31,7 @@ class HardCodedRateProviderTest {
                 "HKD", "ILS", "INR", "JPY", "KRW", "MXN", "NZD", "PHP", "TWD",
                 "USD", "VND", "XAF", "XCD", "XOF", "XPF"};
         Set<Currency> expected = Set.of(currencyCodes).stream()
-                .map(currencyCode -> Currency.getInstance(currencyCode))
-                .collect(Collectors.toSet());
+                .map(Currency::getInstance).collect(Collectors.toSet());
         Set<Currency> actual = instance.supportedCurrencies();
         assertEquals(expected, actual);
     }
