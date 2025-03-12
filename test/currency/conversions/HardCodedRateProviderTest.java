@@ -36,4 +36,22 @@ class HardCodedRateProviderTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testSupportedCurrenciesDoesNotLeakField() {
+        SpecificCurrenciesSupport instance = new HardCodedRateProvider();
+        Set<Currency> initial = instance.supportedCurrencies();
+        Currency currency = CurrencyChooser.chooseCurrency(
+                cur -> !initial.contains(cur)
+        );
+        String message = "Trying to add " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode()
+                + ") to reported set should not leak field nor cause exception";
+        assertDoesNotThrow(() -> {
+            Set<Currency> expected = new HashSet<>(initial);
+            initial.add(currency);
+            Set<Currency> actual = instance.supportedCurrencies();
+            assertEquals(expected, actual, message);
+        }, message);
+    }
+
 }
