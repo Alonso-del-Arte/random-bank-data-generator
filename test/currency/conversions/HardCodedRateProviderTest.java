@@ -17,6 +17,15 @@ import org.junit.jupiter.api.Test;
 
 class HardCodedRateProviderTest {
 
+    private static final Currency UNITED_STATES_DOLLARS
+            = Currency.getInstance(Locale.US);
+
+    private static final String USD_DISPLAY_NAME
+            = UNITED_STATES_DOLLARS.getDisplayName();
+
+    private static final String USD_3_LETTER_CODE
+            = UNITED_STATES_DOLLARS.getCurrencyCode();
+
     @Test
     public void testDateOfHardCodingConstant() {
         LocalDate expected = LocalDate.of(2025, Month.MARCH, 3);
@@ -52,6 +61,21 @@ class HardCodedRateProviderTest {
             Set<Currency> actual = instance.supportedCurrencies();
             assertEquals(expected, actual, message);
         }, message);
+    }
+
+    @Test
+    public void testGetRateUSDToAUD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency austrDollar = Currency.getInstance("AUD");
+        double minimum = 1.44533;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, austrDollar);
+        double maximum = 1.64034;
+        String msg = "Rate of conversion " + actual + " from "
+                + USD_DISPLAY_NAME + " (" + USD_3_LETTER_CODE + ") to "
+                + austrDollar.getDisplayName() + " ("
+                + austrDollar.getCurrencyCode() + ") should be more than "
+                + minimum + " but less than " + maximum;
+        assert minimum < actual && actual < maximum : msg;
     }
 
 }
