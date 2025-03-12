@@ -31,9 +31,8 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
             "TWD", "USD", "VND", "XAF", "XCD", "XOF", "XPF"};
 
     private static final Set<Currency> SUPPORTED_CURRENCIES
-            = Set.of(CURRENCY_CODES).stream().map(
-            currencyCode -> Currency.getInstance(currencyCode)
-    ).collect(Collectors.toSet());
+            = Set.of(CURRENCY_CODES).stream().map(Currency::getInstance)
+            .collect(Collectors.toSet());
 
     @Override
     public Set<Currency> supportedCurrencies() {
