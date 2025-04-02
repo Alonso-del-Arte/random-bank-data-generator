@@ -107,4 +107,19 @@ class HardCodedRateProviderTest {
         assert minimum < actual && actual < maximum : msg;
     }
 
+    @Test
+    public void testGetRateUSDToCNY() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency chineseYuan = Currency.getInstance("CNY");
+        double minimum = 6.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, chineseYuan);
+        double maximum = 7.5;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " ("
+                + USD_3_LETTER_CODE + ") to " + chineseYuan.getDisplayName()
+                + " (" + chineseYuan.getCurrencyCode()
+                + ") should be more than " + minimum + " but less than "
+                + maximum;
+        assert minimum < actual && actual < maximum : msg;
+    }
+
 }
