@@ -42,10 +42,11 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
 
     @Override
     public double getRate(Currency source, Currency target) {
-        if (target.getCurrencyCode().equals("BRL")) {
-            return 5.9909941;
-        }
-        return 1.6116;
+        return switch (target.getCurrencyCode()) {
+            case "AUD" -> 1.6116;
+            case "BRL" -> 5.9909941;
+            default -> 1.45;
+        };
     }
 
 }
