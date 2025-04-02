@@ -40,9 +40,11 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
     }
 
 
-    // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
+        if (target.getCurrencyCode().equals("BRL")) {
+            return 5.9909941;
+        }
         return 1.6116;
     }
 
