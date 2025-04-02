@@ -45,7 +45,8 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
         return switch (target.getCurrencyCode()) {
             case "AUD" -> 1.6116;
             case "BRL" -> 5.9909941;
-            default -> 1.45;
+            case "CAD" -> 1.45;
+            default -> 7.29;
         };
     }
 
