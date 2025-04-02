@@ -78,4 +78,18 @@ class HardCodedRateProviderTest {
         assert minimum < actual && actual < maximum : msg;
     }
 
+    @Test
+    public void testGetRateUSDToBRL() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency brazReal = Currency.getInstance("BRL");
+        double minimum = 4.47;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, brazReal);
+        double maximum = 6.29;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " ("
+                + USD_3_LETTER_CODE + ") to " + brazReal.getDisplayName() + " ("
+                + brazReal.getCurrencyCode() + ") should be more than "
+                + minimum + " but less than " + maximum;
+        assert minimum < actual && actual < maximum : msg;
+    }
+
 }
