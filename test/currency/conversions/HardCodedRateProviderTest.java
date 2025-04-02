@@ -92,4 +92,19 @@ class HardCodedRateProviderTest {
         assert minimum < actual && actual < maximum : msg;
     }
 
+    @Test
+    public void testGetRateUSDToCAD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency canadianDollar = Currency.getInstance("CAD");
+        double minimum = 1.2;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, canadianDollar);
+        double maximum = 1.5;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " ("
+                + USD_3_LETTER_CODE + ") to " + canadianDollar.getDisplayName()
+                + " (" + canadianDollar.getCurrencyCode()
+                + ") should be more than " + minimum + " but less than "
+                + maximum;
+        assert minimum < actual && actual < maximum : msg;
+    }
+
 }
