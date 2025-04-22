@@ -34,7 +34,7 @@ public class CurrencyAmount {
 
     // TODO: Write tests for this
     public boolean isPositive() {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
