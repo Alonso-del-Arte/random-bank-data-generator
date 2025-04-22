@@ -33,6 +33,31 @@ public class CurrencyAmount {
     }
 
     // TODO: Write tests for this
+    public boolean isPositive() {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    public boolean isNotNegative() {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    public boolean isZero() {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    public boolean isNotPositive() {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    public boolean isNegative() {
+        return false;
+    }
+
+    // TODO: Write tests for this
     public CurrencyAmount plus(CurrencyAmount addend) {
         return this;
     }
