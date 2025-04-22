@@ -549,6 +549,17 @@ public class CurrencyAmountTest {
         assert amount.isNotNegative() : msg;
     }
 
+    @Test
+    void testNegativeIsNotNegativeButItIs() {
+        int centsAmount = -RANDOM.nextInt(1, 128000);
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
+        String msg = "Amount " + amount + " (" + currency.getDisplayName()
+                + ", " + currency.getCurrencyCode()
+                + ") should not be not negative";
+        assert !amount.isNotNegative() : msg;
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
