@@ -45,7 +45,7 @@ public class CurrencyAmount {
     }
 
     public boolean isNotPositive() {
-        return this.totalSubunits < 0L;
+        return this.totalSubunits < 1L;
     }
 
     // TODO: Write tests for this
