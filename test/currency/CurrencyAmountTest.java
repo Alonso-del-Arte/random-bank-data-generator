@@ -643,6 +643,17 @@ public class CurrencyAmountTest {
         assert amount.isNegative() : msg;
     }
 
+    @Test
+    void testIsNegativeButIsActuallyPositive() {
+        int centsAmount = RANDOM.nextInt(1, 128000);
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
+        String msg = "Amount " + amount + " (" + currency.getDisplayName()
+                + ", " + currency.getCurrencyCode()
+                + ") should not be negative";
+        assert !amount.isNegative() : msg;
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
