@@ -579,6 +579,16 @@ public class CurrencyAmountTest {
         assert amount.isZero() : msg;
     }
 
+    @Test
+    void testPositiveIsZeroButIsNot() {
+        int centsAmount = RANDOM.nextInt(1, 128000);
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
+        String msg = "Amount " + amount + " (" + currency.getDisplayName()
+                + ", " + currency.getCurrencyCode() + ") should not be zero";
+        assert !amount.isZero() : msg;
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
