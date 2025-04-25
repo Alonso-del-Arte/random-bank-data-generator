@@ -40,9 +40,8 @@ public class CurrencyAmount {
         return this.totalSubunits > -1L;
     }
 
-    // TODO: Write tests for this
     public boolean isZero() {
-        return true;
+        return this.totalSubunits < 1L;
     }
 
     // TODO: Write tests for this
