@@ -42,7 +42,7 @@ public class CurrencyAmount {
 
     // TODO: Write tests for this
     public boolean isZero() {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
