@@ -654,6 +654,16 @@ public class CurrencyAmountTest {
         assert !amount.isNegative() : msg;
     }
 
+    @Test
+    void testIsNegativeButIsActuallyZero() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(0, currency);
+        String msg = "Amount " + amount + " (" + currency.getDisplayName()
+                + ", " + currency.getCurrencyCode()
+                + ") should not be negative";
+        assert !amount.isNegative() : msg;
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
