@@ -11,6 +11,10 @@ public abstract class Transaction {
             String excMsg = "Amount should not be null";
             throw new NullPointerException(excMsg);
         }
+        if (date == null) {
+            String excMsg = "Date should not be null";
+            throw new NullPointerException(excMsg);
+        }
     }
 
 }
