@@ -1,7 +1,6 @@
 package accounts.transactions;
 
 import static accounts.transactions.TransactionTest.RANDOM;
-
 import currency.CurrencyAmount;
 import static currency.CurrencyChooser.chooseCurrency;
 
@@ -34,7 +33,6 @@ class DepositTest {
         Currency currency = chooseCurrency();
         int amountInSubunits = RANDOM.nextInt(10000);
         CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
-        LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject amount " + amount + " of "
                 + currency.getDisplayName() + " (" + currency.getCurrencyCode()
                 + ") with null date";
