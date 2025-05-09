@@ -13,6 +13,19 @@ import org.junit.jupiter.api.Test;
 class DepositTest {
 
     @Test
+    void testGetAmount() {
+        System.out.println("getAmount");
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        int amountInSubunits = RANDOM.nextInt(10000) + 1;
+        CurrencyAmount expected = new CurrencyAmount(amountInSubunits, currency);
+        Deposit instance = new Deposit(expected, LocalDateTime.now());
+        CurrencyAmount actual = instance.getAmount();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
@@ -31,7 +44,7 @@ class DepositTest {
     @Test
     void testConstructorRejectsNullDate() {
         Currency currency = chooseCurrency();
-        int amountInSubunits = RANDOM.nextInt(10000);
+        int amountInSubunits = RANDOM.nextInt(10000) + 1;
         CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
         String message = "Constructor should reject amount " + amount + " of "
                 + currency.getDisplayName() + " (" + currency.getCurrencyCode()
