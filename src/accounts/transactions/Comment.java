@@ -21,6 +21,10 @@ public class Comment /* extends Transaction */ {
 
     public Comment(String text, Currency currency, LocalDateTime date) {
 //        super(amount, date);
+        if (currency == null) {
+            String excMsg = "Currency should not be null";
+            throw new NullPointerException(excMsg);
+        }
     }
 
 }
