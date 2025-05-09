@@ -3,14 +3,15 @@ package accounts.transactions;
 import currency.CurrencyAmount;
 
 import java.time.LocalDateTime;
-import java.util.Currency;
 
 public class Deposit extends Transaction {
+
+    private final CurrencyAmount amt;
 
     // TODO: Write tests for this
     @Override
     public CurrencyAmount getAmount() {
-        return new CurrencyAmount(100, Currency.getInstance("XCD"));
+        return this.amt;
     }
 
     // TODO: Write tests for this
@@ -21,6 +22,7 @@ public class Deposit extends Transaction {
 
     public Deposit(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
+        this.amt = amount;
     }
 
 }
