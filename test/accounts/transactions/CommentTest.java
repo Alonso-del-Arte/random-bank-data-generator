@@ -12,4 +12,22 @@ import org.junit.jupiter.api.Test;
 
 class CommentTest {
 
+    private static final String DEFAULT_TEXT = "For testing purposes only";
+
+    @Test
+    void testConstructorRejectsNullCurrency() {
+        LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
+        String message = "Constructor should reject date " + date
+                + " with null currency";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Comment badInstance = new Comment(DEFAULT_TEXT,null, date);
+            System.out.println(message + ", not created instance "
+                    + badInstance);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
