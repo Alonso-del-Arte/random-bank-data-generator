@@ -30,4 +30,21 @@ class CommentTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testConstructorRejectsNullDate() {
+        Currency currency = chooseCurrency();
+        String message = "Constructor should reject currency "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ") with null date";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Comment badInstance = new Comment(DEFAULT_TEXT, currency, null);
+            System.out.println(message + ", not created instance "
+                    + badInstance);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
