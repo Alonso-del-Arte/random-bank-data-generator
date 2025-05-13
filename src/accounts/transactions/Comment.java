@@ -5,7 +5,7 @@ import currency.CurrencyAmount;
 import java.time.LocalDateTime;
 import java.util.Currency;
 
-public class Comment /* extends Transaction */ {
+public class Comment extends Transaction {
 
     private final String remark;
 
@@ -17,18 +17,18 @@ public class Comment /* extends Transaction */ {
         return this.remark;
     }
 
-//    @Override
+    @Override
     public CurrencyAmount getAmount() {
         return CurrencyAmount.zeroOf(this.fundCur);
     }
 
-//    @Override
+    @Override
     public LocalDateTime getTimestamp() {
         return this.dateTime;
     }
 
     public Comment(String text, Currency currency, LocalDateTime date) {
-//        super(amount, date);
+        super(CurrencyAmount.zeroOf(currency), date);
         if (text == null) {
             String excMsg = "Text should not be null";
             throw new NullPointerException(excMsg);
