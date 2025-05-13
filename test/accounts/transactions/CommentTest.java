@@ -26,6 +26,19 @@ class CommentTest {
     }
 
     @Test
+    void testGetAmount() {
+        System.out.println("getAmount");
+        Currency currency = chooseCurrency();
+        LocalDateTime date = LocalDateTime.now();
+        Comment instance = new Comment(DEFAULT_TEXT, currency, date);
+        CurrencyAmount expected = CurrencyAmount.zeroOf(currency);
+        CurrencyAmount actual = instance.getAmount();
+        String message = "Comment for account funded in "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testConstructorRejectsNullText() {
         Currency currency = chooseCurrency();
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
