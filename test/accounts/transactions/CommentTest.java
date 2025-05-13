@@ -15,6 +15,17 @@ class CommentTest {
     private static final String DEFAULT_TEXT = "For testing purposes only";
 
     @Test
+    void testGetText() {
+        System.out.println("getText");
+        String expected = DEFAULT_TEXT + " : " + RANDOM.nextInt();
+        Currency currency = chooseCurrency();
+        LocalDateTime date = LocalDateTime.now();
+        Comment instance = new Comment(expected, currency, date);
+        String actual = instance.getText();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNullText() {
         Currency currency = chooseCurrency();
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
