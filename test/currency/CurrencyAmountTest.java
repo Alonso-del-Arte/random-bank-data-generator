@@ -748,6 +748,23 @@ public class CurrencyAmountTest {
         assertNotEquals(amountA, amountB, message);
     }
 
+    // TODO: Write test for negativeOneOf()
+
+    @Test
+    void testZeroOf() {
+        System.out.println("zeroOf");
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        CurrencyAmount expected = new CurrencyAmount(0, currency);
+        CurrencyAmount actual = CurrencyAmount.zeroOf(currency);
+        String message = "Getting zero of " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    // TODO: Write test for oneOf()
+
     @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
