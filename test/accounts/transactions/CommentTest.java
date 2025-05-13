@@ -39,6 +39,16 @@ class CommentTest {
     }
 
     @Test
+    void testGetTimestamp() {
+        System.out.println("getTimestamp");
+        Currency currency = chooseCurrency();
+        LocalDateTime expected = LocalDateTime.now();
+        Comment instance = new Comment(DEFAULT_TEXT, currency, expected);
+        LocalDateTime actual = instance.getTimestamp();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNullText() {
         Currency currency = chooseCurrency();
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
