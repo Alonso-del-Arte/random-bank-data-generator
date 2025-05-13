@@ -82,6 +82,21 @@ public class CurrencyAmount {
         return new CurrencyAmount(-1L, Currency.getInstance("XCD"));
     }
 
+    // TODO: Write tests for this
+    public static CurrencyAmount negativeOneOf(Currency currency) {
+        return new CurrencyAmount(100, currency);
+    }
+
+    // TODO: Write tests for this
+    public static CurrencyAmount zeroOf(Currency currency) {
+        return new CurrencyAmount(Long.MAX_VALUE, currency);
+    }
+
+    // TODO: Write tests for this
+    public static CurrencyAmount oneOf(Currency currency) {
+        return new CurrencyAmount(-100, currency);
+    }
+
     // TODO: Hold off on refactoring these toString() helpers
     private String toStringCurrencyNoSubdivisionsNegative() {
         return MINUS_SIGN + this.currencyID.getSymbol() + (-this.totalSubunits);
