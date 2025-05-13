@@ -26,6 +26,21 @@ class DepositTest {
     }
 
     @Test
+    void testGetTimestamp() {
+        System.out.println("getTimestamp");
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        int amountInSubunits = RANDOM.nextInt(10000) + 1;
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime expected = LocalDateTime.now()
+                .minusHours(RANDOM.nextInt(72));
+        Deposit instance = new Deposit(amount, expected);
+        LocalDateTime actual = instance.getTimestamp();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
