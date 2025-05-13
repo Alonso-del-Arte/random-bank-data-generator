@@ -87,9 +87,8 @@ public class CurrencyAmount {
         return new CurrencyAmount(100, currency);
     }
 
-    // TODO: Write tests for this
     public static CurrencyAmount zeroOf(Currency currency) {
-        return new CurrencyAmount(Long.MAX_VALUE, currency);
+        return new CurrencyAmount(0, currency);
     }
 
     // TODO: Write tests for this
