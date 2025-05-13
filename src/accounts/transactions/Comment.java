@@ -9,14 +9,15 @@ public class Comment /* extends Transaction */ {
 
     private final String remark;
 
+    private final Currency fundCur;
+
     public String getText() {
         return this.remark;
     }
 
-    // TODO: Write tests for this
 //    @Override
     public CurrencyAmount getAmount() {
-        return new CurrencyAmount(100, Currency.getInstance("XCD"));
+        return CurrencyAmount.zeroOf(this.fundCur);
     }
 
     // TODO: Write tests for this
@@ -40,6 +41,7 @@ public class Comment /* extends Transaction */ {
             throw new NullPointerException(excMsg);
         }
         this.remark = text;
+        this.fundCur = currency;
     }
 
 }
