@@ -7,6 +7,10 @@ import java.util.Currency;
 
 public class Comment /* extends Transaction */ {
 
+    public String getText() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
     // TODO: Write tests for this
 //    @Override
     public CurrencyAmount getAmount() {
