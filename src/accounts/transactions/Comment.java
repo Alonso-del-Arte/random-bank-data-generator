@@ -7,8 +7,10 @@ import java.util.Currency;
 
 public class Comment /* extends Transaction */ {
 
+    private final String remark;
+
     public String getText() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.remark;
     }
 
     // TODO: Write tests for this
@@ -37,6 +39,7 @@ public class Comment /* extends Transaction */ {
             String excMsg = "Date should not be null";
             throw new NullPointerException(excMsg);
         }
+        this.remark = text;
     }
 
 }
