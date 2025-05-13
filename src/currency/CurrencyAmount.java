@@ -82,6 +82,15 @@ public class CurrencyAmount {
         return new CurrencyAmount(-1L, Currency.getInstance("XCD"));
     }
 
+    private static int pow10(int exponent) {
+        int power = 1;
+        while (exponent > 0) {
+            power *= 10;
+            exponent--;
+        }
+        return power;
+    }
+
     // TODO: Write tests for this
     public static CurrencyAmount negativeOneOf(Currency currency) {
         return new CurrencyAmount(100, currency);
@@ -91,9 +100,9 @@ public class CurrencyAmount {
         return new CurrencyAmount(0, currency);
     }
 
-    // TODO: Write tests for this
     public static CurrencyAmount oneOf(Currency currency) {
-        return new CurrencyAmount(1, currency);
+        return new CurrencyAmount(pow10(currency.getDefaultFractionDigits()),
+                currency);
     }
 
     // TODO: Hold off on refactoring these toString() helpers
