@@ -11,6 +11,8 @@ public class Comment /* extends Transaction */ {
 
     private final Currency fundCur;
 
+    private final LocalDateTime dateTime;
+
     public String getText() {
         return this.remark;
     }
@@ -20,10 +22,9 @@ public class Comment /* extends Transaction */ {
         return CurrencyAmount.zeroOf(this.fundCur);
     }
 
-    // TODO: Write tests for this
 //    @Override
     public LocalDateTime getTimestamp() {
-        return LocalDateTime.now().minusYears(500);
+        return this.dateTime;
     }
 
     public Comment(String text, Currency currency, LocalDateTime date) {
@@ -42,6 +43,7 @@ public class Comment /* extends Transaction */ {
         }
         this.remark = text;
         this.fundCur = currency;
+        this.dateTime = date;
     }
 
 }
