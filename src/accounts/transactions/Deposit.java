@@ -8,21 +8,22 @@ public class Deposit extends Transaction {
 
     private final CurrencyAmount amt;
 
-    // TODO: Write tests for this
+    private final LocalDateTime dateTime;
+
     @Override
     public CurrencyAmount getAmount() {
         return this.amt;
     }
 
-    // TODO: Write tests for this
     @Override
     public LocalDateTime getTimestamp() {
-        return LocalDateTime.now().minusYears(500);
+        return this.dateTime;
     }
 
     public Deposit(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
         this.amt = amount;
+        this.dateTime = date;
     }
 
 }
