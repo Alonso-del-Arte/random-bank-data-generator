@@ -33,10 +33,6 @@ public class Comment extends Transaction {
             String excMsg = "Text should not be null";
             throw new NullPointerException(excMsg);
         }
-        if (currency == null) {
-            String excMsg = "Currency should not be null";
-            throw new NullPointerException(excMsg);
-        }
         this.remark = text;
         this.fundCur = currency;
         this.dateTime = date;
