@@ -764,6 +764,27 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testOneOf() {
+        System.out.println("oneOf");
+        Currency currency = CurrencyChooser.chooseCurrency(2);
+        CurrencyAmount expected = new CurrencyAmount(100, currency);
+        CurrencyAmount actual = CurrencyAmount.oneOf(currency);
+        String message = "Getting one of " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
+    void testOneOfSubdivMilles() {
+        Currency currency = CurrencyChooser.chooseCurrency(3);
+        CurrencyAmount expected = new CurrencyAmount(1000, currency);
+        CurrencyAmount actual = CurrencyAmount.oneOf(currency);
+        String message = "Getting one of " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testOneOfNoSubdivs() {
         Currency currency = CurrencyChooser.chooseCurrency(0);
         CurrencyAmount expected = new CurrencyAmount(1, currency);
