@@ -763,7 +763,17 @@ public class CurrencyAmountTest {
         assertEquals(expected, actual, message);
     }
 
-    // TODO: Write test for oneOf()
+    @Test
+    void testOneOfNoSubdivs() {
+        Currency currency = CurrencyChooser.chooseCurrency(0);
+        CurrencyAmount expected = new CurrencyAmount(1, currency);
+        CurrencyAmount actual = CurrencyAmount.oneOf(currency);
+        String message = "Getting one of " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    // TODO: Write test for oneOf() with subdivisions of unit
 
     @Test
     void testConstructorRejectsNullCurrency() {
