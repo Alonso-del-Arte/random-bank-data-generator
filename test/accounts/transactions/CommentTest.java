@@ -68,6 +68,10 @@ class CommentTest {
         return obj;
     }
 
+    private static Object provideNull() {
+        return null;
+    }
+
     @Test
     void testReferentialEquality() {
         String text = makeComment();
@@ -76,6 +80,16 @@ class CommentTest {
         Comment instance = new Comment(text, currency, date);
         Object obj = passThrough(instance);
         assertEquals(instance, obj);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        String text = makeComment();
+        Currency currency = chooseCurrency();
+        LocalDateTime date = LocalDateTime.now();
+        Comment instance = new Comment(text, currency, date);
+        Object obj = provideNull();
+        assertNotEquals(instance, obj);
     }
 
     @Test
