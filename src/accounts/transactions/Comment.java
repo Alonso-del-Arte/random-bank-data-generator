@@ -32,6 +32,18 @@ public class Comment extends Transaction {
         return "Comment: \"" + this.remark + "\" " + this.dateTime.toString();
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     public Comment(String text, Currency currency, LocalDateTime date) {
         super(CurrencyAmount.zeroOf(currency), date);
         if (text == null) {
