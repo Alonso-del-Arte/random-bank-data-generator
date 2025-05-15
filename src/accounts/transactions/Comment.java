@@ -32,11 +32,6 @@ public class Comment extends Transaction {
         return "Comment: \"" + this.remark + "\" " + this.dateTime.toString();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Comment;
-    }
-
     // TODO: Write tests for this
     @Override
     public int hashCode() {
