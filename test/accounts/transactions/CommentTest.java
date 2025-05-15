@@ -64,6 +64,20 @@ class CommentTest {
         assertEquals(expected, actual);
     }
 
+    private static Object passThrough(Object obj) {
+        return obj;
+    }
+
+    @Test
+    void testReferentialEquality() {
+        String text = makeComment();
+        Currency currency = chooseCurrency();
+        LocalDateTime date = LocalDateTime.now();
+        Comment instance = new Comment(text, currency, date);
+        Object obj = passThrough(instance);
+        assertEquals(instance, obj);
+    }
+
     @Test
     void testConstructorRejectsNullText() {
         Currency currency = chooseCurrency();
