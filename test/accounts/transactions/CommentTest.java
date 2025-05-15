@@ -93,6 +93,16 @@ class CommentTest {
     }
 
     @Test
+    void testNotEqualsDiffClass() {
+        String text = makeComment();
+        Currency currency = chooseCurrency();
+        LocalDateTime date = LocalDateTime.now();
+        Comment instance = new Comment(text, currency, date);
+        Object obj = passThrough(this);
+        assertNotEquals(instance, obj);
+    }
+
+    @Test
     void testConstructorRejectsNullText() {
         Currency currency = chooseCurrency();
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
