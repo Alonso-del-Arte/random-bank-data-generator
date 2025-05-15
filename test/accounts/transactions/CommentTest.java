@@ -103,6 +103,17 @@ class CommentTest {
     }
 
     @Test
+    void testNotEqualsDiffText() {
+        String textA = makeComment();
+        String textB = textA.toUpperCase();
+        Currency currency = chooseCurrency();
+        LocalDateTime date = LocalDateTime.now();
+        Comment commentA = new Comment(textA, currency, date);
+        Comment commentB = new Comment(textB, currency, date);
+        assertNotEquals(commentA, commentB);
+    }
+
+    @Test
     void testConstructorRejectsNullText() {
         Currency currency = chooseCurrency();
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
