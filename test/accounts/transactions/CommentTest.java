@@ -14,6 +14,10 @@ class CommentTest {
 
     private static final String DEFAULT_TEXT = "For testing purposes only";
 
+    private static String makeComment() {
+        return "Awarded " + RANDOM.nextInt() + " bonus points";
+    }
+
     @Test
     void testGetText() {
         System.out.println("getText");
@@ -45,6 +49,18 @@ class CommentTest {
         LocalDateTime expected = LocalDateTime.now();
         Comment instance = new Comment(DEFAULT_TEXT, currency, expected);
         LocalDateTime actual = instance.getTimestamp();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToString() {
+        System.out.println("toString");
+        String text = makeComment();
+        Currency currency = chooseCurrency();
+        LocalDateTime date = LocalDateTime.now();
+        Comment instance = new Comment(text, currency, date);
+        String expected = "Comment: \"" + text + "\" " + date;
+        String actual = instance.toString();
         assertEquals(expected, actual);
     }
 
