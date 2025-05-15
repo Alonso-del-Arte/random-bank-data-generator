@@ -27,6 +27,11 @@ public class Comment extends Transaction {
         return this.dateTime;
     }
 
+    @Override
+    public String toString() {
+        return "Comment: \"" + this.remark + "\" " + this.dateTime.toString();
+    }
+
     public Comment(String text, Currency currency, LocalDateTime date) {
         super(CurrencyAmount.zeroOf(currency), date);
         if (text == null) {
