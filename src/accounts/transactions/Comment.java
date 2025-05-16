@@ -47,7 +47,10 @@ public class Comment extends Transaction {
         if (!this.remark.equals(other.remark)) {
             return false;
         }
-        return this.fundCur.equals(other.fundCur);
+        if (!this.fundCur.equals(other.fundCur)) {
+            return false;
+        }
+        return this.dateTime.equals(other.dateTime);
     }
 
     // TODO: Write tests for this
