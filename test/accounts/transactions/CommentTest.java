@@ -132,7 +132,11 @@ class CommentTest {
         LocalDateTime date = LocalDateTime.now();
         Comment commentA = new Comment(text, currencyA, date);
         Comment commentB = new Comment(text, currencyB, date);
-        assertNotEquals(commentA, commentB);
+        String message = "Comment A is funded in " + currencyA.getDisplayName()
+                + " (" + currencyA.getCurrencyCode()
+                + "), currency B is funded in " + currencyB.getDisplayName()
+                + " (" + currencyB.getCurrencyCode() + ")";
+        assertNotEquals(commentA, commentB, message);
     }
 
     @Test
