@@ -136,6 +136,20 @@ class CommentTest {
     }
 
     @Test
+    void testNotEqualsDiffDate() {
+        String text = makeComment();
+        Currency currency = chooseCurrency();
+        LocalDateTime dateA = LocalDateTime.now();
+        LocalDateTime dateB = dateA.plusHours(RANDOM.nextInt(72))
+                .plusMinutes(15);
+        Comment commentA = new Comment(text, currency, dateA);
+        Comment commentB = new Comment(text, currency, dateB);
+        String message = "Comment A is dated " + dateA + ", comment B is dated "
+                + dateB;
+        assertNotEquals(commentA, commentB, message);
+    }
+
+    @Test
     void testConstructorRejectsNullText() {
         Currency currency = chooseCurrency();
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
