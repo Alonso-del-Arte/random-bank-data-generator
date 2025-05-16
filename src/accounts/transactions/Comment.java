@@ -43,7 +43,11 @@ public class Comment extends Transaction {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        return this.remark.equals(((Comment) obj).remark);
+        Comment other = (Comment) obj;
+        if (!this.remark.equals(other.remark)) {
+            return false;
+        }
+        return this.fundCur.equals(other.fundCur);
     }
 
     // TODO: Write tests for this
