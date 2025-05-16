@@ -114,6 +114,17 @@ class CommentTest {
     }
 
     @Test
+    void testEquals() {
+        System.out.println("equals");
+        String text = makeComment();
+        Currency currency = chooseCurrency();
+        LocalDateTime date = LocalDateTime.now();
+        Comment someComment = new Comment(text, currency, date);
+        Comment sameComment = new Comment(text, currency, date);
+        assertEquals(someComment, sameComment);
+    }
+
+    @Test
     void testConstructorRejectsNullText() {
         Currency currency = chooseCurrency();
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
