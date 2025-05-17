@@ -53,10 +53,12 @@ public class Comment extends Transaction {
         return this.dateTime.equals(other.dateTime);
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        int hash = this.remark.hashCode() << 5;
+        hash += this.fundCur.hashCode();
+        hash <<= 3;
+        return hash + this.dateTime.hashCode();
     }
 
     public Comment(String text, Currency currency, LocalDateTime date) {
