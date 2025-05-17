@@ -6,6 +6,8 @@ import static currency.CurrencyChooser.chooseCurrency;
 
 import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -151,6 +153,25 @@ class CommentTest {
         String message = "Comment A is dated " + dateA + ", comment B is dated "
                 + dateB;
         assertNotEquals(commentA, commentB, message);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int capacity = RANDOM.nextInt(256) + 4;
+        Set<Comment> comments = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            String text = makeComment();
+            Currency currency = chooseCurrency();
+            LocalDateTime date = LocalDateTime.now().minusHours(i);
+            Comment comment = new Comment(text, currency, date);
+            comments.add(comment);
+            hashes.add(comment.hashCode());
+        }
+        int expected = comments.size();
+        int actual = hashes.size();
+        assertEquals(expected, actual);
     }
 
     @Test
