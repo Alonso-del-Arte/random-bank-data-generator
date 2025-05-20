@@ -13,9 +13,8 @@ public class CurrencyAmount {
 
     private final Currency currencyID;
 
-    // TODO: Write tests for this
     public long getAmountInSubunits() {
-        return Long.MIN_VALUE;
+        return this.totalSubunits;
     }
 
     // TODO: Write tests for this
