@@ -22,6 +22,10 @@ public class Deposit extends Transaction {
 
     public Deposit(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
+        if (amount.getAmountInSubunits() < 0L) {
+            String excMsg = "Amount " + amount + " is not valid for a deposit";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.amt = amount;
         this.dateTime = date;
     }
