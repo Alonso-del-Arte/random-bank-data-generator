@@ -22,6 +22,9 @@ bin/
 /nbdist/
 /.nb-gradle/
 
+### Vim ###
+*.swp
+
 ### VS Code ###
 .vscode/
 
