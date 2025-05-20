@@ -488,8 +488,19 @@ public class CurrencyAmountTest {
     // TODO: Write toString() tests for negative amounts of currency with 4
     //  default fraction digits
 
-    // TODO: Write tests for getAmountInCents(), getUnitAmount() and
-    //  getChangeAmount()
+    @Test
+    void testGetAmountInSubunits() {
+        int expected = RANDOM.nextInt();
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(expected, currency);
+        long actual = amount.getAmountInSubunits();
+        String message = "Getting amount " + amount + " of "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ") in subunits";
+        assertEquals(expected, actual, message);
+    }
+
+    // TODO: Write tests for getUnitAmount() and getChangeAmount()
 
     @Test
     void testGetCurrency() {
