@@ -41,13 +41,35 @@ class DepositTest {
     }
 
     @Test
+    void testConstructorRejectsNegativeDeposit() {
+        int amountInSubunits = -RANDOM.nextInt(65536) - 1;
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getCurrencyCode().equals(cur.getSymbol())
+        );
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        String message = "Amount " + amount + " (" + currency.getDisplayName()
+                + ", " + currency.getCurrencyCode()
+                + ") is  not a valid deposit";
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            Deposit badInstance = new Deposit(amount, LocalDateTime.now());
+            System.out.println(message + ", should not have created instance "
+                    + badInstance);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testConstructorRejectsDepositOfZero() {
         Currency currency = chooseCurrency(
                 (cur) -> !cur.getCurrencyCode().equals(cur.getSymbol())
         );
         CurrencyAmount zero = new CurrencyAmount(0L, currency);
         String message = "Amount " + zero + " (" + currency.getDisplayName()
-                + ", " + currency.getCurrencyCode() + ") is  not a valid deposit";
+                + ", " + currency.getCurrencyCode()
+                + ") is  not a valid deposit";
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             Deposit badInstance = new Deposit(zero, LocalDateTime.now());
             System.out.println(message + ", should not have created instance "
