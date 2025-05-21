@@ -66,11 +66,11 @@ class CommentTest {
         assertEquals(expected, actual);
     }
 
-    private static Object passThrough(Object obj) {
+    static Object passThrough(Object obj) {
         return obj;
     }
 
-    private static Object provideNull() {
+    static Object provideNull() {
         return null;
     }
 
