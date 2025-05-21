@@ -12,6 +12,15 @@ import org.junit.jupiter.api.Test;
 
 class DepositTest {
 
+    private static Deposit makeDeposit() {
+        int amountInSubunits = RANDOM.nextInt(262144) + 16;
+        Currency currency = chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime dateTime = LocalDateTime.now()
+                .minusHours(RANDOM.nextInt(72));
+        return new Deposit(amount, dateTime);
+    }
+
     @Test
     void testGetAmount() {
         System.out.println("getAmount");
@@ -53,6 +62,13 @@ class DepositTest {
         String expected = "Deposit of " + amount + " on " + date;
         String actual = instance.toString();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testReferentialEquality() {
+        Deposit instance = makeDeposit();
+        Object obj = CommentTest.passThrough(instance);
+        assertEquals(instance, obj);
     }
 
     @Test
