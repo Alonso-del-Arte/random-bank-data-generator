@@ -28,7 +28,7 @@ public class Deposit extends Transaction {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Deposit;
+        return this == obj;
     }
 
     // TODO: Write tests for this
