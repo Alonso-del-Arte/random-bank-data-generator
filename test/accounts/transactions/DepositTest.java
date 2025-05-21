@@ -99,6 +99,18 @@ class DepositTest {
     }
 
     @Test
+    void testEquals() {
+        System.out.println("equals");
+        int millesAmount = RANDOM.nextInt(524288) + 2;
+        Currency currency = chooseCurrency(3);
+        CurrencyAmount amount = new CurrencyAmount(millesAmount, currency);
+        LocalDateTime date = LocalDateTime.now();
+        Deposit someDeposit = new Deposit(amount, date);
+        Deposit sameDeposit = new Deposit(amount, date);
+        assertEquals(someDeposit, sameDeposit);
+    }
+
+    @Test
     void testConstructorRejectsNegativeDeposit() {
         int amountInSubunits = -RANDOM.nextInt(65536) - 1;
         Currency currency = chooseCurrency(
