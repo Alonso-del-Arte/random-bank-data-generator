@@ -37,7 +37,11 @@ public class Deposit extends Transaction {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        return this.amt.equals(((Deposit) obj).amt);
+        Deposit other = (Deposit) obj;
+        if (!this.amt.equals(other.amt)) {
+            return false;
+        }
+        return this.dateTime.equals(other.dateTime);
     }
 
     // TODO: Write tests for this
