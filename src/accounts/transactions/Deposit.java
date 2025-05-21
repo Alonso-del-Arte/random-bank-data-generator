@@ -26,10 +26,9 @@ public class Deposit extends Transaction {
                 + this.dateTime.toString();
     }
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof Deposit;
     }
 
     // TODO: Write tests for this
