@@ -79,6 +79,13 @@ class DepositTest {
     }
 
     @Test
+    void testNotEqualsDiffClass() {
+        Deposit instance = makeDeposit();
+        Object obj = CommentTest.passThrough(this);
+        assertNotEquals(instance, obj);
+    }
+
+    @Test
     void testConstructorRejectsNegativeDeposit() {
         int amountInSubunits = -RANDOM.nextInt(65536) - 1;
         Currency currency = chooseCurrency(
