@@ -26,6 +26,18 @@ public class Deposit extends Transaction {
                 + this.dateTime.toString();
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return (super.hashCode() % 16) << 16;
+    }
+
     public Deposit(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
         if (amount.isNotPositive()) {
