@@ -86,6 +86,19 @@ class DepositTest {
     }
 
     @Test
+    void testNotEqualsDiffAmount() {
+        int centsAmountA = RANDOM.nextInt(131072) + 8;
+        int centsAmountB = 2 * centsAmountA + 1;
+        Currency currency = chooseCurrency(2);
+        CurrencyAmount amountA = new CurrencyAmount(centsAmountA, currency);
+        CurrencyAmount amountB = new CurrencyAmount(centsAmountB, currency);
+        LocalDateTime date = LocalDateTime.now().minusDays(RANDOM.nextInt(16));
+        Deposit depositA = new Deposit(amountA, date);
+        Deposit depositB = new Deposit(amountB, date);
+        assertNotEquals(depositA, depositB);
+    }
+
+    @Test
     void testConstructorRejectsNegativeDeposit() {
         int amountInSubunits = -RANDOM.nextInt(65536) - 1;
         Currency currency = chooseCurrency(
