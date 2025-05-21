@@ -41,6 +41,21 @@ class DepositTest {
     }
 
     @Test
+    void testToString() {
+        System.out.println("toString");
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        int amountInSubunits = RANDOM.nextInt(10000) + 1;
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(72));
+        Deposit instance = new Deposit(amount, date);
+        String expected = "Deposit of " + amount + " on " + date;
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNegativeDeposit() {
         int amountInSubunits = -RANDOM.nextInt(65536) - 1;
         Currency currency = chooseCurrency(
