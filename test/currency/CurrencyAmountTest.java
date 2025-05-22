@@ -3,6 +3,8 @@ package currency;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -757,6 +759,37 @@ public class CurrencyAmountTest {
                 + ") and " + currencyB.getDisplayName() + " ("
                 + currencyB.getCurrencyCode() + ")";
         assertNotEquals(amountA, amountB, message);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int numberOfCurrencies = RANDOM.nextInt(16) + 4;
+        int numberOfAmountsPerCurrency = RANDOM.nextInt(128) + 32;
+        int capacity = numberOfCurrencies * numberOfAmountsPerCurrency;
+        Set<Currency> currencies = new HashSet<>(numberOfCurrencies);
+        while (currencies.size() < numberOfCurrencies) {
+            currencies.add(CurrencyChooser.chooseCurrency());
+        }
+        Set<CurrencyAmount> amounts = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        int amountInSubunits = -524288;
+        for (int i = 0; i < numberOfAmountsPerCurrency; i++) {
+            amountInSubunits += RANDOM.nextInt(1024);
+            for (Currency currency : currencies) {
+                CurrencyAmount amount = new CurrencyAmount(amountInSubunits,
+                        currency);
+                amounts.add(amount);
+                hashes.add(amount.hashCode());
+            }
+        }
+        String message = "Given " + numberOfCurrencies + " currencies and "
+                + numberOfAmountsPerCurrency
+                + " amounts per currency, there should be " + capacity
+                + " distinct hashes";
+        int expected = amounts.size();
+        int actual = hashes.size();
+        assertEquals(expected, actual, message);
     }
 
     // TODO: Write test for negativeOneOf()
