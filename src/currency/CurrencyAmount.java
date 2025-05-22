@@ -238,10 +238,10 @@ public class CurrencyAmount {
         return this.currencyID.equals(other.currencyID);
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        int hash = this.currencyID.hashCode() << 8;
+        return hash + ((int) this.totalSubunits);
     }
 
     // TODO: Make Comparable<CurrencyAmount>, override compareTo()
