@@ -44,10 +44,10 @@ public class Deposit extends Transaction {
         return this.dateTime.equals(other.dateTime);
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return (super.hashCode() % 16) << 16;
+        int hash = this.amt.hashCode() << 8;
+        return hash + this.dateTime.hashCode();
     }
 
     public Deposit(CurrencyAmount amount, LocalDateTime date) {
