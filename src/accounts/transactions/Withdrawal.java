@@ -21,7 +21,7 @@ public class Withdrawal extends Transaction {
 
     public Withdrawal(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
-        if (amount.getAmountInSubunits() > 0) {
+        if (amount.getAmountInSubunits() > -1) {
             String excMsg = "Amount " + amount
                     + " is not valid for a withdrawal";
             throw new IllegalArgumentException(excMsg);
