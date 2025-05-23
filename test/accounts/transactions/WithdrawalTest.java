@@ -35,6 +35,26 @@ class WithdrawalTest {
     }
 
     @Test
+    void testConstructorRejectsWithdrawalOfZero() {
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getCurrencyCode().equals(cur.getSymbol())
+        );
+        CurrencyAmount zero = new CurrencyAmount(0L, currency);
+        String message = "Amount " + zero + " (" + currency.getDisplayName()
+                + ", " + currency.getCurrencyCode()
+                + ") is  not a valid withdrawal";
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            Withdrawal badInstance = new Withdrawal(zero, LocalDateTime.now());
+            System.out.println(message + ", should not have created instance "
+                    + badInstance);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().plusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
