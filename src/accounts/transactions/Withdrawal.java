@@ -3,7 +3,6 @@ package accounts.transactions;
 import currency.CurrencyAmount;
 
 import java.time.LocalDateTime;
-import java.util.Currency;
 
 public class Withdrawal extends Transaction {
 
