@@ -8,15 +8,16 @@ public class Withdrawal extends Transaction {
 
     private final CurrencyAmount amt;
 
+    private final LocalDateTime dateTime;
+
     @Override
     public CurrencyAmount getAmount() {
         return this.amt;
     }
 
-    // TODO: Write tests for this
     @Override
     public LocalDateTime getTimestamp() {
-        return LocalDateTime.now().minusYears(500);
+        return this.dateTime;
     }
 
     public Withdrawal(CurrencyAmount amount, LocalDateTime date) {
@@ -27,6 +28,7 @@ public class Withdrawal extends Transaction {
             throw new IllegalArgumentException(excMsg);
         }
         this.amt = amount;
+        this.dateTime = date;
     }
 
 }
