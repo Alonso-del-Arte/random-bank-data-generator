@@ -13,6 +13,19 @@ import org.junit.jupiter.api.Test;
 class WithdrawalTest {
 
     @Test
+    void testGetAmount() {
+        System.out.println("getAmount");
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        int amountInSubunits = -RANDOM.nextInt(10000) - 1;
+        CurrencyAmount expected = new CurrencyAmount(amountInSubunits, currency);
+        Withdrawal instance = new Withdrawal(expected, LocalDateTime.now());
+        CurrencyAmount actual = instance.getAmount();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsPositiveWithdrawal() {
         int amountInSubunits = RANDOM.nextInt(65536) + 1;
         Currency currency = chooseCurrency(
