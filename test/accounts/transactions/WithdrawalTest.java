@@ -26,6 +26,21 @@ class WithdrawalTest {
     }
 
     @Test
+    void testGetTimestamp() {
+        System.out.println("getTimestamp");
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        int amountInSubunits = -RANDOM.nextInt(10000) - 1;
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime expected = LocalDateTime.now()
+                .minusHours(RANDOM.nextInt(72));
+        Withdrawal instance = new Withdrawal(amount, expected);
+        LocalDateTime actual = instance.getTimestamp();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsPositiveWithdrawal() {
         int amountInSubunits = RANDOM.nextInt(65536) + 1;
         Currency currency = chooseCurrency(
