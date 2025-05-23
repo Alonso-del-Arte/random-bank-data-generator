@@ -13,6 +13,28 @@ import org.junit.jupiter.api.Test;
 class WithdrawalTest {
 
     @Test
+    void testConstructorRejectsPositiveWithdrawal() {
+        int amountInSubunits = RANDOM.nextInt(65536) + 1;
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getCurrencyCode().equals(cur.getSymbol())
+        );
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        String message = "Amount " + amount + " (" + currency.getDisplayName()
+                + ", " + currency.getCurrencyCode()
+                + ") is not a valid withdrawal";
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            Withdrawal badInstance = new Withdrawal(amount,
+                    LocalDateTime.now());
+            System.out.println(message + ", should not have created instance "
+                    + badInstance);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().plusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
