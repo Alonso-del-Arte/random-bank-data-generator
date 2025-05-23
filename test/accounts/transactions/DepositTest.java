@@ -151,7 +151,7 @@ class DepositTest {
         CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
         String message = "Amount " + amount + " (" + currency.getDisplayName()
                 + ", " + currency.getCurrencyCode()
-                + ") is  not a valid deposit";
+                + ") is not a valid deposit";
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             Deposit badInstance = new Deposit(amount, LocalDateTime.now());
             System.out.println(message + ", should not have created instance "
