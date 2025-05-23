@@ -7,10 +7,11 @@ import java.util.Currency;
 
 public class Withdrawal extends Transaction {
 
-    // TODO: Write tests for this
+    private final CurrencyAmount amt;
+
     @Override
     public CurrencyAmount getAmount() {
-        return new CurrencyAmount(100, Currency.getInstance("XCD"));
+        return this.amt;
     }
 
     // TODO: Write tests for this
@@ -26,6 +27,7 @@ public class Withdrawal extends Transaction {
                     + " is not valid for a withdrawal";
             throw new IllegalArgumentException(excMsg);
         }
+        this.amt = amount;
     }
 
 }
