@@ -56,6 +56,12 @@ public class CurrencyAmount {
         return this;
     }
 
+    /**
+     * Negates this currency amount. For the example, suppose this amount is
+     * $20.00.
+     * @return This amount negated. In the example, this would be &minus;$20.00.
+     * Likely a fresh instance even in the case of zero of a currency.
+     */
     public CurrencyAmount negate() {
         return new CurrencyAmount(-this.totalSubunits, this.currencyID);
     }
