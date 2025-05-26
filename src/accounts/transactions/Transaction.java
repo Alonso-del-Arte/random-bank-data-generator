@@ -7,8 +7,10 @@ import java.util.Currency;
 
 public abstract class Transaction {
 
+    private final CurrencyAmount amt;
+
     public CurrencyAmount getAmount() {
-        return new CurrencyAmount(0, Currency.getInstance("XCD"));
+        return this.amt;
     }
 
     public LocalDateTime getTimestamp() {
@@ -24,6 +26,7 @@ public abstract class Transaction {
             String excMsg = "Date should not be null";
             throw new NullPointerException(excMsg);
         }
+        this.amt = amount;
     }
 
 }
