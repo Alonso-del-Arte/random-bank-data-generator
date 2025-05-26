@@ -20,6 +20,12 @@ public class Withdrawal extends Transaction {
         return this.dateTime;
     }
 
+    @Override
+    public String toString() {
+        return "Withdrawal of " + this.amt.negate().toString() + " on "
+                + this.dateTime.toString();
+    }
+
     public Withdrawal(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
         if (amount.isNotNegative()) {
