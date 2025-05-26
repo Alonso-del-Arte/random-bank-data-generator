@@ -15,6 +15,19 @@ class TransactionTest {
     static final Random RANDOM = new Random(~(System.currentTimeMillis() << 3));
 
     @Test
+    void testGetAmount() {
+        int subunits = RANDOM.nextInt();
+        Currency currency = chooseCurrency();
+        CurrencyAmount expected = new CurrencyAmount(subunits, currency);
+        Transaction transaction = new TransactionImpl(expected,
+                LocalDateTime.now());
+        CurrencyAmount actual = transaction.getAmount();
+        String message = "Expecting amount of currency "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
