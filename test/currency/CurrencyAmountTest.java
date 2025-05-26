@@ -859,6 +859,19 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testNegateNegativeIsPositive() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        int subdivsAmount = -RANDOM.nextInt(262144) - 16;
+        CurrencyAmount amount = new CurrencyAmount(subdivsAmount, currency);
+        CurrencyAmount expected = new CurrencyAmount(-subdivsAmount, currency);
+        CurrencyAmount actual = amount.negate();
+        String message = "Negating " + amount + " of currency "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
