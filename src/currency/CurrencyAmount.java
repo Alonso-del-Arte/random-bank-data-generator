@@ -56,9 +56,8 @@ public class CurrencyAmount {
         return this;
     }
 
-    // TODO: Write tests for this
     public CurrencyAmount negate() {
-        long subunits = -Math.abs(this.totalSubunits);
+        long subunits = -this.totalSubunits;
         return new CurrencyAmount(subunits, this.currencyID);
     }
 
