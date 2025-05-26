@@ -3,12 +3,17 @@ package accounts.transactions;
 import currency.CurrencyAmount;
 
 import java.time.LocalDateTime;
+import java.util.Currency;
 
 public abstract class Transaction {
 
-    public abstract CurrencyAmount getAmount();
+    public CurrencyAmount getAmount() {
+        return new CurrencyAmount(0, Currency.getInstance("XCD"));
+    }
 
-    public abstract LocalDateTime getTimestamp();
+    public LocalDateTime getTimestamp() {
+        return LocalDateTime.now();
+    }
 
     Transaction(CurrencyAmount amount, LocalDateTime date) {
         if (amount == null) {

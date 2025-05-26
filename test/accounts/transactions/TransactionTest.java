@@ -51,16 +51,6 @@ class TransactionTest {
 
     private static class TransactionImpl extends Transaction {
 
-        @Override
-        public CurrencyAmount getAmount() {
-            return new CurrencyAmount(0, Currency.getInstance("USD"));
-        }
-
-        @Override
-        public LocalDateTime getTimestamp() {
-            return LocalDateTime.now();
-        }
-
         TransactionImpl(CurrencyAmount amount, LocalDateTime date) {
             super(amount, date);
         }
