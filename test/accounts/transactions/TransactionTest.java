@@ -43,6 +43,17 @@ class TransactionTest {
     }
 
     @Test
+    void testNotEqualsNull() {
+        Currency currency = chooseCurrency();
+        int amountInSubunits = RANDOM.nextInt(10000);
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
+        Transaction instance = new TransactionImpl(amount, date);
+        Object obj = passThrough(null);
+        assertNotEquals(instance, obj);
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
