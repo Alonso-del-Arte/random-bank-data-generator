@@ -16,7 +16,7 @@ public abstract class Transaction {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return this.getClass().equals(obj.getClass());
     }
 
     // TODO: Write tests for this
