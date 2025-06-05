@@ -54,6 +54,28 @@ class TransactionTest {
     }
 
     @Test
+    void testNotEqualsDiffClass() {
+        Currency currency = chooseCurrency();
+        int amountInSubunits = RANDOM.nextInt(10000);
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
+        Transaction instanceImpl = new TransactionImpl(amount, date);
+        Transaction instanceAnon = new Transaction(amount, date) {
+
+            @Override
+            public CurrencyAmount getAmount() {
+                return super.getAmount();
+            }
+
+        };
+        String message = "Instance of class "
+                + instanceImpl.getClass().getName()
+                + " should not equal instance of class "
+                + instanceAnon.getClass().getName();
+        assertNotEquals(instanceImpl, instanceAnon, message);
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
