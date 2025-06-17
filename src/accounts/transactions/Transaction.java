@@ -23,10 +23,7 @@ public abstract class Transaction {
             return false;
         }
         Transaction other = (Transaction) obj;
-        if (this.amt.getAmountInSubunits() != other.amt.getAmountInSubunits()) {
-            return false;
-        }
-        return this.amt.getCurrency().equals(other.amt.getCurrency());
+        return this.amt.equals(other.amt);
     }
 
     // TODO: Write tests for this
