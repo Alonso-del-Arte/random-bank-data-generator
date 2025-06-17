@@ -22,8 +22,11 @@ public abstract class Transaction {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        return this.amt.getAmountInSubunits()
-                == ((Transaction) obj).amt.getAmountInSubunits();
+        Transaction other = (Transaction) obj;
+        if (this.amt.getAmountInSubunits() != other.amt.getAmountInSubunits()) {
+            return false;
+        }
+        return this.amt.getCurrency().equals(other.amt.getCurrency());
     }
 
     // TODO: Write tests for this
