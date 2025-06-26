@@ -113,6 +113,24 @@ class TransactionTest {
     }
 
     @Test
+    void testNotEqualsSameAmountDiffDate() {
+        Currency currency = chooseCurrency();
+        int subunits = RANDOM.nextInt(10000);
+        CurrencyAmount amount = new CurrencyAmount(subunits, currency);
+        LocalDateTime dateA = LocalDateTime.now().minusHours(RANDOM.nextInt(24) + 1);
+        LocalDateTime dateB = LocalDateTime.now().plusHours(RANDOM.nextInt(24) + 1);
+        Transaction trxA = new TransactionImpl(amount, dateA);
+        Transaction trxB = new TransactionImpl(amount, dateB);
+        String message = "Transaction of " + amount + " in "
+                + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode()
+                + ") should differ from transaction of " + amount
+                + " as one took place on " + dateA + " and the other on "
+                + dateB;
+        assertNotEquals(trxA, trxB, message);
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
