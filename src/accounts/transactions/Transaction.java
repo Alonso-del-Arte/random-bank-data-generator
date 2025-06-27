@@ -17,7 +17,7 @@ public abstract class Transaction {
         if (obj == null) {
             return false;
         }
-        return obj instanceof Transaction;
+        return this.getClass().equals(obj.getClass());
     }
 
     // TODO: Write tests for this
