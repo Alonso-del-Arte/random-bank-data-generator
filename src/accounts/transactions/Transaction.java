@@ -14,22 +14,6 @@ public abstract class Transaction {
         return this.amt;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
-            return false;
-        }
-        Transaction other = (Transaction) obj;
-        if (!this.dateTime.equals(other.dateTime)) {
-            return false;
-        }
-        return this.amt.getAmountInSubunits()
-                == other.amt.getAmountInSubunits();
-    }
-
     // TODO: Write tests for this
     @Override
     public int hashCode() {
