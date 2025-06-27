@@ -8,6 +8,8 @@ public abstract class Transaction {
 
     private final CurrencyAmount amt;
 
+    private final LocalDateTime dateTime;
+
     public CurrencyAmount getAmount() {
         return this.amt;
     }
@@ -17,7 +19,11 @@ public abstract class Transaction {
         if (obj == null) {
             return false;
         }
-        return this.getClass().equals(obj.getClass());
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        Transaction other = (Transaction) obj;
+        return this.dateTime.equals(other.dateTime);
     }
 
     // TODO: Write tests for this
@@ -40,6 +46,7 @@ public abstract class Transaction {
             throw new NullPointerException(excMsg);
         }
         this.amt = amount;
+        this.dateTime = date;
     }
 
 }
