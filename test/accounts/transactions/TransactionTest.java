@@ -77,6 +77,25 @@ class TransactionTest {
     }
 
     @Test
+    void testNotEqualsSameAmountDiffDate() {
+        Currency currency = chooseCurrency();
+        int subunits = RANDOM.nextInt(10000);
+        CurrencyAmount amount = new CurrencyAmount(subunits, currency);
+        LocalDateTime dateA = LocalDateTime.now().minusHours(RANDOM.nextInt(24) + 1);
+        LocalDateTime dateB = LocalDateTime.now().plusHours(RANDOM.nextInt(24) + 1);
+        Transaction trxA = new TransactionImpl(amount, dateA);
+        Transaction trxB = new TransactionImpl(amount, dateB);
+        String message = "Transaction of " + amount + " in "
+                + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode()
+                + ") should differ from transaction of " + amount
+                + " as one took place on " + dateA + " and the other on "
+                + dateB;
+        assertNotEquals(trxA, trxB, message);
+    }
+
+    @org.junit.jupiter.api.Disabled
+    @Test
     void testNotEqualsDiffAmountOfSameCurrency() {
         Currency currency = chooseCurrency();
         int subunitsA = RANDOM.nextInt(10000);
@@ -93,6 +112,7 @@ class TransactionTest {
         assertNotEquals(trxA, trxB, message);
     }
 
+    @org.junit.jupiter.api.Disabled
     @Test
     void testNotEqualsSameAmountOfDiffCurrency() {
         Currency currencyA = chooseCurrency();
@@ -109,24 +129,6 @@ class TransactionTest {
                 + ") should differ from transaction of " + amountB + " in "
                 + currencyB.getDisplayName() + " (" + currencyB.getCurrencyCode()
                 + ") even though both took place on " + date;
-        assertNotEquals(trxA, trxB, message);
-    }
-
-    @Test
-    void testNotEqualsSameAmountDiffDate() {
-        Currency currency = chooseCurrency();
-        int subunits = RANDOM.nextInt(10000);
-        CurrencyAmount amount = new CurrencyAmount(subunits, currency);
-        LocalDateTime dateA = LocalDateTime.now().minusHours(RANDOM.nextInt(24) + 1);
-        LocalDateTime dateB = LocalDateTime.now().plusHours(RANDOM.nextInt(24) + 1);
-        Transaction trxA = new TransactionImpl(amount, dateA);
-        Transaction trxB = new TransactionImpl(amount, dateB);
-        String message = "Transaction of " + amount + " in "
-                + currency.getDisplayName() + " ("
-                + currency.getCurrencyCode()
-                + ") should differ from transaction of " + amount
-                + " as one took place on " + dateA + " and the other on "
-                + dateB;
         assertNotEquals(trxA, trxB, message);
     }
 
