@@ -23,7 +23,11 @@ public abstract class Transaction {
             return false;
         }
         Transaction other = (Transaction) obj;
-        return this.dateTime.equals(other.dateTime);
+        if (!this.dateTime.equals(other.dateTime)) {
+            return false;
+        }
+        return this.amt.getAmountInSubunits()
+                == other.amt.getAmountInSubunits();
     }
 
     // TODO: Write tests for this
