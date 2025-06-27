@@ -29,10 +29,7 @@ public abstract class Transaction {
         if (!this.dateTime.equals(other.dateTime)) {
             return false;
         }
-        if (this.amt.getAmountInSubunits() != other.amt.getAmountInSubunits()) {
-            return false;
-        }
-        return this.amt.getCurrency().equals(other.amt.getCurrency());
+        return this.amt.equals(other.amt);
     }
 
     // TODO: Write tests for this
