@@ -111,7 +111,6 @@ class TransactionTest {
         assertNotEquals(trxA, trxB, message);
     }
 
-    @org.junit.jupiter.api.Disabled
     @Test
     void testNotEqualsSameAmountOfDiffCurrency() {
         Currency currencyA = chooseCurrency();
