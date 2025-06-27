@@ -12,18 +12,20 @@ public abstract class Transaction {
         return this.amt;
     }
 
-    // TODO: Write tests for this
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
-            return false;
-        }
-        Transaction other = (Transaction) obj;
-        return this.amt.equals(other.amt);
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (!this.getClass().equals(obj.getClass())) {
+//            return false;
+//        }
+//        Transaction other = (Transaction) obj;
+//        if (!this.amt.equals(other.amt)) {
+//            return false;
+//        }
+//        return this.amt.equals(other.amt);
+//    }
 
     // TODO: Write tests for this
     @Override
