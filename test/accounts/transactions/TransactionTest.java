@@ -131,6 +131,19 @@ class TransactionTest {
     }
 
     @Test
+    void testEquals() {
+        System.out.println("equals");
+        Currency currency = chooseCurrency();
+        int bound = -16 * Short.MIN_VALUE;
+        int subunits = RANDOM.nextInt(bound);
+        CurrencyAmount amount = new CurrencyAmount(subunits, currency);
+        LocalDateTime date = LocalDateTime.now();
+        Transaction someTransaction = new TransactionImpl(amount, date);
+        Transaction sameTransaction = new TransactionImpl(amount, date);
+        assertEquals(someTransaction, sameTransaction);
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
