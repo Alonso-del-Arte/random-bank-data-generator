@@ -20,6 +20,18 @@ public class Withdrawal extends Transaction {
         return this.dateTime;
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "Withdrawal of " + this.amt.negate().toString() + " on "
