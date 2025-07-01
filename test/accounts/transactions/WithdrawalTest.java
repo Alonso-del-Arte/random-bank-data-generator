@@ -66,6 +66,13 @@ class WithdrawalTest {
     }
 
     @Test
+    void testReferentialEquality() {
+        Withdrawal instance = makeWithdrawal();
+        Object obj = CommentTest.passThrough(instance);
+        assertEquals(instance, obj);
+    }
+
+    @Test
     void testConstructorRejectsPositiveWithdrawal() {
         int amountInSubunits = RANDOM.nextInt(65536) + 1;
         Currency currency = chooseCurrency(
