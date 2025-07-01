@@ -12,6 +12,15 @@ import org.junit.jupiter.api.Test;
 
 class WithdrawalTest {
 
+    private static Withdrawal makeWithdrawal() {
+        int amountInSubunits = -RANDOM.nextInt(262144) - 16;
+        Currency currency = chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime dateTime = LocalDateTime.now()
+                .minusHours(RANDOM.nextInt(72));
+        return new Withdrawal(amount, dateTime);
+    }
+
     @Test
     void testGetAmount() {
         System.out.println("getAmount");
