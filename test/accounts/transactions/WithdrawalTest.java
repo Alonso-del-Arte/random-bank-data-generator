@@ -73,6 +73,13 @@ class WithdrawalTest {
     }
 
     @Test
+    void testNotEqualsNull() {
+        Withdrawal instance = makeWithdrawal();
+        Object obj = CommentTest.provideNull();
+        assertNotEquals(instance, obj);
+    }
+
+    @Test
     void testConstructorRejectsPositiveWithdrawal() {
         int amountInSubunits = RANDOM.nextInt(65536) + 1;
         Currency currency = chooseCurrency(
