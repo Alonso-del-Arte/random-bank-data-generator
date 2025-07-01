@@ -80,6 +80,13 @@ class WithdrawalTest {
     }
 
     @Test
+    void testNotEqualsDiffClass() {
+        Withdrawal instance = makeWithdrawal();
+        Object obj = CommentTest.passThrough(this);
+        assertNotEquals(instance, obj);
+    }
+
+    @Test
     void testConstructorRejectsPositiveWithdrawal() {
         int amountInSubunits = RANDOM.nextInt(65536) + 1;
         Currency currency = chooseCurrency(
