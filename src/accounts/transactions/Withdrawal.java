@@ -41,7 +41,7 @@ public class Withdrawal extends Transaction {
     // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        return -1;
     }
 
     @Override
