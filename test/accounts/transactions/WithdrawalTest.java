@@ -6,6 +6,8 @@ import static currency.CurrencyChooser.chooseCurrency;
 
 import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -121,6 +123,24 @@ class WithdrawalTest {
         Withdrawal withdrawalA = new Withdrawal(amount, dateA);
         Withdrawal withdrawalB = new Withdrawal(amount, dateB);
         assertNotEquals(withdrawalA, withdrawalB);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int capacity = RANDOM.nextInt(256) + 64;
+        Set<Withdrawal> withdrawals = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            Withdrawal withdrawal = makeWithdrawal();
+            withdrawals.add(withdrawal);
+            hashes.add(withdrawal.hashCode());
+        }
+        int expected = withdrawals.size();
+        int actual = hashes.size();
+        String message = "Given " + expected
+                + " distinct withdrawals, there should be as many hash codes";
+        assertEquals(expected, actual, message);
     }
 
     @Test
