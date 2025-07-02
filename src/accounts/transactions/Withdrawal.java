@@ -31,6 +31,9 @@ public class Withdrawal extends Transaction {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
+        if (!this.dateTime.equals(((Withdrawal) obj).dateTime)) {
+            return false;
+        }
         return this.amt.equals(((Withdrawal) obj).amt);
     }
 
