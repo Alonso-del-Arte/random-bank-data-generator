@@ -112,6 +112,18 @@ class WithdrawalTest {
     }
 
     @Test
+    void testNotEqualsDiffDate() {
+        int unitsAmount = -RANDOM.nextInt(131072) - 8;
+        Currency currency = chooseCurrency(0);
+        CurrencyAmount amount = new CurrencyAmount(unitsAmount, currency);
+        LocalDateTime dateA = LocalDateTime.now().minusDays(RANDOM.nextInt(16));
+        LocalDateTime dateB = dateA.plusMinutes(1);
+        Withdrawal withdrawalA = new Withdrawal(amount, dateA);
+        Withdrawal withdrawalB = new Withdrawal(amount, dateB);
+        assertNotEquals(withdrawalA, withdrawalB);
+    }
+
+    @Test
     void testConstructorRejectsPositiveWithdrawal() {
         int amountInSubunits = RANDOM.nextInt(65536) + 1;
         Currency currency = chooseCurrency(
