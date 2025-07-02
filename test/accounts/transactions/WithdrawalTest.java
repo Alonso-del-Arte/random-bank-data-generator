@@ -100,6 +100,18 @@ class WithdrawalTest {
     }
 
     @Test
+    void testEquals() {
+        System.out.println("equals");
+        int millesAmount = -RANDOM.nextInt(524288) - 2;
+        Currency currency = chooseCurrency(3);
+        CurrencyAmount amount = new CurrencyAmount(millesAmount, currency);
+        LocalDateTime date = LocalDateTime.now();
+        Withdrawal someWithdrawal = new Withdrawal(amount, date);
+        Withdrawal sameWithdrawal = new Withdrawal(amount, date);
+        assertEquals(someWithdrawal, sameWithdrawal);
+    }
+
+    @Test
     void testConstructorRejectsPositiveWithdrawal() {
         int amountInSubunits = RANDOM.nextInt(65536) + 1;
         Currency currency = chooseCurrency(
