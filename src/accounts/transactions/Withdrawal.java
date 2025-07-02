@@ -23,7 +23,7 @@ public class Withdrawal extends Transaction {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Withdrawal;
+        return this == obj;
     }
 
     // TODO: Write tests for this
