@@ -31,10 +31,11 @@ public class Withdrawal extends Transaction {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        if (!this.dateTime.equals(((Withdrawal) obj).dateTime)) {
+        Withdrawal other = (Withdrawal) obj;
+        if (!this.dateTime.equals(other.dateTime)) {
             return false;
         }
-        return this.amt.equals(((Withdrawal) obj).amt);
+        return this.amt.equals(other.amt);
     }
 
     // TODO: Write tests for this
