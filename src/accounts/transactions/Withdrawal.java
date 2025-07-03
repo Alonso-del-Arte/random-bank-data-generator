@@ -21,30 +21,6 @@ public class Withdrawal extends Transaction {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
-            return false;
-        }
-        Withdrawal other = (Withdrawal) obj;
-        if (!this.dateTime.equals(other.dateTime)) {
-            return false;
-        }
-        return this.amt.equals(other.amt);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = this.amt.hashCode() << 8;
-        return hash + this.dateTime.hashCode();
-    }
-
-    @Override
     public String toString() {
         return "Withdrawal of " + this.amt.negate().toString() + " on "
                 + this.dateTime.toString();
