@@ -4,7 +4,9 @@ import currency.CurrencyAmount;
 
 import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import static currency.CurrencyChooser.chooseCurrency;
 import static currency.CurrencyChooser.chooseCurrencyOtherThan;
@@ -14,6 +16,15 @@ import org.junit.jupiter.api.Test;
 class TransactionTest {
 
     static final Random RANDOM = new Random(~(System.currentTimeMillis() << 3));
+
+    private static Transaction makeTransaction() {
+        int amountInSubunits = RANDOM.nextInt();
+        Currency currency = chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime dateTime = LocalDateTime.now()
+                .minusHours(RANDOM.nextInt(72));
+        return new TransactionImpl(amount, dateTime);
+    }
 
     @Test
     void testGetAmount() {
@@ -141,6 +152,24 @@ class TransactionTest {
         Transaction someTransaction = new TransactionImpl(amount, date);
         Transaction sameTransaction = new TransactionImpl(amount, date);
         assertEquals(someTransaction, sameTransaction);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int capacity = RANDOM.nextInt(256) + 64;
+        Set<Transaction> transactions = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            Transaction transaction = makeTransaction();
+            transactions.add(transaction);
+            hashes.add(transaction.hashCode());
+        }
+        int expected = transactions.size();
+        int actual = hashes.size();
+        String message = "Given " + expected
+                + " distinct transactions, there should be as many hash codes";
+        assertEquals(expected, actual, message);
     }
 
     @Test
