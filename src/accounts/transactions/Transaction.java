@@ -32,10 +32,10 @@ public abstract class Transaction {
         return this.amt.equals(other.amt);
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        int hash = this.amt.hashCode() << 8;
+        return hash + this.dateTime.hashCode();
     }
 
     public LocalDateTime getTimestamp() {
