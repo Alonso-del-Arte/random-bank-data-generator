@@ -27,24 +27,6 @@ public class Deposit extends Transaction {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
-            return false;
-        }
-        Deposit other = (Deposit) obj;
-        if (!this.amt.equals(other.amt)) {
-            return false;
-        }
-        return this.dateTime.equals(other.dateTime);
-    }
-
-    @Override
     public int hashCode() {
         int hash = this.amt.hashCode() << 8;
         return hash + this.dateTime.hashCode();
