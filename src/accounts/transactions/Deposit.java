@@ -26,12 +26,6 @@ public class Deposit extends Transaction {
                 + this.dateTime.toString();
     }
 
-    @Override
-    public int hashCode() {
-        int hash = this.amt.hashCode() << 8;
-        return hash + this.dateTime.hashCode();
-    }
-
     public Deposit(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
         if (amount.isNotPositive()) {
