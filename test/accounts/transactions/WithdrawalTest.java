@@ -45,7 +45,7 @@ class WithdrawalTest {
         int amountInSubunits = -RANDOM.nextInt(10000) - 1;
         CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
         LocalDateTime expected = LocalDateTime.now()
-                .minusHours(RANDOM.nextInt(72));
+                .minusHours(RANDOM.nextInt(72)).plusMinutes(1);
         Withdrawal instance = new Withdrawal(amount, expected);
         LocalDateTime actual = instance.getTimestamp();
         assertEquals(expected, actual);
