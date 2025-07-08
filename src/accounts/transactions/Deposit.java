@@ -6,24 +6,12 @@ import java.time.LocalDateTime;
 
 public class Deposit extends Transaction {
 
-    private final CurrencyAmount amt;
-
-    private final LocalDateTime dateTime;
-
-    @Override
-    public String toString() {
-        return "Deposit of " + this.amt.toString() + " on "
-                + this.dateTime.toString();
-    }
-
     public Deposit(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
         if (amount.isNotPositive()) {
             String excMsg = "Amount " + amount + " is not valid for a deposit";
             throw new IllegalArgumentException(excMsg);
         }
-        this.amt = amount;
-        this.dateTime = date;
     }
 
 }
