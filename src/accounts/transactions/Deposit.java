@@ -17,7 +17,7 @@ public class Deposit extends Transaction {
 
     @Override
     public LocalDateTime getTimestamp() {
-        return this.dateTime.plusDays(60);
+        return this.dateTime;
     }
 
     @Override
