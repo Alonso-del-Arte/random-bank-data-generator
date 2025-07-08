@@ -14,6 +14,10 @@ public abstract class Transaction {
         return this.amt;
     }
 
+    public LocalDateTime getTimestamp() {
+        return LocalDateTime.now();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -36,10 +40,6 @@ public abstract class Transaction {
     public int hashCode() {
         int hash = this.amt.hashCode() << 8;
         return hash + this.dateTime.hashCode();
-    }
-
-    public LocalDateTime getTimestamp() {
-        return LocalDateTime.now();
     }
 
     Transaction(CurrencyAmount amount, LocalDateTime date) {
