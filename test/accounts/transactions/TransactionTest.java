@@ -1,6 +1,8 @@
 package accounts.transactions;
 
 import currency.CurrencyAmount;
+import static currency.CurrencyChooser.chooseCurrency;
+import static currency.CurrencyChooser.chooseCurrencyOtherThan;
 
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -8,8 +10,6 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import static currency.CurrencyChooser.chooseCurrency;
-import static currency.CurrencyChooser.chooseCurrencyOtherThan;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
