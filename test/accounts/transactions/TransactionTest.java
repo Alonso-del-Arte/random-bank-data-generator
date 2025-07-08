@@ -39,6 +39,21 @@ class TransactionTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testGetTimestamp() {
+        System.out.println("getTimestamp");
+        Currency currency = chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        int amountInSubunits = RANDOM.nextInt();
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime expected = LocalDateTime.now()
+                .plusDays(RANDOM.nextInt(72)).minusMinutes(1);
+        Transaction instance = new TransactionImpl(amount, expected);
+        LocalDateTime actual = instance.getTimestamp();
+        assertEquals(expected, actual);
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
