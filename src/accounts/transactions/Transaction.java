@@ -15,7 +15,7 @@ public abstract class Transaction {
     }
 
     public LocalDateTime getTimestamp() {
-        return LocalDateTime.now();
+        return this.dateTime;
     }
 
     @Override
