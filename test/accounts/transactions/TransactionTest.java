@@ -188,6 +188,21 @@ class TransactionTest {
     }
 
     @Test
+    void testToString() {
+        System.out.println("toString");
+        int amountInSubunits = RANDOM.nextInt();
+        Currency currency = chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
+        LocalDateTime dateTime = LocalDateTime.now()
+                .minusDays(RANDOM.nextInt(360));
+        Transaction instance = new TransactionImpl(amount, dateTime);
+        String expected = instance.getClass().getSimpleName() + " of " + amount
+                + " on " + dateTime;
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNullAmount() {
         LocalDateTime date = LocalDateTime.now().minusHours(RANDOM.nextInt(24));
         String message = "Constructor should reject date " + date
