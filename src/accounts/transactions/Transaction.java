@@ -42,6 +42,12 @@ public abstract class Transaction {
         return hash + this.dateTime.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " of " + this.amt + " on "
+                + this.dateTime;
+    }
+
     Transaction(CurrencyAmount amount, LocalDateTime date) {
         if (amount == null) {
             String excMsg = "Amount should not be null";
