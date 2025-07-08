@@ -11,16 +11,6 @@ public class Withdrawal extends Transaction {
     private final LocalDateTime dateTime;
 
     @Override
-    public CurrencyAmount getAmount() {
-        return this.amt;
-    }
-
-    @Override
-    public LocalDateTime getTimestamp() {
-        return this.dateTime;
-    }
-
-    @Override
     public String toString() {
         return "Withdrawal of " + this.amt.negate().toString() + " on "
                 + this.dateTime.toString();
