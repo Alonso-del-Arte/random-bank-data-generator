@@ -45,7 +45,7 @@ class DepositTest {
         int amountInSubunits = RANDOM.nextInt(10000) + 1;
         CurrencyAmount amount = new CurrencyAmount(amountInSubunits, currency);
         LocalDateTime expected = LocalDateTime.now()
-                .minusHours(RANDOM.nextInt(72));
+                .plusHours(RANDOM.nextInt(72)).minusMinutes(1);
         Deposit instance = new Deposit(amount, expected);
         LocalDateTime actual = instance.getTimestamp();
         assertEquals(expected, actual);
