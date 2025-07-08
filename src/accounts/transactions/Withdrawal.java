@@ -17,7 +17,7 @@ public class Withdrawal extends Transaction {
 
     @Override
     public LocalDateTime getTimestamp() {
-        return this.dateTime.minusDays(60);
+        return this.dateTime;
     }
 
     @Override
