@@ -6,10 +6,6 @@ import java.time.LocalDateTime;
 
 public class Withdrawal extends Transaction {
 
-    private final CurrencyAmount amt;
-
-    private final LocalDateTime dateTime;
-
     @Override
     public String toString() {
         return "Withdrawal of " + this.amt.negate().toString() + " on "
@@ -23,8 +19,6 @@ public class Withdrawal extends Transaction {
                     + " is not valid for a withdrawal";
             throw new IllegalArgumentException(excMsg);
         }
-        this.amt = amount;
-        this.dateTime = date;
     }
 
 }

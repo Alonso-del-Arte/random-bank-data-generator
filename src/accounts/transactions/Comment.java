@@ -11,8 +11,6 @@ public class Comment extends Transaction {
 
     private final Currency fundCur;
 
-    private final LocalDateTime dateTime;
-
     public String getText() {
         return this.remark;
     }
@@ -69,7 +67,6 @@ public class Comment extends Transaction {
         }
         this.remark = text;
         this.fundCur = currency;
-        this.dateTime = date;
     }
 
 }
