@@ -21,11 +21,6 @@ public class Comment extends Transaction {
     }
 
     @Override
-    public LocalDateTime getTimestamp() {
-        return this.dateTime;
-    }
-
-    @Override
     public String toString() {
         return "Comment: \"" + this.remark + "\" " + this.dateTime.toString();
     }
