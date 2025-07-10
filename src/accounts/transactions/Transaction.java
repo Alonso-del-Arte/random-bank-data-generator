@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 
 public abstract class Transaction {
 
-    private final CurrencyAmount amt;
+    final CurrencyAmount amt;
 
-    private final LocalDateTime dateTime;
+    final LocalDateTime dateTime;
 
     public CurrencyAmount getAmount() {
         return this.amt;
