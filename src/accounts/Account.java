@@ -31,12 +31,11 @@ public abstract class Account {
 
     // TODO: Write tests for this
     public Entity getAccountBeneficiary() {
-        return this.accountBeneficiary;
+        return null;
     }
 
     // TODO: Write tests for this
     public void removeAccountBeneficiary() {
-        this.accountBeneficiary = null;
     }
 
     // TODO: Write tests for this
