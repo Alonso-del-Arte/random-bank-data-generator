@@ -19,8 +19,8 @@ public abstract class Account {
 
     CurrencyAmount accountBalance;
 
-    ArrayList<Transaction> accountHistory;
+    List<Transaction> accountHistory;
 
     Entity accountBeneficiary;
-    
+
 }
