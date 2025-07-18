@@ -1,6 +1,8 @@
 package accounts;
 
+import accounts.transactions.Deposit;
 import accounts.transactions.Transaction;
+import accounts.transactions.Withdrawal;
 import currency.CurrencyAmount;
 import entities.Entity;
 
@@ -22,5 +24,37 @@ public abstract class Account {
     List<Transaction> accountHistory;
 
     Entity accountBeneficiary;
+
+    // TODO: Write tests for this
+    public void setAccountBeneficiary(Entity entity) {
+    }
+
+    // TODO: Write tests for this
+    public Entity getAccountBeneficiary() {
+        return this.accountBeneficiary;
+    }
+
+    // TODO: Write tests for this
+    public void removeAccountBeneficiary() {
+        this.accountBeneficiary = null;
+    }
+
+    // TODO: Write tests for this
+    CurrencyAmount getAccountBalance() {
+        return new CurrencyAmount(100, java.util.Currency.getInstance("XCD"));
+    }
+
+    // TODO: Write tests for this
+    public void processDeposit(Deposit deposit) {
+    }
+
+    // TODO: Write tests for this
+    public void processWithdrawal(Withdrawal withdrawal) {
+    }
+
+    // TODO: Write tests for this
+    public Account(Entity primary, Entity secondary, Deposit initialDeposit) {
+        //
+    }
 
 }
