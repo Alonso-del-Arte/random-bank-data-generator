@@ -27,13 +27,7 @@ public class Comment extends Transaction {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
+        if (!super.equals(obj)) {
             return false;
         }
         Comment other = (Comment) obj;
