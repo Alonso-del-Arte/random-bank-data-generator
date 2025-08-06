@@ -97,7 +97,7 @@ public class CurrencyAmount {
 
     // TODO: Write tests for this
     public static CurrencyAmount negativeOneOf(Currency currency) {
-        return new CurrencyAmount(100, currency);
+        return new CurrencyAmount(-100, currency);
     }
 
     public static CurrencyAmount zeroOf(Currency currency) {
