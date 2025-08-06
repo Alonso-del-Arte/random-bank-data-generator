@@ -792,7 +792,16 @@ public class CurrencyAmountTest {
         assertEquals(expected, actual, message);
     }
 
-    // TODO: Write test for negativeOneOf()
+    @Test
+    void testNegativeOneOf() {
+        System.out.println("negativeOneOf");
+        Currency currency = CurrencyChooser.chooseCurrency(2);
+        CurrencyAmount expected = new CurrencyAmount(-100, currency);
+        CurrencyAmount actual = CurrencyAmount.negativeOneOf(currency);
+        String message = "Getting negative one of " + currency.getDisplayName()
+                + " (" + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
 
     @Test
     void testZeroOf() {
