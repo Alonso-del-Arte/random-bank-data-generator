@@ -867,6 +867,24 @@ public class CurrencyAmountTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testPlus() {
+        System.out.println("plus");
+        int bound = 32768;
+        int addendASubunits = RANDOM.nextInt(1, bound);
+        int addendBSubunits = RANDOM.nextInt(1, bound);
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount addendA = new CurrencyAmount(addendASubunits, currency);
+        CurrencyAmount addendB = new CurrencyAmount(addendBSubunits, currency);
+        int expSubunits = addendASubunits + addendBSubunits;
+        CurrencyAmount expected = new CurrencyAmount(expSubunits, currency);
+        CurrencyAmount actual = addendA.plus(addendB);
+        String message = "Adding up " + addendA + " and " + addendB
+                + " of currency " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
     // TODO: Write tests for plus()
 
     // TODO: Write tests for minus()
