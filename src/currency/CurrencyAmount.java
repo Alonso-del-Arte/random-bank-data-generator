@@ -53,7 +53,8 @@ public class CurrencyAmount {
 
     // TODO: Write tests for this
     public CurrencyAmount plus(CurrencyAmount addend) {
-        return this;
+        return new CurrencyAmount(this.totalSubunits + addend.totalSubunits,
+                this.currencyID);
     }
 
     /**
