@@ -804,6 +804,16 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testNegativeOneOfSubdivMilles() {
+        Currency currency = CurrencyChooser.chooseCurrency(3);
+        CurrencyAmount expected = new CurrencyAmount(-1000, currency);
+        CurrencyAmount actual = CurrencyAmount.negativeOneOf(currency);
+        String message = "Getting negative one of " + currency.getDisplayName()
+                + " (" + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testZeroOf() {
         System.out.println("zeroOf");
         Currency currency = CurrencyChooser.chooseCurrency(
