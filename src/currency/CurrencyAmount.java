@@ -96,10 +96,8 @@ public class CurrencyAmount {
     }
 
     public static CurrencyAmount negativeOneOf(Currency currency) {
-        if (currency.getDefaultFractionDigits() == 3) {
-            return new CurrencyAmount(-1000, currency);
-        }
-        return new CurrencyAmount(-100, currency);
+        return new CurrencyAmount(-pow10(currency.getDefaultFractionDigits()),
+                currency);
     }
 
     public static CurrencyAmount zeroOf(Currency currency) {
