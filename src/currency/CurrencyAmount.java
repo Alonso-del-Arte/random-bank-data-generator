@@ -95,8 +95,10 @@ public class CurrencyAmount {
         return power;
     }
 
-    // TODO: Write tests for this
     public static CurrencyAmount negativeOneOf(Currency currency) {
+        if (currency.getDefaultFractionDigits() == 3) {
+            return new CurrencyAmount(-1000, currency);
+        }
         return new CurrencyAmount(-100, currency);
     }
 
