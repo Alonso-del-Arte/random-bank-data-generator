@@ -57,8 +57,9 @@ public class CurrencyAmount {
 //                    + " are of mismatched currencies for adding up";
 //            throw new CurrencyConversionNeededException(this, addend, excMsg);
 //        }
-        return new CurrencyAmount(this.totalSubunits + addend.totalSubunits,
-                this.currencyID);
+//        return new CurrencyAmount(this.totalSubunits + addend.totalSubunits,
+//                this.currencyID);
+        return this;
     }
 
     /**
