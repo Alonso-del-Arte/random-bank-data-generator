@@ -52,14 +52,17 @@ public class CurrencyAmount {
     }
 
     public CurrencyAmount plus(CurrencyAmount addend) {
-//        if (!this.currencyID.equals(addend.currencyID)) {
-//            String excMsg = "Amounts " + this + " and " + addend
-//                    + " are of mismatched currencies for adding up";
-//            throw new CurrencyConversionNeededException(this, addend, excMsg);
-//        }
-//        return new CurrencyAmount(this.totalSubunits + addend.totalSubunits,
-//                this.currencyID);
-        return this;
+        if (addend == null) {
+            String excMsg = "Can't add null to " + this;
+            throw new NullPointerException(excMsg);
+        }
+        if (!this.currencyID.equals(addend.currencyID)) {
+            String excMsg = "Amounts " + this + " and " + addend
+                    + " are of mismatched currencies for adding up";
+            throw new CurrencyConversionNeededException(this, addend, excMsg);
+        }
+        return new CurrencyAmount(this.totalSubunits + addend.totalSubunits,
+                this.currencyID);
     }
 
     /**
