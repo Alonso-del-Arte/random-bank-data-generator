@@ -868,6 +868,27 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testPlusShouldRejectNullCurrency() {
+        int bound = 32768;
+        int addendSubunits = RANDOM.nextInt(1, bound);
+        Currency currency = CurrencyChooser.chooseCurrency();
+        Currency currencyB = CurrencyChooser.chooseCurrencyOtherThan(currency);
+        CurrencyAmount addend = new CurrencyAmount(addendSubunits, currency);
+        String message = "Adding up " + addend + " of currency "
+                + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode()
+                + ") to null should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            CurrencyAmount badResult = addend.plus(null);
+            System.out.println(message + ", not given result " + badResult.toString());
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testPlus() {
         System.out.println("plus");
         int bound = 32768;
