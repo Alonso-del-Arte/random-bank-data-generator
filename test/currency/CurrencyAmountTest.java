@@ -936,6 +936,26 @@ public class CurrencyAmountTest {
         assert holdAmounts : message;
     }
 
+    @Test
+    void testMinusShouldRejectNullCurrency() {
+        int bound = 32768;
+        int addendSubunits = RANDOM.nextInt(1, bound);
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount minuend = new CurrencyAmount(addendSubunits, currency);
+        String message = "Subtracting null from " + minuend + " of currency "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ") should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            CurrencyAmount badResult = minuend.minus(null);
+            System.out.println(message + ", not given result "
+                    + badResult.toString());
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
     // TODO: Write tests for minus()
 
     @Test
