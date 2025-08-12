@@ -77,6 +77,12 @@ public class CurrencyAmount {
             String excMsg = "Can't substract null from " + this;
             throw new NullPointerException(excMsg);
         }
+        if (!this.currencyID.equals(subtrahend.currencyID)) {
+            String excMsg = "Amounts " + this + " and " + subtrahend
+                    + " are of mismatched currencies for subtracting";
+            throw new CurrencyConversionNeededException(this, subtrahend,
+                    excMsg);
+        }
         return new CurrencyAmount(this.totalSubunits - subtrahend.totalSubunits,
                 this.currencyID);
     }
