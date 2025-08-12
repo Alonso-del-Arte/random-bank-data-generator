@@ -956,6 +956,24 @@ public class CurrencyAmountTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testMinus() {
+        System.out.println("minus");
+        int bound = 32768;
+        int minuendSubunits = RANDOM.nextInt(2, bound);
+        int subtrahendSubunits = RANDOM.nextInt(1, minuendSubunits);
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount minuend = new CurrencyAmount(minuendSubunits, currency);
+        CurrencyAmount subtrahend = new CurrencyAmount(subtrahendSubunits, currency);
+        int expSubunits = minuendSubunits - subtrahendSubunits;
+        CurrencyAmount expected = new CurrencyAmount(expSubunits, currency);
+        CurrencyAmount actual = minuend.minus(subtrahend);
+        String message = "Subtracting " + subtrahend + " from " + minuend
+                + " of currency " + currency.getDisplayName() + " ("
+                + currency.getCurrencyCode() + ")";
+        assertEquals(expected, actual, message);
+    }
+
     // TODO: Write tests for minus()
 
     @Test
