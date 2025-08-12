@@ -74,7 +74,7 @@ public class CurrencyAmount {
     // TODO: Write tests for this
     public CurrencyAmount minus(CurrencyAmount subtrahend) {
         if (subtrahend == null) {
-            String excMsg = "Can't substract null from " + this.toString();
+            String excMsg = "Can't substract null from " + this;
             throw new NullPointerException(excMsg);
         }
         return this;
