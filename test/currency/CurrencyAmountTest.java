@@ -974,7 +974,36 @@ public class CurrencyAmountTest {
         assertEquals(expected, actual, message);
     }
 
-    // TODO: Write tests for minus()
+    @Test
+    void testMinusMismatchedCurrency() {
+        int bound = 32768;
+        int minuendSubunits = RANDOM.nextInt(2, bound);
+        int subtrahendSubunits = RANDOM.nextInt(1, minuendSubunits);
+        Currency currencyA = CurrencyChooser.chooseCurrency();
+        Currency currencyB = CurrencyChooser.chooseCurrencyOtherThan(currencyA);
+        CurrencyAmount minuend = new CurrencyAmount(minuendSubunits, currencyA);
+        CurrencyAmount subtrahend = new CurrencyAmount(subtrahendSubunits,
+                currencyB);
+        String message = "Subtracting " + subtrahend + " of currency "
+                + currencyB.getDisplayName() + " ("
+                + currencyB.getCurrencyCode() + ") from " + minuend
+                + " of currency " + currencyA.getDisplayName() + " ("
+                + currencyA.getCurrencyCode() + ") should cause exception";
+        CurrencyConversionNeededException exc
+                = assertThrows(CurrencyConversionNeededException.class, () -> {
+            CurrencyAmount badResult = minuend.minus(subtrahend);
+            System.out.println(message + ", not given result " + badResult.toString());
+        }, message);
+        String excMsg = exc.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+        boolean holdAmounts = (minuend.equals(exc.getAmountA())
+                && subtrahend.equals(exc.getAmountB()))
+                || (minuend.equals(exc.getAmountB())
+                && subtrahend.equals(exc.getAmountA()));
+        assert holdAmounts : message;
+    }
 
     @Test
     void testNegate() {
