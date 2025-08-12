@@ -868,7 +868,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    void testPlusShouldRejectNullCurrency() {
+    void testPlusShouldRejectNullAddend() {
         int bound = 32768;
         int addendSubunits = RANDOM.nextInt(1, bound);
         Currency currency = CurrencyChooser.chooseCurrency();
@@ -937,7 +937,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    void testMinusShouldRejectNullCurrency() {
+    void testMinusShouldRejectNullSubtrahend() {
         int bound = 32768;
         int addendSubunits = RANDOM.nextInt(1, bound);
         Currency currency = CurrencyChooser.chooseCurrency();
