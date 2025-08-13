@@ -1044,17 +1044,16 @@ public class CurrencyAmountTest {
         System.out.println("compareTo");
         int capacity = RANDOM.nextInt(16) + 4;
         List<CurrencyAmount> expected = new ArrayList<>(capacity);
-        int low = -524288 - RANDOM.nextInt(12);
-        int high = -low + RANDOM.nextInt(12);
-        int curr = low;
+        int subunits = -524288 - RANDOM.nextInt(12);
+        int high = -subunits + RANDOM.nextInt(12);
         int bound = 2 * high / capacity;
         Currency currency = CurrencyChooser.chooseCurrency(
                 (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
         );
-        while (curr < high) {
-            CurrencyAmount amount = new CurrencyAmount(curr, currency);
+        while (subunits < high) {
+            CurrencyAmount amount = new CurrencyAmount(subunits, currency);
             expected.add(amount);
-            curr += (RANDOM.nextInt(bound) + 1);
+            subunits += (RANDOM.nextInt(bound) + 1);
         }
         List<CurrencyAmount> actual = new ArrayList<>(expected);
         Collections.shuffle(actual, RANDOM);
