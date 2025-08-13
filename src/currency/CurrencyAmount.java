@@ -255,7 +255,7 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
 
     @Override
     public int compareTo(CurrencyAmount other) {
-        return 0;
+        return Long.compare(this.totalSubunits, other.totalSubunits);
     }
 
     // TODO: Write tests for this
