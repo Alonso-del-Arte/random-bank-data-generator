@@ -1,6 +1,9 @@
 package currency;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Currency;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.HashSet;
@@ -1033,6 +1036,31 @@ public class CurrencyAmountTest {
         String message = "Negating " + amount + " of currency "
                 + currency.getDisplayName() + " (" + currency.getCurrencyCode()
                 + ")";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
+    void testCompareTo() {
+        System.out.println("compareTo");
+        int capacity = RANDOM.nextInt(16) + 4;
+        List<CurrencyAmount> expected = new ArrayList<>(capacity);
+        int low = -524288 - RANDOM.nextInt(12);
+        int high = -low + RANDOM.nextInt(12);
+        int curr = low;
+        int bound = 2 * high / capacity;
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        while (curr < high) {
+            CurrencyAmount amount = new CurrencyAmount(curr, currency);
+            expected.add(amount);
+            curr += (RANDOM.nextInt(bound) + 1);
+        }
+        List<CurrencyAmount> actual = new ArrayList<>(expected);
+        Collections.shuffle(actual, RANDOM);
+        Collections.sort(actual);
+        String message = "Sorting amounts of " + currency.getDisplayName()
+                + " (" + currency.getCurrencyCode() + ")";
         assertEquals(expected, actual, message);
     }
 
