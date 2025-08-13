@@ -255,6 +255,11 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
 
     @Override
     public int compareTo(CurrencyAmount other) {
+        if (!this.currencyID.equals(other.currencyID)) {
+            String excMsg = "Conversion needed to compare " + this + " and "
+                    + other;
+            throw new CurrencyConversionNeededException(this, other, excMsg);
+        }
         return Long.compare(this.totalSubunits, other.totalSubunits);
     }
 
