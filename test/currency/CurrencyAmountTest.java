@@ -1064,6 +1064,42 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testCompareToMismatchedCausesException() {
+        int capacity = RANDOM.nextInt(16) + 4;
+        List<CurrencyAmount> amounts = new ArrayList<>(capacity);
+        int subunits = -524288 - RANDOM.nextInt(12);
+        int high = -subunits + RANDOM.nextInt(12);
+        int bound = 2 * high / capacity;
+        Currency prevCurrency = CurrencyChooser.chooseCurrency();
+        while (subunits < high) {
+            Currency currency
+                    = CurrencyChooser.chooseCurrencyOtherThan(prevCurrency);
+            CurrencyAmount amount = new CurrencyAmount(subunits, currency);
+            amounts.add(amount);
+            subunits += (RANDOM.nextInt(bound) + 1);
+            prevCurrency = currency;
+        }
+        String message = "Trying to sort " + amounts
+                + " should cause exception";
+        CurrencyConversionNeededException exc
+                = assertThrows(CurrencyConversionNeededException.class, () -> {
+                    Collections.sort(amounts);
+        }, message);
+        String excMsg = exc.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isBlank() : "Message should not be blank";
+        CurrencyAmount amountA = exc.getAmountA();
+        CurrencyAmount amountB = exc.getAmountB();
+        String contentsMsg = "List of amounts should contain "
+                + amountA.toString() + " and " + amountB.toString()
+                + " or their inverses";
+        assert amounts.contains(amountA) || amounts.contains(amountA.negate())
+                : contentsMsg;
+        assert amounts.contains(amountB) || amounts.contains(amountB.negate())
+                : contentsMsg;
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
