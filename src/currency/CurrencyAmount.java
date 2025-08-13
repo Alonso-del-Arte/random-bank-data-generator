@@ -3,7 +3,7 @@ package currency;
 import java.util.Currency;
 import java.util.Locale;
 
-public class CurrencyAmount {
+public class CurrencyAmount implements Comparable<CurrencyAmount> {
 
     private static final char MINUS_SIGN = '−';
 
@@ -253,7 +253,10 @@ public class CurrencyAmount {
         return hash + ((int) this.totalSubunits);
     }
 
-    // TODO: Make Comparable<CurrencyAmount>, override compareTo()
+    @Override
+    public int compareTo(CurrencyAmount other) {
+        return 0;
+    }
 
     // TODO: Write tests for this
     public CurrencyAmount(long amountInSubunits, Currency currency) {
