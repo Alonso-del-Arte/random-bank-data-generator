@@ -1001,7 +1001,11 @@ public class CurrencyAmountTest {
         boolean holdAmounts = (minuend.equals(exc.getAmountA())
                 && subtrahend.equals(exc.getAmountB()))
                 || (minuend.equals(exc.getAmountB())
-                && subtrahend.equals(exc.getAmountA()));
+                && subtrahend.equals(exc.getAmountA()))
+                || (minuend.equals(exc.getAmountA())
+                && subtrahend.equals(exc.getAmountB().negate()))
+                || (minuend.equals(exc.getAmountB())
+                && subtrahend.equals(exc.getAmountA().negate()));
         assert holdAmounts : message;
     }
 
