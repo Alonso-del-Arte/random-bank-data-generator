@@ -72,14 +72,7 @@ public class CurrencyAmount {
     }
 
     public CurrencyAmount minus(CurrencyAmount subtrahend) {
-        if (!this.currencyID.equals(subtrahend.currencyID)) {
-            String excMsg = "Amounts " + this + " and " + subtrahend
-                    + " are of mismatched currencies for subtracting";
-            throw new CurrencyConversionNeededException(this, subtrahend,
-                    excMsg);
-        }
-        return new CurrencyAmount(this.totalSubunits - subtrahend.totalSubunits,
-                this.currencyID);
+        return this.plus(subtrahend.negate());
     }
 
     // TODO: Write tests for this
