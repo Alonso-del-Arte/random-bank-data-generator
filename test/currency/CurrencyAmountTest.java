@@ -1088,6 +1088,7 @@ public class CurrencyAmountTest {
         String excMsg = exc.getMessage();
         assert excMsg != null : "Message should not be null";
         assert !excMsg.isBlank() : "Message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
         CurrencyAmount amountA = exc.getAmountA();
         CurrencyAmount amountB = exc.getAmountB();
         String contentsMsg = "List of amounts should contain "
