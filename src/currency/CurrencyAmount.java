@@ -259,7 +259,6 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
         return Long.signum(diff.totalSubunits);
     }
 
-    // TODO: Write tests for this
     public CurrencyAmount(long amountInSubunits, Currency currency) {
         if (currency == null) {
             String excMsg = "Currency should not be null";
