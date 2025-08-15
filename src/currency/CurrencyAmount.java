@@ -82,6 +82,10 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
 
     // TODO: Write tests for this
     public CurrencyAmount divides(int divisor) {
+        if (divisor == 0) {
+            String excMsg = "Can't divide " + this + " by zero";
+            throw new IllegalArgumentException(excMsg);
+        }
         return this;
     }
 
