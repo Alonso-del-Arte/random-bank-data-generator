@@ -75,9 +75,9 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
         return this.plus(subtrahend.negate());
     }
 
-    // TODO: Write tests for this
     public CurrencyAmount times(int multiplicand) {
-        return this;
+        return new CurrencyAmount(this.totalSubunits * multiplicand,
+                this.currencyID);
     }
 
     // TODO: Write tests for this
