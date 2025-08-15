@@ -1117,6 +1117,27 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testDividesRejectsDivisorZero() {
+        int centsAmount = RANDOM.nextInt(65536) - 32768;
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
+        String message = "Dividing " + amount + " of "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ") by 0 should cause exception";
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            CurrencyAmount badResult = amount.divides(0);
+            System.out.println(message + ", not given result "
+                    + badResult.toString());
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isBlank() : "Message should not be blank";
+        String amtStr = amount.toString();
+        String containsMsg = "Message should contain \"" + amtStr + "\"";
+        assert excMsg.contains(amtStr) : containsMsg;
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
