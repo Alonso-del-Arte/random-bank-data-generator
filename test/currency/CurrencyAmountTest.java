@@ -1101,6 +1101,22 @@ public class CurrencyAmountTest {
     }
 
     @Test
+    void testTimes() {
+        System.out.println("times");
+        int centsAmount = RANDOM.nextInt(65536) - 32768;
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyAmount amount = new CurrencyAmount(centsAmount, currency);
+        int multiplicand = RANDOM.nextInt(128) - 64;
+        int expCents = centsAmount * multiplicand;
+        CurrencyAmount expected = new CurrencyAmount(expCents, currency);
+        CurrencyAmount actual = amount.times(multiplicand);
+        String msg = "Multiplying " + amount + " of "
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode()
+                + ") by " + multiplicand;
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
     void testConstructorRejectsNullCurrency() {
         int centsAmount = RANDOM.nextInt();
         String message = "Trying to instantiate " + centsAmount
