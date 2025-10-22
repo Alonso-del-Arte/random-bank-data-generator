@@ -6,7 +6,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-class TaxpayerIdentificationNumberTest {
+public class TaxpayerIdentificationNumberTest {
 
     public static final Random RANDOM
             = new Random(System.currentTimeMillis() << 3);
