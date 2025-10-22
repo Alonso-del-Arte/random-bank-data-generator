@@ -31,6 +31,16 @@ class EntityTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGetTIN() {
+        System.out.println("getTIN");
+        String name = makeName();
+        TaxpayerIdentificationNumber expected = makeTIN();
+        Entity instance = new EntityImpl(name, expected);
+        TaxpayerIdentificationNumber actual = instance.getTIN();
+        assertEquals(expected, actual);
+    }
+
     private static class EntityImpl extends Entity {
 
         EntityImpl(String name, TaxpayerIdentificationNumber tin) {
