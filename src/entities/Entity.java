@@ -2,7 +2,7 @@ package entities;
 
 import entities.idnumbers.TaxpayerIdentificationNumber;
 
-public class Entity {
+public abstract class Entity {
 
     private String designation;
 
