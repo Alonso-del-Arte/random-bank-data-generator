@@ -6,9 +6,8 @@ public abstract class Entity {
 
     private String designation;
 
-    // TODO: Write tests for this
     public String getName() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.designation;
     }
 
     // TODO: Write tests for this
@@ -18,7 +17,7 @@ public abstract class Entity {
 
     // TODO: Write tests for this
     public Entity(String name, TaxpayerIdentificationNumber tin) {
-        //
+        this.designation = name;
     }
 
 }
