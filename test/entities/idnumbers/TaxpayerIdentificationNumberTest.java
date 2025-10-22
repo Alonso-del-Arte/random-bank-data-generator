@@ -18,6 +18,11 @@ class TaxpayerIdentificationNumberTest {
         assertEquals(expected, actual);
     }
 
+    public static TaxpayerIdentificationNumber makeTIN() {
+        return new TaxpayerIdentificationNumberImpl(RANDOM
+                .nextInt(TaxpayerIdentificationNumber.UPPER_NUMBER_LIMIT));
+    }
+
     @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
