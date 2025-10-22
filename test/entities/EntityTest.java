@@ -20,7 +20,7 @@ class EntityTest {
         return new String(characters);
     }
 
-    private class EntityImpl extends Entity {
+    private static class EntityImpl extends Entity {
 
         EntityImpl(String name, TaxpayerIdentificationNumber tin) {
             super(name, tin);
