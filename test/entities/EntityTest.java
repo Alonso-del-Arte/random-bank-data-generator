@@ -1,10 +1,11 @@
 package entities;
 
+import entities.idnumbers.TaxpayerIdentificationNumber;
+import static entities.idnumbers.TaxpayerIdentificationNumberTest.makeTIN;
+
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import entities.idnumbers.TaxpayerIdentificationNumber;
 import org.junit.jupiter.api.Test;
 
 class EntityTest {
@@ -18,6 +19,16 @@ class EntityTest {
             characters[i] = (char) RANDOM.nextInt('a', 123);
         }
         return new String(characters);
+    }
+
+    @Test
+    void testGetName() {
+        System.out.println("getName");
+        String expected = makeName();
+        TaxpayerIdentificationNumber tin = makeTIN();
+        Entity instance = new EntityImpl(expected, tin);
+        String actual = instance.getName();
+        assertEquals(expected, actual);
     }
 
     private static class EntityImpl extends Entity {
