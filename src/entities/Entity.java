@@ -6,18 +6,20 @@ public abstract class Entity {
 
     private String designation;
 
+    private final TaxpayerIdentificationNumber payerID;
+
     public String getName() {
         return this.designation;
     }
 
-    // TODO: Write tests for this
     public TaxpayerIdentificationNumber getTIN() {
-        return null;
+        return this.payerID;
     }
 
     // TODO: Write tests for this
     public Entity(String name, TaxpayerIdentificationNumber tin) {
         this.designation = name;
+        this.payerID = tin;
     }
 
 }
