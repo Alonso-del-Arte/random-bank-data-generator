@@ -4,6 +4,7 @@ import static entities.EntityTest.RANDOM;
 import entities.idnumbers.SocialSecurityNumber;
 import entities.idnumbers.TaxpayerIdentificationNumber;
 
+import static entities.idnumbers.TaxpayerIdentificationNumberTest.makeTIN;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -48,6 +49,22 @@ class PersonTest {
         Entity instance = new Person(name, expected);
         TaxpayerIdentificationNumber actual = instance.getTIN();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testConstructorRejectsNullName() {
+        SocialSecurityNumber ssn = makeSSN();
+        String message = "Null name for SSN " + ssn + " should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Entity badEntity = new Person(null, ssn);
+            System.out.println(message + ", not created instance "
+                    + Person.class.getName() + "@"
+                    + Integer.toHexString(badEntity.hashCode()));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
     }
 
 }
