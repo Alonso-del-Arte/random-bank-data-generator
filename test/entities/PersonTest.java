@@ -67,4 +67,20 @@ class PersonTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testConstructorRejectsNullSSN() {
+        String name = makeName();
+        String message = "Null SSN for name " + name + " should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Entity badEntity = new Person(name, null);
+            System.out.println(message + ", not created instance "
+                    + Person.class.getName() + "@"
+                    + Integer.toHexString(badEntity.hashCode()));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
