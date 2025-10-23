@@ -16,10 +16,9 @@ public abstract class Entity {
         return this.payerID;
     }
 
-    // TODO: Write tests for this
     public Entity(String name, TaxpayerIdentificationNumber tin) {
-        if (name == null) {
-            String excMsg = "Name should not be null";
+        if (name == null || tin == null) {
+            String excMsg = "Name, TIN should not be null";
             throw new NullPointerException(excMsg);
         }
         this.designation = name;
