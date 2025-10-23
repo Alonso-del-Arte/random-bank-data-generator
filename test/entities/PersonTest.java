@@ -29,4 +29,14 @@ class PersonTest {
                 .nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT));
     }
 
+    @Test
+    void testGetName() {
+        System.out.println("getName");
+        String expected = makeName();
+        SocialSecurityNumber ssn = makeSSN();
+        Entity instance = new Person(expected, ssn);
+        String actual = instance.getName();
+        assertEquals(expected, actual);
+    }
+
 }
