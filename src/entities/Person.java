@@ -20,6 +20,10 @@ public class Person extends Entity {
 
     public Person(String name, SocialSecurityNumber ssn) {
         super(name, ssn);
+        if (name == null) {
+            String excMsg = "Null name is not valid";
+            throw new NullPointerException(excMsg);
+        }
         this.moniker = name;
         this.socSecNum = ssn;
     }
