@@ -2,6 +2,7 @@ package entities;
 
 import static entities.EntityTest.RANDOM;
 import entities.idnumbers.SocialSecurityNumber;
+import entities.idnumbers.TaxpayerIdentificationNumber;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,16 @@ class PersonTest {
         SocialSecurityNumber ssn = makeSSN();
         Entity instance = new Person(expected, ssn);
         String actual = instance.getName();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetTIN() {
+        System.out.println("getTIN");
+        String name = makeName();
+        SocialSecurityNumber expected = makeSSN();
+        Entity instance = new Person(name, expected);
+        TaxpayerIdentificationNumber actual = instance.getTIN();
         assertEquals(expected, actual);
     }
 
