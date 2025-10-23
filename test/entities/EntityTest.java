@@ -57,7 +57,22 @@ class EntityTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
-    // TODO: Write test constructor rejects null TIN
+    @Test
+    void testConstructorRejectsNullTIN() {
+        String name = makeName();
+        String message = "Null TIN for name " + name
+                + " should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Entity badEntity = new EntityImpl(name, null);
+            System.out.println(message + ", not created instance "
+                    + Entity.class.getName() + "@"
+                    + Integer.toHexString(badEntity.hashCode()));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
 
     private static class EntityImpl extends Entity {
 
