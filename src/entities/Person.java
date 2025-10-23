@@ -6,21 +6,22 @@ public class Person extends Entity {
 
     private final String moniker;
 
-    // TODO: Write tests for this
+    private final SocialSecurityNumber socSecNum;
+
     @Override
     public String getName() {
         return this.moniker;
     }
 
-    // TODO: Write tests for this
     @Override
     public SocialSecurityNumber getTIN() {
-        return null;
+        return this.socSecNum;
     }
 
     public Person(String name, SocialSecurityNumber ssn) {
         super(name, ssn);
         this.moniker = name;
+        this.socSecNum = ssn;
     }
 
 }
