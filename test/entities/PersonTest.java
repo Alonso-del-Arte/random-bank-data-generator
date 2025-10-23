@@ -4,7 +4,6 @@ import static entities.EntityTest.RANDOM;
 import entities.idnumbers.SocialSecurityNumber;
 import entities.idnumbers.TaxpayerIdentificationNumber;
 
-import static entities.idnumbers.TaxpayerIdentificationNumberTest.makeTIN;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
