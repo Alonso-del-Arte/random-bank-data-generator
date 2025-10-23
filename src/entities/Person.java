@@ -4,10 +4,12 @@ import entities.idnumbers.SocialSecurityNumber;
 
 public class Person extends Entity {
 
+    private final String moniker;
+
     // TODO: Write tests for this
     @Override
     public String getName() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.moniker;
     }
 
     // TODO: Write tests for this
@@ -18,6 +20,7 @@ public class Person extends Entity {
 
     public Person(String name, SocialSecurityNumber ssn) {
         super(name, ssn);
+        this.moniker = name;
     }
 
 }
