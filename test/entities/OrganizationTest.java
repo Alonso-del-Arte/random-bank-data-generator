@@ -14,7 +14,7 @@ class OrganizationTest {
 
     private static final int NUMBER_OF_SUFFIXES = SUFFIXES.length;
 
-    private static String makeName() {
+    private static String makeOrgName() {
         int len = RANDOM.nextInt(3, 8);
         char[] characters = new char[len];
         for (int i = 0; i < len; i++) {
@@ -33,7 +33,7 @@ class OrganizationTest {
     @Test
     void testGetName() {
         System.out.println("getName");
-        String expected = makeName();
+        String expected = makeOrgName();
         EmployerIdentificationNumber ein = makeEIN();
         Entity instance = new Organization(expected, ein);
         String actual = instance.getName();
@@ -43,7 +43,7 @@ class OrganizationTest {
     @Test
     void testGetTIN() {
         System.out.println("getTIN");
-        String name = makeName();
+        String name = makeOrgName();
         EmployerIdentificationNumber expected = makeEIN();
         Entity instance = new Organization(name, expected);
         TaxpayerIdentificationNumber actual = instance.getTIN();
@@ -68,7 +68,7 @@ class OrganizationTest {
 
     @Test
     void testConstructorRejectsNullEIN() {
-        String name = makeName();
+        String name = makeOrgName();
         String message = "Null EIN for name " + name
                 + " should cause exception";
         Throwable t = assertThrows(NullPointerException.class, () -> {
