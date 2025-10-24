@@ -9,11 +9,6 @@ public class Organization extends Entity {
     private final EmployerIdentificationNumber num;
 
     @Override
-    public String getName() {
-        return this.moniker;
-    }
-
-    @Override
     public EmployerIdentificationNumber getTIN() {
         return this.num;
     }
