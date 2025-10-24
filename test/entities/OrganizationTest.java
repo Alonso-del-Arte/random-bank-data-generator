@@ -14,7 +14,7 @@ class OrganizationTest {
 
     private static final int NUMBER_OF_SUFFIXES = SUFFIXES.length;
 
-    private static String makeOrgName() {
+    static String makeOrgName() {
         int len = RANDOM.nextInt(3, 8);
         char[] characters = new char[len];
         for (int i = 0; i < len; i++) {
@@ -25,7 +25,7 @@ class OrganizationTest {
         return acronym + ' ' + SUFFIXES[index];
     }
 
-    private static EmployerIdentificationNumber makeEIN() {
+    static EmployerIdentificationNumber makeEIN() {
         return new EmployerIdentificationNumber(RANDOM
                 .nextInt(EmployerIdentificationNumber.UPPER_NUMBER_LIMIT));
     }

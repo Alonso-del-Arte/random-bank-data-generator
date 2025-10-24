@@ -19,13 +19,13 @@ class PersonTest {
 
     private static final int NUMBER_OF_LAST_NAMES = LAST_NAMES.length;
 
-    private static String makeName() {
+    static String makeName() {
         int firstNameIndex = RANDOM.nextInt(NUMBER_OF_FIRST_NAMES);
         int lastNameIndex = RANDOM.nextInt(NUMBER_OF_LAST_NAMES);
         return FIRST_NAMES[firstNameIndex] + ' ' + LAST_NAMES[lastNameIndex];
     }
 
-    private static SocialSecurityNumber makeSSN() {
+    static SocialSecurityNumber makeSSN() {
         return new SocialSecurityNumber(RANDOM
                 .nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT));
     }
