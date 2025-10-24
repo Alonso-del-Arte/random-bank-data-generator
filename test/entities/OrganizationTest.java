@@ -2,9 +2,6 @@ package entities;
 
 import static entities.EntityTest.RANDOM;
 import entities.idnumbers.EmployerIdentificationNumber;
-import entities.idnumbers.SocialSecurityNumber;
-import entities.idnumbers.TaxpayerIdentificationNumber;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -30,6 +27,16 @@ class OrganizationTest {
     private static EmployerIdentificationNumber makeEIN() {
         return new EmployerIdentificationNumber(RANDOM
                 .nextInt(EmployerIdentificationNumber.UPPER_NUMBER_LIMIT));
+    }
+
+    @Test
+    void testGetName() {
+        System.out.println("getName");
+        String expected = makeName();
+        EmployerIdentificationNumber ein = makeEIN();
+        Organization instance = new Organization(expected, ein);
+        String actual = instance.getName();
+        assertEquals(expected, actual);
     }
 
 }
