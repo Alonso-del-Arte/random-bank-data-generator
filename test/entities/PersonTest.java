@@ -69,7 +69,8 @@ class PersonTest {
     @Test
     void testConstructorRejectsNullSSN() {
         String name = makeName();
-        String message = "Null SSN for name " + name + " should cause exception";
+        String message = "Null SSN for name " + name
+                + " should cause exception";
         Throwable t = assertThrows(NullPointerException.class, () -> {
             Entity badEntity = new Person(name, null);
             System.out.println(message + ", not created instance "
