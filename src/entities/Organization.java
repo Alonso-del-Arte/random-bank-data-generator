@@ -6,20 +6,22 @@ public class Organization extends Entity {
 
     private final String moniker;
 
+    private final EmployerIdentificationNumber num;
+
     @Override
     public String getName() {
         return this.moniker;
     }
 
-    // TODO: Write tests for this
     @Override
     public EmployerIdentificationNumber getTIN() {
-        return null;
+        return this.num;
     }
 
     public Organization(String name, EmployerIdentificationNumber ein) {
         super(name, ein);
         this.moniker = name;
+        this.num = ein;
     }
 
 }
