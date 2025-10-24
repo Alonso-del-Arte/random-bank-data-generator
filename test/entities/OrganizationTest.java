@@ -66,4 +66,21 @@ class OrganizationTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testConstructorRejectsNullEIN() {
+        String name = makeName();
+        String message = "Null EIN for name " + name
+                + " should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Entity badEntity = new Organization(name, null);
+            System.out.println(message + ", not created instance "
+                    + Organization.class.getName() + "@"
+                    + Integer.toHexString(badEntity.hashCode()));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
