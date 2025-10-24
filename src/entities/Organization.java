@@ -4,10 +4,11 @@ import entities.idnumbers.EmployerIdentificationNumber;
 
 public class Organization extends Entity {
 
-    // TODO: Write tests for this
+    private final String moniker;
+
     @Override
     public String getName() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.moniker;
     }
 
     // TODO: Write tests for this
@@ -18,6 +19,7 @@ public class Organization extends Entity {
 
     public Organization(String name, EmployerIdentificationNumber ein) {
         super(name, ein);
+        this.moniker = name;
     }
 
 }
