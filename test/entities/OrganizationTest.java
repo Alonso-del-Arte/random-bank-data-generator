@@ -50,4 +50,20 @@ class OrganizationTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testConstructorRejectsNullName() {
+        EmployerIdentificationNumber ein = makeEIN();
+        String message = "Null name for EIN " + ein + " should cause exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Entity badEntity = new Organization(null, ein);
+            System.out.println(message + ", not created instance "
+                    + Organization.class.getName() + "@"
+                    + Integer.toHexString(badEntity.hashCode()));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
