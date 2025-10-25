@@ -40,6 +40,18 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return (this.num % SERIAL_MODULUS) == (other.num % SERIAL_MODULUS);
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         String initial = leftPad(Integer.toString(this.num), 9, '0');
