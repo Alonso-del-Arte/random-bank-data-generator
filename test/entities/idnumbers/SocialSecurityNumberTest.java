@@ -162,6 +162,14 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testReferentialEquality() {
+        int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber instance = new SocialSecurityNumber(num);
+        String msg = instance.toRedactedString() + " should equal itself";
+        assert instance.equals(instance) : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
