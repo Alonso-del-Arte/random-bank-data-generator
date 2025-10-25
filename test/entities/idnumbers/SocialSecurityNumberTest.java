@@ -170,6 +170,14 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testNotEqualsNull() {
+        int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber instance = new SocialSecurityNumber(num);
+        String msg = instance.toRedactedString() + " should not equal null";
+        assert !instance.equals(null) : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
