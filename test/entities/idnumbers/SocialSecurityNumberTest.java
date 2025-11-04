@@ -1,5 +1,7 @@
 package entities.idnumbers;
 
+import currency.CurrencyAmountTest;
+
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -174,7 +176,8 @@ class SocialSecurityNumberTest {
         int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
         SocialSecurityNumber instance = new SocialSecurityNumber(num);
         String msg = instance.toRedactedString() + " should not equal null";
-        assert !instance.equals(null) : msg;
+        Object obj = CurrencyAmountTest.provideNull();
+        assert !instance.equals(obj) : msg;
     }
 
     @Test
@@ -183,7 +186,7 @@ class SocialSecurityNumberTest {
         SocialSecurityNumber ssn = new SocialSecurityNumber(num);
         EmployerIdentificationNumber ein = new EmployerIdentificationNumber(num);
         String msg = ssn.toRedactedString() + " should not equal EIN";
-        assert !ssn.equals(ein) : msg;
+        assertNotEquals(ssn, ein, msg);
     }
 
     @Test
