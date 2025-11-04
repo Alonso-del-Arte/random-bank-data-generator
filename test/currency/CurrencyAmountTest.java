@@ -680,7 +680,7 @@ public class CurrencyAmountTest {
         assert !amount.isNegative() : msg;
     }
 
-    private static Object passThrough(Object obj) {
+    public static Object passThrough(Object obj) {
         return obj;
     }
 
