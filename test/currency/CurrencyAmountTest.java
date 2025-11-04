@@ -693,7 +693,7 @@ public class CurrencyAmountTest {
         assertEquals(amount, sameRef);
     }
 
-    private static Object provideNull() {
+    public static Object provideNull() {
         return null;
     }
 
