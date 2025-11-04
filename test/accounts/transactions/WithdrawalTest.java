@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import currency.CurrencyAmountTest;
 import org.junit.jupiter.api.Test;
 
 class WithdrawalTest {
@@ -77,7 +79,7 @@ class WithdrawalTest {
     @Test
     void testNotEqualsNull() {
         Withdrawal instance = makeWithdrawal();
-        Object obj = CommentTest.provideNull();
+        Object obj = CurrencyAmountTest.provideNull();
         assertNotEquals(instance, obj);
     }
 

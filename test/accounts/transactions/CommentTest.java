@@ -2,6 +2,7 @@ package accounts.transactions;
 
 import static accounts.transactions.TransactionTest.RANDOM;
 import currency.CurrencyAmount;
+import currency.CurrencyAmountTest;
 import static currency.CurrencyChooser.chooseCurrency;
 
 import java.time.LocalDateTime;
@@ -70,10 +71,6 @@ class CommentTest {
         return obj;
     }
 
-    static Object provideNull() {
-        return null;
-    }
-
     @Test
     void testReferentialEquality() {
         String text = makeComment();
@@ -90,7 +87,7 @@ class CommentTest {
         Currency currency = chooseCurrency();
         LocalDateTime date = LocalDateTime.now();
         Comment instance = new Comment(text, currency, date);
-        Object obj = provideNull();
+        Object obj = CurrencyAmountTest.provideNull();
         assertNotEquals(instance, obj);
     }
 

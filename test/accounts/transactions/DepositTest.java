@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import currency.CurrencyAmountTest;
 import org.junit.jupiter.api.Test;
 
 class DepositTest {
@@ -76,7 +78,7 @@ class DepositTest {
     @Test
     void testNotEqualsNull() {
         Deposit instance = makeDeposit();
-        Object obj = CommentTest.provideNull();
+        Object obj = CurrencyAmountTest.provideNull();
         assertNotEquals(instance, obj);
     }
 
