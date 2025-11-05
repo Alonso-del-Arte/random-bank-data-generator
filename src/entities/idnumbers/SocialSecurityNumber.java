@@ -23,7 +23,7 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     // TODO: Write tests for this
     static boolean correctSSNDashPlacement(String s) {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
