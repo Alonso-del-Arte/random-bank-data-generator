@@ -54,6 +54,16 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    public void testLongStringDoesNotHaveCorrectSSNDashPlacement() {
+        int bound = 1 << 20;
+        int tooManyDigits = 10000 + RANDOM.nextInt(bound);
+        String s = "***-**-" + tooManyDigits;
+        String msg = "\"" + s
+                + "\" should not be found to have correct SSN dash placement";
+        assert !SocialSecurityNumber.correctSSNDashPlacement(s) : msg;
+    }
+
+    @Test
     void testToString() {
         System.out.println("toString");
         int number = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
