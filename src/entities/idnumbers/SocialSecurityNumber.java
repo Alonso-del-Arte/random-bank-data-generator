@@ -22,7 +22,9 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
     public static final int UPPER_NUMBER_LIMIT = 1000000000;
 
     static boolean correctSSNDashPlacement(String s) {
-        if (s.length() < 11) return false;
+        if (s.length() < 11 || s.length() > 11) {
+            return false;
+        }
         return (s.indexOf('-') == 3) && (s.indexOf('-', 4) == 6)
                 && (s.indexOf('-', 7) == -1);
     }
