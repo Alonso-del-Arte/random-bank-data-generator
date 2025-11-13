@@ -37,8 +37,10 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     @Override
     int hashCodeObscurant() {
-        return this.num;
-    }
+        int hash = 239 * (this.num / 1000000);
+        hash += 47 * ((this.num / 10000) % 100);
+        hash += 100000 * (this.num % 10000);
+        return hash;    }
 
     public short getLastFour() {
         return (short) (this.num % SERIAL_MODULUS);
