@@ -239,6 +239,16 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testHashCodeOffsetShouldNotBePowerOfTwo() {
+        int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber instance = new SocialSecurityNumber(num);
+        int actual = instance.hashCodeOffset();
+        String msg = "Hash code offset " + actual
+                + " should not be power of two";
+        assert actual != Integer.highestOneBit(actual) : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
