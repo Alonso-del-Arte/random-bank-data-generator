@@ -35,6 +35,11 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return 0;
     }
 
+    @Override
+    int hashCodeObscurant() {
+        return 0;
+    }
+
     public short getLastFour() {
         return (short) (this.num % SERIAL_MODULUS);
     }
