@@ -249,6 +249,16 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testHashCodeOffsetShouldNotBeMultipleOfTen() {
+        int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber instance = new SocialSecurityNumber(num);
+        int actual = instance.hashCodeOffset();
+        String msg = "Hash code offset " + actual
+                + " should not be multiple of 10";
+        assert actual % 10 != 0 : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
