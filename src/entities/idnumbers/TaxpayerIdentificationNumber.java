@@ -28,7 +28,7 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
 
     // TODO: Write tests for this
     int hashCodeObscurant() {
-        return 0;
+        return this.num;
     }
 
     TaxpayerIdentificationNumber(int number) {

@@ -37,7 +37,7 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     @Override
     int hashCodeObscurant() {
-        return 0;
+        return this.num;
     }
 
     public short getLastFour() {
