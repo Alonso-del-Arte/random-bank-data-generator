@@ -32,7 +32,7 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
     // TODO: Write tests for this
     @Override
     int hashCodeOffset() {
-        return 16384;
+        return 16380;
     }
 
     @Override
