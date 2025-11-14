@@ -289,6 +289,23 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int numberOfCalls = RANDOM.nextInt(128) + 32;
+        for (int i = 0; i < numberOfCalls; i++) {
+            int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT
+                    - i);
+            SocialSecurityNumber instance = new SocialSecurityNumber(num);
+            int expected = instance.hashCodeOffset()
+                    + instance.hashCodeObscurant();
+            int actual = instance.hashCode();
+            String message = "Reckoning hash code for "
+                    + instance.toRedactedString();
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
