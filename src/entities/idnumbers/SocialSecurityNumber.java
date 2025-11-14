@@ -52,12 +52,6 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     // TODO: Write tests for this
     @Override
-    public boolean equals(Object obj) {
-        return obj instanceof SocialSecurityNumber;
-    }
-
-    // TODO: Write tests for this
-    @Override
     public int hashCode() {
         return 0;
     }
