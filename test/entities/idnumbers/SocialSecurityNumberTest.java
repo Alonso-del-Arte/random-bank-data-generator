@@ -229,6 +229,17 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testNotEqualsDiffNum() {
+        int numA = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber ssnA = new SocialSecurityNumber(numA);
+        int numB = TaxpayerIdentificationNumberTest.chooseNumOtherThan(numA);
+        SocialSecurityNumber ssnB = new SocialSecurityNumber(numB);
+        String message = ssnA.toRedactedString() + " should not equal "
+                + ssnB.toRedactedString();
+        assertNotEquals(ssnA, ssnB, message);
+    }
+
+    @Test
     void testHashCodeOffset() {
         System.out.println("hashCodeOffset");
         int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
