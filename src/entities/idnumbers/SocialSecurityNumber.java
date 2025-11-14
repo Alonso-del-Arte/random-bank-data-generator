@@ -29,7 +29,6 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
                 && (s.indexOf('-', 7) == -1);
     }
 
-    // TODO: Write tests for this
     @Override
     int hashCodeOffset() {
         return 16381;
@@ -66,10 +65,9 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
 
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        return this.hashCodeOffset() + this.hashCodeObscurant();
     }
 
     @Override
