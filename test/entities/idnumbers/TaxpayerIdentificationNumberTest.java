@@ -11,6 +11,15 @@ public class TaxpayerIdentificationNumberTest {
     public static final Random RANDOM
             = new Random(System.currentTimeMillis() << 3);
 
+    static int chooseNumOtherThan(int other) {
+        int choice = other;
+        while (choice == other) {
+            choice = RANDOM.nextInt(TaxpayerIdentificationNumber
+                    .UPPER_NUMBER_LIMIT);
+        }
+        return choice;
+    }
+
     @Test
     void testUpperNumberLimitConstant() {
         int expected = 1000000000;
