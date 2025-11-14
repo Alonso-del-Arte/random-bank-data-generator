@@ -50,13 +50,20 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
         return (this.num % SERIAL_MODULUS) == (other.num % SERIAL_MODULUS);
     }
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (!(this.getClass().equals(obj.getClass()))) return false;
-        return this.num == ((SocialSecurityNumber) obj).num;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass().equals(obj.getClass())) {
+            return this.num == ((SocialSecurityNumber) obj).num;
+        } else {
+            return false;
+        }
+
     }
 
     // TODO: Write tests for this
