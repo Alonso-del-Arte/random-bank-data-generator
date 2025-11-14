@@ -240,6 +240,15 @@ class SocialSecurityNumberTest {
     }
 
     @Test
+    void testEquals() {
+        System.out.println("equals");
+        int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber someNum = new SocialSecurityNumber(num);
+        SocialSecurityNumber sameNum = new SocialSecurityNumber(num);
+        assertEquals(someNum, sameNum);
+    }
+
+    @Test
     void testHashCodeOffset() {
         System.out.println("hashCodeOffset");
         int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
