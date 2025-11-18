@@ -202,6 +202,7 @@ class SocialSecurityNumberTest {
         assert numberA.matchesLastFour(numberB) : msg;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     void testReferentialEquality() {
         int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
