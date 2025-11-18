@@ -207,7 +207,8 @@ class SocialSecurityNumberTest {
         int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
         SocialSecurityNumber instance = new SocialSecurityNumber(num);
         String msg = instance.toRedactedString() + " should equal itself";
-        assert instance.equals(instance) : msg;
+        Object obj = CurrencyAmountTest.passThrough(instance);
+        assert instance.equals(obj) : msg;
     }
 
     @Test
