@@ -1,6 +1,6 @@
 package entities.idnumbers;
 
-import static currency.CurrencyAmountTest.RANDOM;
+import static currency.CurrencyAmountTest.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,11 +86,14 @@ class EmployerIdentificationNumberTest {
         assertEquals(expected, actual);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     void testReferentialEquality() {
         int num = RANDOM.nextInt(EmployerIdentificationNumber.UPPER_NUMBER_LIMIT);
         EmployerIdentificationNumber instance = new EmployerIdentificationNumber(num);
-        assert instance.equals(instance);
+        Object obj = passThrough(instance);
+        String msg = instance + " should be equal to itself";
+        assert instance.equals(obj) : msg;
     }
 
     @Test
