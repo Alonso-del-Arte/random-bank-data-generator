@@ -26,6 +26,23 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
         return 0;
     }
 
+    // TODO: Write tests for this
+    int hashCodeObscurant() {
+        return this.num;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         String intermediate = TextCalculator.leftPad(Integer.toString(this.num),
