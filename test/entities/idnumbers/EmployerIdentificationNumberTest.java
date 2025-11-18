@@ -87,6 +87,13 @@ class EmployerIdentificationNumberTest {
     }
 
     @Test
+    void testReferentialEquality() {
+        int num = RANDOM.nextInt(EmployerIdentificationNumber.UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber instance = new EmployerIdentificationNumber(num);
+        assert instance.equals(instance);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
