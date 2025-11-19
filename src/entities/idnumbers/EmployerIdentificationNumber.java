@@ -20,10 +20,9 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
         return s.indexOf('-') == 2;
     }
 
-    // TODO: Write tests for this
     @Override
     int hashCodeOffset() {
-        return 20;
+        return 21;
     }
 
     // TODO: Write tests for this
