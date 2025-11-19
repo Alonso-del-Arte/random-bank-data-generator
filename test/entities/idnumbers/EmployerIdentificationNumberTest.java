@@ -147,6 +147,18 @@ class EmployerIdentificationNumberTest {
     }
 
     @Test
+    void testHashCodeOffset() {
+        System.out.println("hashCodeOffset");
+        int num = RANDOM.nextInt(EmployerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber instance
+                = new EmployerIdentificationNumber(num);
+        int actual = instance.hashCodeOffset();
+        String msg = "Hash code offset should not be 0";
+        assert actual != 0 : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
