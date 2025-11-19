@@ -23,7 +23,7 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
     // TODO: Write tests for this
     @Override
     int hashCodeOffset() {
-        return 2;
+        return 20;
     }
 
     // TODO: Write tests for this
