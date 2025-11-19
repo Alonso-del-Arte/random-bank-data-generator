@@ -171,6 +171,18 @@ class EmployerIdentificationNumberTest {
     }
 
     @Test
+    void testHashCodeOffsetShouldNotBeMultipleOfTen() {
+        int num = RANDOM.nextInt(EmployerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber instance
+                = new EmployerIdentificationNumber(num);
+        int actual = instance.hashCodeOffset();
+        String msg = "Hash code offset " + actual
+                + " should not be multiple of 10";
+        assert actual % 10 != 0 : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
