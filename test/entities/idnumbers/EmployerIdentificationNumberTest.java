@@ -116,6 +116,19 @@ class EmployerIdentificationNumberTest {
     }
 
     @Test
+    void testNotEqualsDiffNum() {
+        int numA = RANDOM.nextInt(EmployerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber einA
+                = new EmployerIdentificationNumber(numA);
+        int numB = TaxpayerIdentificationNumberTest.chooseNumOtherThan(numA);
+        EmployerIdentificationNumber einB
+                = new EmployerIdentificationNumber(numB);
+        String message = einA + " should not equal " + einB;
+        assertNotEquals(einA, einB, message);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
