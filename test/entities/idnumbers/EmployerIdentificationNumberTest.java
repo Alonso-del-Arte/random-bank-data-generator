@@ -114,7 +114,7 @@ class EmployerIdentificationNumberTest {
     void testNotEqualsDiffClass() {
         int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
         SocialSecurityNumber ssn = new SocialSecurityNumber(num);
-        EmployerIdentificationNumber ein 
+        EmployerIdentificationNumber ein
                 = new EmployerIdentificationNumber(num);
         String msg = ssn.toRedactedString() + " should not equal EIN " + ein;
         Object obj = CurrencyAmountTest.passThrough(ssn);
@@ -132,6 +132,18 @@ class EmployerIdentificationNumberTest {
                 = new EmployerIdentificationNumber(numB);
         String message = einA + " should not equal " + einB;
         assertNotEquals(einA, einB, message);
+    }
+
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        int num = RANDOM.nextInt(EmployerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber someNum
+                = new EmployerIdentificationNumber(num);
+        EmployerIdentificationNumber sameNum
+                = new EmployerIdentificationNumber(num);
+        assertEquals(someNum, sameNum);
     }
 
     @Test
