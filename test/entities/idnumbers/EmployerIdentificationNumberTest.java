@@ -90,8 +90,10 @@ class EmployerIdentificationNumberTest {
     @SuppressWarnings("ConstantConditions")
     @Test
     void testReferentialEquality() {
-        int num = RANDOM.nextInt(EmployerIdentificationNumber.UPPER_NUMBER_LIMIT);
-        EmployerIdentificationNumber instance = new EmployerIdentificationNumber(num);
+        int num = RANDOM.nextInt(EmployerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber instance
+                = new EmployerIdentificationNumber(num);
         Object obj = passThrough(instance);
         String msg = instance + " should be equal to itself";
         assert instance.equals(obj) : msg;
@@ -99,8 +101,10 @@ class EmployerIdentificationNumberTest {
 
     @Test
     void testNotEqualsNull() {
-        int num = RANDOM.nextInt(TaxpayerIdentificationNumber.UPPER_NUMBER_LIMIT);
-        EmployerIdentificationNumber instance = new EmployerIdentificationNumber(num);
+        int num = RANDOM.nextInt(TaxpayerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber instance
+                = new EmployerIdentificationNumber(num);
         String msg = instance + " should not equal null";
         Object obj = CurrencyAmountTest.provideNull();
         assert !instance.equals(obj) : msg;
@@ -110,9 +114,11 @@ class EmployerIdentificationNumberTest {
     void testNotEqualsDiffClass() {
         int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
         SocialSecurityNumber ssn = new SocialSecurityNumber(num);
-        EmployerIdentificationNumber ein = new EmployerIdentificationNumber(num);
+        EmployerIdentificationNumber ein 
+                = new EmployerIdentificationNumber(num);
         String msg = ssn.toRedactedString() + " should not equal EIN " + ein;
-        assertNotEquals(ein, ssn, msg);
+        Object obj = CurrencyAmountTest.passThrough(ssn);
+        assertNotEquals(ein, obj, msg);
     }
 
     @Test
