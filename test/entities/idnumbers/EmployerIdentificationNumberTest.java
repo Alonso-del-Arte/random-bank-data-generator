@@ -2,6 +2,7 @@ package entities.idnumbers;
 
 import static currency.CurrencyAmountTest.*;
 
+import currency.CurrencyAmountTest;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -94,6 +95,15 @@ class EmployerIdentificationNumberTest {
         Object obj = passThrough(instance);
         String msg = instance + " should be equal to itself";
         assert instance.equals(obj) : msg;
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        int num = RANDOM.nextInt(TaxpayerIdentificationNumber.UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber instance = new EmployerIdentificationNumber(num);
+        String msg = instance + " should not equal null";
+        Object obj = CurrencyAmountTest.provideNull();
+        assert !instance.equals(obj) : msg;
     }
 
     @Test
