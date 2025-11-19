@@ -31,6 +31,20 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
         return this.num;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.num == ((EmployerIdentificationNumber) obj).num;
+    }
+
     // TODO: Write tests for this
     @Override
     public int hashCode() {
