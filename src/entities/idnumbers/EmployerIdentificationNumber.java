@@ -34,7 +34,7 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof EmployerIdentificationNumber;
+        return obj != null;// instanceof EmployerIdentificationNumber;
     }
 
     // TODO: Write tests for this
