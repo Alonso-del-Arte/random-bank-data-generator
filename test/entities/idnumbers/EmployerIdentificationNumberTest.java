@@ -107,6 +107,15 @@ class EmployerIdentificationNumberTest {
     }
 
     @Test
+    void testNotEqualsDiffClass() {
+        int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
+        SocialSecurityNumber ssn = new SocialSecurityNumber(num);
+        EmployerIdentificationNumber ein = new EmployerIdentificationNumber(num);
+        String msg = ssn.toRedactedString() + " should not equal EIN";
+        assertNotEquals(ein, ssn, msg);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
