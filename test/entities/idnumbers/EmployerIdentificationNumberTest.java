@@ -111,7 +111,7 @@ class EmployerIdentificationNumberTest {
         int num = RANDOM.nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT);
         SocialSecurityNumber ssn = new SocialSecurityNumber(num);
         EmployerIdentificationNumber ein = new EmployerIdentificationNumber(num);
-        String msg = ssn.toRedactedString() + " should not equal EIN";
+        String msg = ssn.toRedactedString() + " should not equal EIN " + ein;
         assertNotEquals(ein, ssn, msg);
     }
 
