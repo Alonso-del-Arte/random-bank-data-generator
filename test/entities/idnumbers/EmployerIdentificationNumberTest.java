@@ -183,6 +183,18 @@ class EmployerIdentificationNumberTest {
     }
 
     @Test
+    void testHashCodeObscurant() {
+        System.out.println("hashCodeObscurant");
+        int num = RANDOM.nextInt(EmployerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        EmployerIdentificationNumber instance
+                = new EmployerIdentificationNumber(num);
+        int actual = instance.hashCodeObscurant();
+        String msg = "Obscurant for SSN " + instance + " should not be " + num;
+        assert actual != num : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
