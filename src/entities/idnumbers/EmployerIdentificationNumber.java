@@ -25,9 +25,10 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
         return 21;
     }
 
-    // TODO: Write tests for this
     int hashCodeObscurant() {
-        return this.num;
+        int trail = this.num % 10000000;
+        int head = this.num - trail;
+        return trail * 100 + head / 10000000;
     }
 
     @Override
