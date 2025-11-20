@@ -31,6 +31,18 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
         return this.num;
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return Integer.MIN_VALUE;
+    }
+
     TaxpayerIdentificationNumber(int number) {
         if (number < 0 || number >= UPPER_NUMBER_LIMIT) {
             String excMsg = "Number " + number + " is outside of the range 0 to "
