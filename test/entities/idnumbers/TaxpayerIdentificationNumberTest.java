@@ -71,6 +71,21 @@ public class TaxpayerIdentificationNumberTest {
     }
 
     @Test
+    void testNotEqualsDiffNum() {
+        int halfBound = TaxpayerIdentificationNumber.UPPER_NUMBER_LIMIT / 2;
+        int numA = RANDOM.nextInt(halfBound);
+        int numB = RANDOM.nextInt(halfBound,
+                TaxpayerIdentificationNumber.UPPER_NUMBER_LIMIT);
+        TaxpayerIdentificationNumber tinA
+                = new TaxpayerIdentificationNumberImpl(numA);
+        TaxpayerIdentificationNumber tinB
+                = new TaxpayerIdentificationNumberImpl(numB);
+        String message = "TIN for " + numA + " should not equal TIN for "
+                + numB;
+        assertNotEquals(tinA, tinB, message);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
