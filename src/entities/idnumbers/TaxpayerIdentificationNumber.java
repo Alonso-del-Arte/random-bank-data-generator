@@ -34,7 +34,7 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj != null && this.getClass().equals(obj.getClass());
     }
 
     // TODO: Write tests for this
