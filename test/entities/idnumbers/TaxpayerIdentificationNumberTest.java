@@ -86,6 +86,19 @@ public class TaxpayerIdentificationNumberTest {
     }
 
     @Test
+    void testEquals() {
+        System.out.println("equals");
+        int num = RANDOM.nextInt(TaxpayerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        TaxpayerIdentificationNumber someNumber
+                = new TaxpayerIdentificationNumberImpl(num);
+        TaxpayerIdentificationNumber sameNumber
+                = new TaxpayerIdentificationNumberImpl(num);
+        String message = "TIN for number " + num;
+        assertEquals(someNumber, sameNumber, message);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
