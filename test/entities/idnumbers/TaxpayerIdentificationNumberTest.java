@@ -51,6 +51,26 @@ public class TaxpayerIdentificationNumberTest {
     }
 
     @Test
+    void testNotEqualsDiffClass() {
+        int num = RANDOM.nextInt(TaxpayerIdentificationNumber
+                .UPPER_NUMBER_LIMIT);
+        TaxpayerIdentificationNumber implClassInstance
+                = new TaxpayerIdentificationNumberImpl(num);
+        TaxpayerIdentificationNumber anonClassInstance = new TaxpayerIdentificationNumber(num) {
+
+            @Override
+            int hashCodeOffset() {
+                return 0;
+            }
+
+        };
+        String message = "Instance of " + implClassInstance.getClass().getName()
+                + " for number " + num + " should not be equal to instance of "
+                + anonClassInstance.getClass().getName() + " for same number";
+        assertNotEquals(implClassInstance, anonClassInstance, message);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
