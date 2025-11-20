@@ -43,6 +43,14 @@ public class TaxpayerIdentificationNumberTest {
     }
 
     @Test
+    void testNotEqualsNull() {
+        TaxpayerIdentificationNumber instance = makeTIN();
+        Object obj = provideNull();
+        String message = "TIN " + instance + " should not equal null";
+        assertNotEquals(instance, obj, message);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
