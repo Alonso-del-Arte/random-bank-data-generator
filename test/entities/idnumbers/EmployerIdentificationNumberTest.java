@@ -195,6 +195,23 @@ class EmployerIdentificationNumberTest {
     }
 
     @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int numberOfCalls = RANDOM.nextInt(128) + 32;
+        for (int i = 0; i < numberOfCalls; i++) {
+            int num = RANDOM.nextInt(EmployerIdentificationNumber
+                    .UPPER_NUMBER_LIMIT - i);
+            TaxpayerIdentificationNumber instance
+                    = new EmployerIdentificationNumber(num);
+            int expected = instance.hashCodeOffset()
+                    + instance.hashCodeObscurant();
+            int actual = instance.hashCode();
+            String message = "Reckoning hash code for " + instance;
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
