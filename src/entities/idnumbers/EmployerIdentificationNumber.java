@@ -45,10 +45,9 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
         return this.num == ((EmployerIdentificationNumber) obj).num;
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        return this.hashCodeOffset() + this.hashCodeObscurant();
     }
 
     @Override
