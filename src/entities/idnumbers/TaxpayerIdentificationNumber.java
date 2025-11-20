@@ -31,6 +31,20 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
         return this.num;
     }
 
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass().equals(obj.getClass())) {
+            return this.num == ((TaxpayerIdentificationNumber) obj).num;
+        } else {
+            return false;
+        }
+    }
+
     // TODO: Write tests for this
     @Override
     public int hashCode() {
