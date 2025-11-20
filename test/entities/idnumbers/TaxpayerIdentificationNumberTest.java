@@ -1,5 +1,7 @@
 package entities.idnumbers;
 
+import static currency.CurrencyAmountTest.*;
+
 import java.io.Serial;
 import java.util.Random;
 
@@ -30,6 +32,14 @@ public class TaxpayerIdentificationNumberTest {
     public static TaxpayerIdentificationNumber makeTIN() {
         return new TaxpayerIdentificationNumberImpl(RANDOM
                 .nextInt(TaxpayerIdentificationNumber.UPPER_NUMBER_LIMIT));
+    }
+
+    @Test
+    void testReferentialEquality() {
+        TaxpayerIdentificationNumber instance = makeTIN();
+        Object obj = passThrough(instance);
+        String message = "TIN " + instance + " should be equal to itself";
+        assertEquals(instance, obj, message);
     }
 
     @Test
@@ -79,7 +89,7 @@ public class TaxpayerIdentificationNumberTest {
 
         @Override
         int hashCodeOffset() {
-            return 16384;
+            return 38416;
         }
 
         TaxpayerIdentificationNumberImpl(int number) {
