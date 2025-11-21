@@ -63,6 +63,11 @@ public class TaxpayerIdentificationNumberTest {
                 return 0;
             }
 
+            @Override
+            int hashCodeObscurant() {
+                return this.num << 10;
+            }
+
         };
         String message = "Instance of " + implClassInstance.getClass().getName()
                 + " for number " + num + " should not be equal to instance of "
@@ -146,6 +151,11 @@ public class TaxpayerIdentificationNumberTest {
         @Override
         int hashCodeOffset() {
             return 38416;
+        }
+
+        @Override
+        int hashCodeObscurant() {
+            return ~this.num;
         }
 
         TaxpayerIdentificationNumberImpl(int number) {

@@ -26,10 +26,7 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
      */
     abstract int hashCodeOffset();
 
-    // TODO: Write tests for this
-    int hashCodeObscurant() {
-        return this.num;
-    }
+    abstract int hashCodeObscurant();
 
     public boolean equals(Object obj) {
         if (this == obj) {
