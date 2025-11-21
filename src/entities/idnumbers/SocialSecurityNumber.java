@@ -50,26 +50,6 @@ public class SocialSecurityNumber extends TaxpayerIdentificationNumber {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (this.getClass().equals(obj.getClass())) {
-            return this.num == ((SocialSecurityNumber) obj).num;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return this.hashCodeOffset() + this.hashCodeObscurant();
-    }
-
-    @Override
     public String toString() {
         String initial = leftPad(Integer.toString(this.num), 9, '0');
         return initial.substring(0, 3) + '-' + initial.substring(3, 5) + '-'

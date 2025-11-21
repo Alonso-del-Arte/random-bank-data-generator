@@ -32,25 +32,6 @@ public class EmployerIdentificationNumber extends TaxpayerIdentificationNumber {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
-            return false;
-        }
-        return this.num == ((EmployerIdentificationNumber) obj).num;
-    }
-
-    @Override
-    public int hashCode() {
-        return this.hashCodeOffset() + this.hashCodeObscurant();
-    }
-
-    @Override
     public String toString() {
         String intermediate = TextCalculator.leftPad(Integer.toString(this.num),
                 9, '0');
