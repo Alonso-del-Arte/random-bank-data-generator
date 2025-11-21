@@ -28,7 +28,7 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
 
     abstract int hashCodeObscurant();
 
-    public boolean equals(Object obj) {
+    public final boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -43,7 +43,7 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return this.hashCodeOffset() + this.hashCodeObscurant();
     }
 
