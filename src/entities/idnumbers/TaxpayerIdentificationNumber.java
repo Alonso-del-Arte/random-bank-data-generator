@@ -42,10 +42,9 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
         }
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return Integer.MIN_VALUE;
+        return this.hashCodeOffset() + this.hashCodeObscurant();
     }
 
     TaxpayerIdentificationNumber(int number) {
