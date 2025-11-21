@@ -104,6 +104,16 @@ public class TaxpayerIdentificationNumberTest {
     }
 
     @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        TaxpayerIdentificationNumber instance = makeTIN();
+        int expected = instance.hashCodeOffset() + instance.hashCodeObscurant();
+        int actual = instance.hashCode();
+        String message = "Reckoning hash code for " + instance.num;
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testConstructorRejectsNegativeNumbers() {
         int badNum = RANDOM.nextInt() | Integer.MIN_VALUE;
         String message = "Constructor should reject number " + badNum;
@@ -155,7 +165,7 @@ public class TaxpayerIdentificationNumberTest {
 
         @Override
         int hashCodeObscurant() {
-            return ~this.num;
+            return ((~this.num) << 1) ^ this.num;
         }
 
         TaxpayerIdentificationNumberImpl(int number) {
