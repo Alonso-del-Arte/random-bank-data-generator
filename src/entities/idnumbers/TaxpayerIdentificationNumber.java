@@ -42,6 +42,10 @@ public abstract class TaxpayerIdentificationNumber implements Serializable {
         }
     }
 
+    /**
+     * Gives a hash code for this taxpayer identification number.
+     * @return A number that is different from the actual number.
+     */
     @Override
     public final int hashCode() {
         return this.hashCodeOffset() + this.hashCodeObscurant();
