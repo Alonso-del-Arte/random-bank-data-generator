@@ -25,7 +25,7 @@ class PersonTest {
         return FIRST_NAMES[firstNameIndex] + ' ' + LAST_NAMES[lastNameIndex];
     }
 
-    static SocialSecurityNumber makeSSN() {
+    public static SocialSecurityNumber makeSSN() {
         return new SocialSecurityNumber(RANDOM
                 .nextInt(SocialSecurityNumber.UPPER_NUMBER_LIMIT));
     }
