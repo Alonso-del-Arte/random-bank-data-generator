@@ -96,7 +96,13 @@ class ConversionRateQuoteTest {
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote quote = new ConversionRateQuote(currencies, rate,
                 date);
-        assert quote.equals(passThrough(quote));
+        Object obj = passThrough(quote);
+        String message = "Quote " + quote + " should be equal to itself";
+        assertEquals(quote, obj, message);
+    }
+
+    private static Object provideNull() {
+        return null;
     }
 
     @Test
@@ -108,7 +114,7 @@ class ConversionRateQuoteTest {
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote quote = new ConversionRateQuote(currencies, rate,
                 date);
-        Object obj = passThrough(null);
+        Object obj = provideNull();
         String msg = quote + " should not equal null";
         assert !quote.equals(obj) : msg;
     }
