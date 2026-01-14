@@ -88,6 +88,9 @@ public class ConversionRateQuote {
             String excMsg = "Rate " + rate + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
+        if (date == null) {
+            throw new NullPointerException("Date should not be null");
+        }
         this.pair = currencies;
         this.conversionRate = rate;
         this.fetchDate = date;
