@@ -472,7 +472,6 @@ class ConversionRateQuoteTest {
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
         double rate = RANDOM.nextDouble();
-        LocalDateTime date = LocalDateTime.now();
         String message = "Using null date should've caused NPE";
         Throwable t = assertThrows(NullPointerException.class, () -> {
             ConversionRateQuote instance = new ConversionRateQuote(currencies,
