@@ -70,7 +70,7 @@ public class ConversionRateQuote {
             throw new NullPointerException("Currencies should not be null");
         }
         if (rate == Double.NEGATIVE_INFINITY
-                || rate == Double.POSITIVE_INFINITY) {
+                || rate == Double.POSITIVE_INFINITY || Double.isNaN(rate)) {
             String excMsg = "Rate " + rate + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
