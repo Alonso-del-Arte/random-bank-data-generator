@@ -445,4 +445,25 @@ class ConversionRateQuoteTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testAuxConstructorRejectsNaNRate() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = Double.NaN;
+        String message = "Using " + rate
+                + " for rate should've caused exception";
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            ConversionRateQuote instance = new ConversionRateQuote(currencies,
+                    rate);
+            System.out.println(message + ", not created instance "
+                    + instance.getClass().getName() + '@'
+                    + Integer.toHexString(System.identityHashCode(instance)));
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
