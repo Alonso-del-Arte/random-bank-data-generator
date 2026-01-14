@@ -78,18 +78,15 @@ public class ConversionRateQuote {
         this.fetchDate = LocalDateTime.now();
     }
 
-    // TODO: Write tests for this
     public ConversionRateQuote(CurrencyPair currencies, double rate,
                                LocalDateTime date) {
-        if (currencies == null) {
-            throw new NullPointerException("Currencies should not be null");
+        if (currencies == null || date == null) {
+            String excMsg = "Currencies, date should not be null";
+            throw new NullPointerException(excMsg);
         }
         if (!Double.isFinite(rate)) {
             String excMsg = "Rate " + rate + " is not valid";
             throw new IllegalArgumentException(excMsg);
-        }
-        if (date == null) {
-            throw new NullPointerException("Date should not be null");
         }
         this.pair = currencies;
         this.conversionRate = rate;
