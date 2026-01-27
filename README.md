@@ -11,7 +11,7 @@ intelligence."
 
 My idea here is that this generator program will write a database file (SQL) and 
 that will be it. Thus, I will be using immutable classes a lot more than I would 
-be if this was a program that made repeated accesses to a database that was 
-being accessed by other processes in real time.
+if this was a program that made repeated accesses to a database that was being 
+accessed by other processes in real time.
 
 The (FINISH WRITING)
