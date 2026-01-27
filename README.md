@@ -14,4 +14,5 @@ that will be it. Thus, I will be using immutable classes a lot more than I would
 if this was a program that made repeated accesses to a database that was being 
 accessed by other processes in real time.
 
-The (FINISH WRITING)
+Then it will be up to the programmers of the banking application what they do 
+with the fictional data created by this program.
