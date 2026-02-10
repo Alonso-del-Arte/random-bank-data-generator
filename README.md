@@ -22,3 +22,5 @@ with the fictional data created by this program.
 The program will first create fictional customers, consisting of fictional 
 businesses and fictional individuals. Next, it will create fictional 
 transactions for these fictional customers.
+
+This project won't be open to Hacktoberfest.
