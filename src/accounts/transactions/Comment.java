@@ -16,11 +16,6 @@ public class Comment extends Transaction {
     }
 
     @Override
-    public CurrencyAmount getAmount() {
-        return CurrencyAmount.zeroOf(this.fundCur);
-    }
-
-    @Override
     public String toString() {
         return "Comment: \"" + this.remark + "\" " + this.dateTime.toString();
     }
