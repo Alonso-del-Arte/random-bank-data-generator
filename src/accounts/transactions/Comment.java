@@ -9,8 +9,6 @@ public class Comment extends Transaction {
 
     private final String remark;
 
-    private final Currency fundCur;
-
     public String getText() {
         return this.remark;
     }
@@ -25,22 +23,12 @@ public class Comment extends Transaction {
         if (!super.equals(obj)) {
             return false;
         }
-        Comment other = (Comment) obj;
-        if (!this.remark.equals(other.remark)) {
-            return false;
-        }
-        if (!this.fundCur.equals(other.fundCur)) {
-            return false;
-        }
-        return this.dateTime.equals(other.dateTime);
+        return this.remark.equals(((Comment) obj).remark);
     }
 
     @Override
     public int hashCode() {
-        int hash = this.remark.hashCode() << 5;
-        hash += this.fundCur.hashCode();
-        hash <<= 3;
-        return hash + this.dateTime.hashCode();
+        return super.hashCode() + (this.remark.hashCode() << 5);
     }
 
     public Comment(String text, Currency currency, LocalDateTime date) {
@@ -50,7 +38,6 @@ public class Comment extends Transaction {
             throw new NullPointerException(excMsg);
         }
         this.remark = text;
-        this.fundCur = currency;
     }
 
 }
