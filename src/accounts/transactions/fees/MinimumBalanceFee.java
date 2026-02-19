@@ -50,8 +50,8 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Write tests for this
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory) {
         super(amount, LocalDateTime.of(1970, 1, 1, 12, 0));
-        if (amount == null) {
-            String excMsg = "Amount should not be null";
+        if (amount == null || advisory == null) {
+            String excMsg = "Amount, advisory should not be null";
             throw new NullPointerException(excMsg);
         }
         this.tempAmountHolder = amount;
