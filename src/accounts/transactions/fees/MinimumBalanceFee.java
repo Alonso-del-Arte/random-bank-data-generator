@@ -4,13 +4,17 @@ import accounts.transactions.Comment;
 import currency.CurrencyAmount;
 
 import java.time.LocalDateTime;
+import java.util.Currency;
 
 public class MinimumBalanceFee extends Fee {
+
+    // TODO: Delete when refactoring getAmount()
+    private final CurrencyAmount tempAmountHolder;
 
     // TODO: Write tests for this
     @Override
     public CurrencyAmount getAmount() {
-        return new CurrencyAmount(0, java.util.Currency.getInstance("XCD"));
+        return this.tempAmountHolder;
     }
 
     // TODO: Write tests for this
@@ -46,12 +50,15 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Write tests for this
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory) {
         super(amount, LocalDateTime.of(1970, 1, 1, 12, 0));
+        this.tempAmountHolder = new CurrencyAmount(0,
+                Currency.getInstance("XCD"));
     }
 
     // TODO: Write tests for this
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory,
                              LocalDateTime date) {
         super(amount, date);
+        this.tempAmountHolder = amount;
     }
 
 }
