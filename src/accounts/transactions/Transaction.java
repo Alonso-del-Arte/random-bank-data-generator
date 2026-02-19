@@ -49,10 +49,10 @@ public abstract class Transaction {
     }
 
     Transaction(CurrencyAmount amount, LocalDateTime date) {
-        if (amount == null || date == null) {
-            String excMsg = "Amount, date should not be null";
-            throw new NullPointerException(excMsg);
-        }
+//        if (amount == null || date == null) {
+//            String excMsg = "Amount, date should not be null";
+//            throw new NullPointerException(excMsg);
+//        }
         this.amt = amount;
         this.dateTime = date;
     }
