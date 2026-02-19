@@ -14,7 +14,7 @@ class FeeTest {
 
     static final Random RANDOM = new Random(~System.currentTimeMillis() << 4);
 
-    CurrencyAmount makeFeeAmount() {
+    static CurrencyAmount makeFeeAmount() {
         int subunits = -RANDOM.nextInt(MAXIMUM_FEE_IN_SUBUNITS) - 1;
         Currency currency = CurrencyChooser.chooseCurrency();
         return new CurrencyAmount(subunits, currency);
