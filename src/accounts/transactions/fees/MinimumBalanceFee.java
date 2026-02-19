@@ -43,7 +43,7 @@ public class MinimumBalanceFee extends Fee {
         return 1;
     }
 
-    public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount threshold,
+    public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory,
                              LocalDateTime date) {
         super(amount, date);
     }
