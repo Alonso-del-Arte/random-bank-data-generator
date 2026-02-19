@@ -43,6 +43,12 @@ public class MinimumBalanceFee extends Fee {
         return 1;
     }
 
+    // TODO: Write tests for this
+    public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory) {
+        super(amount, LocalDateTime.of(1970, 1, 1, 12, 0));
+    }
+
+    // TODO: Write tests for this
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory,
                              LocalDateTime date) {
         super(amount, date);
