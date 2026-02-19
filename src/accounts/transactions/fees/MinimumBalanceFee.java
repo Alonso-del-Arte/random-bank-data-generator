@@ -50,8 +50,7 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Write tests for this
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory) {
         super(amount, LocalDateTime.of(1970, 1, 1, 12, 0));
-        this.tempAmountHolder = new CurrencyAmount(0,
-                Currency.getInstance("XCD"));
+        this.tempAmountHolder = amount;
     }
 
     // TODO: Write tests for this
