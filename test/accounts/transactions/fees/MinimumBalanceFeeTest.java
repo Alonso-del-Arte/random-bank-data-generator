@@ -1,6 +1,7 @@
 package accounts.transactions.fees;
 
 import currency.CurrencyAmount;
+import currency.CurrencyChooser;
 
 import java.time.LocalDateTime;
 
@@ -31,6 +32,24 @@ class MinimumBalanceFeeTest {
         Fee instance = new MinimumBalanceFee(expected, advisory, now);
         CurrencyAmount actual = instance.getAmount();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testAuxConstructorRejectsNullAmount() {
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+                CurrencyChooser.chooseCurrency());
+        String message = "Constructor should reject advisory " + advisory
+                + " with null amount";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Fee badInstance = new MinimumBalanceFee(null, advisory);
+            int sysHash = System.identityHashCode(badInstance);
+            System.out.println(message + ", not created instance "
+                    + Integer.toHexString(sysHash));
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
     }
 
 }
