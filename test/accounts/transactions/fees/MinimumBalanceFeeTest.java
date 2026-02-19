@@ -12,6 +12,16 @@ class MinimumBalanceFeeTest {
     private static final int DEFAULT_ADVISORY = 10000;
 
     @Test
+    void testGetAmountAuxConstructor() {
+        CurrencyAmount expected = FeeTest.makeFeeAmount();
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+                expected.getCurrency());
+        Fee instance = new MinimumBalanceFee(expected, advisory);
+        CurrencyAmount actual = instance.getAmount();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testGetAmount() {
         System.out.println("getAmount");
         CurrencyAmount expected = FeeTest.makeFeeAmount();
