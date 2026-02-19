@@ -14,11 +14,11 @@ public class Withdrawal extends Transaction {
 
     public Withdrawal(CurrencyAmount amount, LocalDateTime date) {
         super(amount, date);
-        if (amount.isNotNegative()) {
-            String excMsg = "Amount " + amount
-                    + " is not valid for a withdrawal";
-            throw new IllegalArgumentException(excMsg);
-        }
+//        if (amount.isNotNegative()) {
+//            String excMsg = "Amount " + amount
+//                    + " is not valid for a withdrawal";
+//            throw new IllegalArgumentException(excMsg);
+//        }
     }
 
 }
