@@ -1,5 +1,6 @@
 package accounts.transactions.fees;
 
+import accounts.transactions.Comment;
 import currency.CurrencyAmount;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,12 @@ public class MinimumBalanceFee extends Fee {
     @Override
     public LocalDateTime getTimestamp() {
         return LocalDateTime.of(1900, 1, 1, 0, 1);
+    }
+
+    // TODO: Write tests for this
+    public Comment getAdvisory() {
+        return new Comment("SORRY, NOT IMPLEMENTED YET",
+                this.getAmount().getCurrency(), this.getTimestamp());
     }
 
     // TODO: Write tests for this
