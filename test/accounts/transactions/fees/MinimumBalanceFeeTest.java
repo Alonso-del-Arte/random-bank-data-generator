@@ -111,7 +111,6 @@ class MinimumBalanceFeeTest {
         CurrencyAmount amount = FeeTest.makeFeeAmount();
         CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
                 amount.getCurrency());
-        LocalDateTime now = LocalDateTime.now();
         String message = "Constructor should reject advisory " + advisory
                 + " and amount " + amount + " with null date";
         Throwable t = assertThrows(NullPointerException.class, () -> {
