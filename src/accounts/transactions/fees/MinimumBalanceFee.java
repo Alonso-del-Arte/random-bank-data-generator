@@ -61,8 +61,8 @@ public class MinimumBalanceFee extends Fee {
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory,
                              LocalDateTime date) {
         super(amount, date);
-        if (amount == null || advisory == null) {
-            String excMsg = "Amount should not be null";
+        if (amount == null || advisory == null || date == null) {
+            String excMsg = "Amounts, date should not be null";
             throw new NullPointerException(excMsg);
         }
         this.tempAmountHolder = amount;
