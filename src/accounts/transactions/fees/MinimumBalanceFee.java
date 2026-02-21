@@ -50,7 +50,7 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Write tests for this
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory) {
         super(amount, LocalDateTime.of(1970, 1, 1, 12, 0));
-        if (amount == null || advisory == null) {
+        if (advisory == null) {
             String excMsg = "Amount, advisory should not be null";
             throw new NullPointerException(excMsg);
         }
@@ -61,7 +61,7 @@ public class MinimumBalanceFee extends Fee {
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory,
                              LocalDateTime date) {
         super(amount, date);
-        if (amount == null || advisory == null || date == null) {
+        if (advisory == null) {
             String excMsg = "Amounts, date should not be null";
             throw new NullPointerException(excMsg);
         }
