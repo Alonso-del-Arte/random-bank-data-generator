@@ -54,6 +54,11 @@ public class MinimumBalanceFee extends Fee {
             String excMsg = "Amount, advisory should not be null";
             throw new NullPointerException(excMsg);
         }
+        if (amount.isPositive()) {
+            String excMsg = "Amount " + amount
+                    + " is not valid, should be negative";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.tempAmountHolder = amount;
     }
 
