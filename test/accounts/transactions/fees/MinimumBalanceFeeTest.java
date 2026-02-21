@@ -58,6 +58,29 @@ class MinimumBalanceFeeTest {
     }
 
     @Test
+    void testConstructorRejectsPositiveAmount() {
+        CurrencyAmount amount = FeeTest.makeFeeAmount().negate();
+        String amtStr = amount.toString();
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+                amount.getCurrency());
+        LocalDateTime now = LocalDateTime.now();
+        String message = "Constructor should reject fee amount " + amtStr;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            Fee badInstance = new MinimumBalanceFee(amount, advisory, now);
+            int sysHash = System.identityHashCode(badInstance);
+            System.out.println(message + ", not created instance "
+                    + Integer.toHexString(sysHash));
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should include \"" + amtStr
+                + "\"";
+        assert excMsg.contains(amtStr) : containsMsg;
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testAuxConstructorRejectsNullAmount() {
         CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
                 CurrencyChooser.chooseCurrency());
