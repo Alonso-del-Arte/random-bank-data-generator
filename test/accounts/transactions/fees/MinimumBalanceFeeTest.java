@@ -106,4 +106,24 @@ class MinimumBalanceFeeTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testConstructorRejectsNullDate() {
+        CurrencyAmount amount = FeeTest.makeFeeAmount();
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+                amount.getCurrency());
+        LocalDateTime now = LocalDateTime.now();
+        String message = "Constructor should reject advisory " + advisory
+                + " and amount " + amount + " with null date";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Fee badInstance = new MinimumBalanceFee(amount, advisory, null);
+            int sysHash = System.identityHashCode(badInstance);
+            System.out.println(message + ", not created instance "
+                    + Integer.toHexString(sysHash));
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
