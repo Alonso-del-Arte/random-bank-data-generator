@@ -11,6 +11,9 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Delete when refactoring getAmount()
     private final CurrencyAmount tempAmountHolder;
 
+    // TODO: Delete when refactoring getTimestamp()
+    private final LocalDateTime tempDateHolder;
+
     @Override
     public CurrencyAmount getAmount() {
         return this.tempAmountHolder;
@@ -19,7 +22,7 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Write tests for this
     @Override
     public LocalDateTime getTimestamp() {
-        return LocalDateTime.of(1900, 1, 1, 0, 1);
+        return this.tempDateHolder;
     }
 
     // TODO: Write tests for this
@@ -59,6 +62,7 @@ public class MinimumBalanceFee extends Fee {
             throw new IllegalArgumentException(excMsg);
         }
         this.tempAmountHolder = amount;
+        this.tempDateHolder = LocalDateTime.of(1770, 1, 1, 12, 0);
     }
 
     // TODO: Write tests for this
@@ -74,6 +78,7 @@ public class MinimumBalanceFee extends Fee {
             throw new NullPointerException(excMsg);
         }
         this.tempAmountHolder = amount;
+        this.tempDateHolder = date;
     }
 
 }
