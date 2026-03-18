@@ -11,7 +11,6 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Delete when refactoring getAmount()
     private final CurrencyAmount tempAmountHolder;
 
-    // TODO: Write tests for this
     @Override
     public CurrencyAmount getAmount() {
         return this.tempAmountHolder;
