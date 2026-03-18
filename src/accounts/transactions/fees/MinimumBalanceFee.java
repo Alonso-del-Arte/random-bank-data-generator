@@ -19,7 +19,6 @@ public class MinimumBalanceFee extends Fee {
         return this.tempAmountHolder;
     }
 
-    // TODO: Write tests for this
     @Override
     public LocalDateTime getTimestamp() {
         return this.tempDateHolder;
@@ -62,7 +61,7 @@ public class MinimumBalanceFee extends Fee {
             throw new IllegalArgumentException(excMsg);
         }
         this.tempAmountHolder = amount;
-        this.tempDateHolder = LocalDateTime.of(1770, 1, 1, 12, 0);
+        this.tempDateHolder = LocalDateTime.now();
     }
 
     // TODO: Write tests for this
