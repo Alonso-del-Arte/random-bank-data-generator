@@ -1,5 +1,7 @@
 package accounts.transactions.fees;
 
+import static accounts.transactions.fees.FeeTest.RANDOM;
+
 import currency.CurrencyAmount;
 import currency.CurrencyChooser;
 
@@ -31,6 +33,19 @@ class MinimumBalanceFeeTest {
         LocalDateTime now = LocalDateTime.now();
         Fee instance = new MinimumBalanceFee(expected, advisory, now);
         CurrencyAmount actual = instance.getAmount();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetTimestamp() {
+        System.out.println("getTimestamp");
+        CurrencyAmount amount = FeeTest.makeFeeAmount();
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+                amount.getCurrency());
+        int days = RANDOM.nextInt(7, 180);
+        LocalDateTime expected = LocalDateTime.now().minusDays(days);
+        Fee instance = new MinimumBalanceFee(amount, advisory, expected);
+        LocalDateTime actual = instance.getTimestamp();
         assertEquals(expected, actual);
     }
 
