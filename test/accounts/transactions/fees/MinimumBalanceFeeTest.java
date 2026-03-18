@@ -55,7 +55,6 @@ class MinimumBalanceFeeTest {
         String amtStr = amount.toString();
         CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
                 amount.getCurrency());
-        LocalDateTime now = LocalDateTime.now();
         String message = "Constructor should reject fee amount " + amtStr;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             Fee badInstance = new MinimumBalanceFee(amount, advisory);
