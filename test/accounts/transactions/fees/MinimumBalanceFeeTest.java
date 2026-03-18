@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import static org.testframe.api.Asserters.assertInRange;
+
 class MinimumBalanceFeeTest {
 
     private static final int DEFAULT_ADVISORY = 10000;
@@ -47,6 +49,19 @@ class MinimumBalanceFeeTest {
         Fee instance = new MinimumBalanceFee(amount, advisory, expected);
         LocalDateTime actual = instance.getTimestamp();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetTimestampAuxConstructor() {
+        CurrencyAmount amount = FeeTest.makeFeeAmount();
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+                amount.getCurrency());
+        LocalDateTime minimum = LocalDateTime.now().minusMinutes(1);
+        Fee instance = new MinimumBalanceFee(amount, advisory);
+        LocalDateTime maximum = LocalDateTime.now().plusMinutes(1);
+        LocalDateTime actual = instance.getTimestamp();
+        String msg = "Aux constructor should timestamp the present";
+        assertInRange(minimum, actual, maximum, msg);
     }
 
     @Test
