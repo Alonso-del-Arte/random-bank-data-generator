@@ -1,7 +1,6 @@
 package accounts.transactions.fees;
 
 import static accounts.transactions.fees.FeeTest.RANDOM;
-
 import currency.CurrencyAmount;
 import currency.CurrencyChooser;
 
@@ -14,12 +13,12 @@ import static org.testframe.api.Asserters.assertInRange;
 
 class MinimumBalanceFeeTest {
 
-    private static final int DEFAULT_ADVISORY = 10000;
+    private static final int DEFAULT_ADVISORY_AMOUNT = 10000;
 
     @Test
     void testGetAmountAuxConstructor() {
         CurrencyAmount expected = FeeTest.makeFeeAmount();
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 expected.getCurrency());
         Fee instance = new MinimumBalanceFee(expected, advisory);
         CurrencyAmount actual = instance.getAmount();
@@ -30,7 +29,7 @@ class MinimumBalanceFeeTest {
     void testGetAmount() {
         System.out.println("getAmount");
         CurrencyAmount expected = FeeTest.makeFeeAmount();
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 expected.getCurrency());
         LocalDateTime now = LocalDateTime.now();
         Fee instance = new MinimumBalanceFee(expected, advisory, now);
@@ -42,7 +41,7 @@ class MinimumBalanceFeeTest {
     void testGetTimestamp() {
         System.out.println("getTimestamp");
         CurrencyAmount amount = FeeTest.makeFeeAmount();
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 amount.getCurrency());
         int days = RANDOM.nextInt(7, 180);
         LocalDateTime expected = LocalDateTime.now().minusDays(days);
@@ -54,7 +53,7 @@ class MinimumBalanceFeeTest {
     @Test
     void testGetTimestampAuxConstructor() {
         CurrencyAmount amount = FeeTest.makeFeeAmount();
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 amount.getCurrency());
         LocalDateTime minimum = LocalDateTime.now().minusMinutes(1);
         Fee instance = new MinimumBalanceFee(amount, advisory);
@@ -68,7 +67,7 @@ class MinimumBalanceFeeTest {
     void testAuxConstructorRejectsPositiveAmount() {
         CurrencyAmount amount = FeeTest.makeFeeAmount().negate();
         String amtStr = amount.toString();
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 amount.getCurrency());
         String message = "Constructor should reject fee amount " + amtStr;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
@@ -90,7 +89,7 @@ class MinimumBalanceFeeTest {
     void testConstructorRejectsPositiveAmount() {
         CurrencyAmount amount = FeeTest.makeFeeAmount().negate();
         String amtStr = amount.toString();
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 amount.getCurrency());
         LocalDateTime now = LocalDateTime.now();
         String message = "Constructor should reject fee amount " + amtStr;
@@ -111,7 +110,7 @@ class MinimumBalanceFeeTest {
 
     @Test
     void testAuxConstructorRejectsNullAmount() {
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 CurrencyChooser.chooseCurrency());
         String message = "Constructor should reject advisory " + advisory
                 + " with null amount";
@@ -129,7 +128,7 @@ class MinimumBalanceFeeTest {
 
     @Test
     void testConstructorRejectsNullAmount() {
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 CurrencyChooser.chooseCurrency());
         LocalDateTime now = LocalDateTime.now();
         String message = "Constructor should reject advisory " + advisory
@@ -184,7 +183,7 @@ class MinimumBalanceFeeTest {
     @Test
     void testConstructorRejectsNullDate() {
         CurrencyAmount amount = FeeTest.makeFeeAmount();
-        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY,
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
                 amount.getCurrency());
         String message = "Constructor should reject advisory " + advisory
                 + " and amount " + amount + " with null date";
