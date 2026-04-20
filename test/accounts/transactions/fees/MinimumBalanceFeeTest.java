@@ -89,7 +89,6 @@ class MinimumBalanceFeeTest {
         CurrencyAmount advisory = amount.times(multiplicand);
         MinimumBalanceFee instance = new MinimumBalanceFee(amount, advisory);
         Comment actual = instance.getAdvisory();
-        System.out.println("advisory = " + advisory);
         String expText = "Minimum amount ought to be at least "
                 + advisory.toString();
         String actText = actual.getText();
