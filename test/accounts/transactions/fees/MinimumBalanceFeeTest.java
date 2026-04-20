@@ -6,6 +6,7 @@ import currency.CurrencyAmount;
 import currency.CurrencyChooser;
 
 import java.time.LocalDateTime;
+import java.util.Currency;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -68,13 +69,14 @@ class MinimumBalanceFeeTest {
     void testGetAdvisory() {
         System.out.println("getAdvisory");
         CurrencyAmount amount = FeeTest.makeFeeAmount();
-        int multiplicand = RANDOM.nextInt(2, 10);
+        int multiplicand = -RANDOM.nextInt(2, 10);
         CurrencyAmount advisory = amount.times(multiplicand);
         int days = RANDOM.nextInt(7, 180);
         LocalDateTime date = LocalDateTime.now().minusDays(days);
         MinimumBalanceFee instance
                 = new MinimumBalanceFee(amount, advisory, date);
-        String text = "Minimum amount ought to be at least " + advisory.toString();
+        String text = "Minimum amount ought to be at least "
+                + advisory.toString();
         Comment expected = new Comment(text, amount.getCurrency(), date);
         Comment actual = instance.getAdvisory();
         assertEquals(expected, actual);
