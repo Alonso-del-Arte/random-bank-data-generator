@@ -4,6 +4,7 @@ import accounts.transactions.Comment;
 import static accounts.transactions.fees.FeeTest.RANDOM;
 import currency.CurrencyAmount;
 import currency.CurrencyChooser;
+import currency.CurrencyConversionNeededException;
 
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -194,6 +195,30 @@ class MinimumBalanceFeeTest {
             System.out.println(message + ", not created instance "
                     + Integer.toHexString(sysHash));
         });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    public void testAuxConstructorRejectsMismatchedCurrencies() {
+        CurrencyAmount amount = FeeTest.makeFeeAmount();
+        Currency currencyA = amount.getCurrency();
+        Currency currencyB = CurrencyChooser.chooseCurrencyOtherThan(currencyA);
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
+                currencyB);
+        String message = "Constructor should reject the combination of amount "
+                + amount + " which is drawn in " + currencyA.getDisplayName()
+                + " (" + currencyA.getCurrencyCode() + ") and advisory amount "
+                + advisory + " which is drawn in " + currencyB.getDisplayName()
+                + " (" + currencyB.getCurrencyCode() + ")";
+        Throwable t = assertThrows(CurrencyConversionNeededException.class,
+                () -> {
+                    Fee badInstance = new MinimumBalanceFee(amount, advisory);
+                    System.out.println(message + " not created instance "
+                            + badInstance);
+                }, message);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
