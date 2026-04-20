@@ -51,7 +51,7 @@ public class MinimumBalanceFee extends Fee {
         return 1;
     }
 
-    // TODO: Write tests for this
+    // TODO: Refactor as a chained constructor
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory) {
         super(amount, LocalDateTime.of(1970, 1, 1, 12, 0));
         if (advisory == null) {
@@ -71,7 +71,6 @@ public class MinimumBalanceFee extends Fee {
         this.advisoryAmount = advisory;
     }
 
-    // TODO: Write tests for this
     public MinimumBalanceFee(CurrencyAmount amount, CurrencyAmount advisory,
                              LocalDateTime date) {
         super(amount, date);
@@ -82,6 +81,9 @@ public class MinimumBalanceFee extends Fee {
         if (advisory == null) {
             String excMsg = "Amounts, date should not be null";
             throw new NullPointerException(excMsg);
+        }
+        if (!amount.getCurrency().equals(advisory.getCurrency())) {
+            throw new CurrencyConversionNeededException(amount, advisory);
         }
         this.tempAmountHolder = amount;
         this.tempDateHolder = date;
