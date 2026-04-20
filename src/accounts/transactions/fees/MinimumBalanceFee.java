@@ -26,7 +26,6 @@ public class MinimumBalanceFee extends Fee {
         return this.tempDateHolder;
     }
 
-    // TODO: Write tests for this
     public Comment getAdvisory() {
         String text = "Minimum amount ought to be at least "
                 + this.advisoryAmount.toString();
@@ -66,7 +65,7 @@ public class MinimumBalanceFee extends Fee {
         }
         this.tempAmountHolder = amount;
         this.tempDateHolder = LocalDateTime.now();
-        this.advisoryAmount = advisory.negate();
+        this.advisoryAmount = advisory;
     }
 
     // TODO: Write tests for this
