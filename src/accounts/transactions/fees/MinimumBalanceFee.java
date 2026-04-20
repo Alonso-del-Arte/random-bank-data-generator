@@ -29,7 +29,7 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Write tests for this
     public Comment getAdvisory() {
         String text = "Minimum amount ought to be at least "
-                + this.advisoryAmount.toString();
+                + "this.advisoryAmount.toString()";
         return new Comment(text, this.getAmount().getCurrency(),
                 this.getTimestamp());
     }
