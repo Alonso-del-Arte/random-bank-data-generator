@@ -14,6 +14,8 @@ public class MinimumBalanceFee extends Fee {
     // TODO: Delete when refactoring getTimestamp()
     private final LocalDateTime tempDateHolder;
 
+    private final CurrencyAmount advisoryAmount;
+
     @Override
     public CurrencyAmount getAmount() {
         return this.tempAmountHolder;
@@ -26,8 +28,10 @@ public class MinimumBalanceFee extends Fee {
 
     // TODO: Write tests for this
     public Comment getAdvisory() {
-        return new Comment("SORRY, NOT IMPLEMENTED YET",
-                this.getAmount().getCurrency(), this.getTimestamp());
+        String text = "Minimum amount ought to be at least "
+                + this.advisoryAmount.toString();
+        return new Comment(text, this.getAmount().getCurrency(),
+                this.getTimestamp());
     }
 
     // TODO: Write tests for this
@@ -62,6 +66,7 @@ public class MinimumBalanceFee extends Fee {
         }
         this.tempAmountHolder = amount;
         this.tempDateHolder = LocalDateTime.now();
+        this.advisoryAmount = advisory.negate();
     }
 
     // TODO: Write tests for this
@@ -78,6 +83,7 @@ public class MinimumBalanceFee extends Fee {
         }
         this.tempAmountHolder = amount;
         this.tempDateHolder = date;
+        this.advisoryAmount = advisory;
     }
 
 }
