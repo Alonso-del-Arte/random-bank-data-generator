@@ -83,6 +83,26 @@ class MinimumBalanceFeeTest {
     }
 
     @Test
+    void testGetAdvisoryAuxConstructor() {
+        CurrencyAmount amount = FeeTest.makeFeeAmount();
+        int multiplicand = -RANDOM.nextInt(2, 10);
+        CurrencyAmount advisory = amount.times(multiplicand);
+        MinimumBalanceFee instance = new MinimumBalanceFee(amount, advisory);
+        Comment actual = instance.getAdvisory();
+        System.out.println("advisory = " + advisory);
+        String expText = "Minimum amount ought to be at least "
+                + advisory.toString();
+        String actText = actual.getText();
+        assertEquals(expText, actText);
+        Currency expCurrency = advisory.getCurrency();
+        Currency actCurrency = actual.getAmount().getCurrency();
+        assertEquals(expCurrency, actCurrency);
+        LocalDateTime expTimestamp = instance.getTimestamp();
+        LocalDateTime actTimestamp = actual.getTimestamp();
+        assertEquals(expTimestamp, actTimestamp);
+    }
+
+    @Test
     void testAuxConstructorRejectsPositiveAmount() {
         CurrencyAmount amount = FeeTest.makeFeeAmount().negate();
         String amtStr = amount.toString();
