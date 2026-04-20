@@ -1,5 +1,6 @@
 package accounts.transactions.fees;
 
+import accounts.transactions.Comment;
 import static accounts.transactions.fees.FeeTest.RANDOM;
 import currency.CurrencyAmount;
 import currency.CurrencyChooser;
@@ -61,6 +62,22 @@ class MinimumBalanceFeeTest {
         LocalDateTime actual = instance.getTimestamp();
         String msg = "Aux constructor should timestamp the present";
         assertInRange(minimum, actual, maximum, msg);
+    }
+
+    @Test
+    void testGetAdvisory() {
+        System.out.println("getAdvisory");
+        CurrencyAmount amount = FeeTest.makeFeeAmount();
+        int multiplicand = RANDOM.nextInt(2, 10);
+        CurrencyAmount advisory = amount.times(multiplicand);
+        int days = RANDOM.nextInt(7, 180);
+        LocalDateTime date = LocalDateTime.now().minusDays(days);
+        MinimumBalanceFee instance
+                = new MinimumBalanceFee(amount, advisory, date);
+        String text = "Minimum amount ought to be at least " + advisory.toString();
+        Comment expected = new Comment(text, amount.getCurrency(), date);
+        Comment actual = instance.getAdvisory();
+        assertEquals(expected, actual);
     }
 
     @Test
