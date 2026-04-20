@@ -262,4 +262,31 @@ class MinimumBalanceFeeTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testConstructorRejectsMismatchedCurrencies() {
+        CurrencyAmount amount = FeeTest.makeFeeAmount();
+        Currency currencyA = amount.getCurrency();
+        Currency currencyB = CurrencyChooser.chooseCurrencyOtherThan(currencyA);
+        CurrencyAmount advisory = new CurrencyAmount(DEFAULT_ADVISORY_AMOUNT,
+                currencyB);
+        int days = RANDOM.nextInt(7, 180);
+        LocalDateTime date = LocalDateTime.now().minusDays(days);
+        String message = "Constructor should reject the combination of amount "
+                + amount + " which is drawn in " + currencyA.getDisplayName()
+                + " (" + currencyA.getCurrencyCode() + ") and advisory amount "
+                + advisory + " which is drawn in " + currencyB.getDisplayName()
+                + " (" + currencyB.getCurrencyCode() + ")";
+        Throwable t = assertThrows(CurrencyConversionNeededException.class,
+                () -> {
+                    Fee badInstance = new MinimumBalanceFee(amount, advisory,
+                            date);
+                    System.out.println(message + " not created instance "
+                            + badInstance);
+                }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
