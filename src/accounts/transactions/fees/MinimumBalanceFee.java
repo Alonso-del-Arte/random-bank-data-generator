@@ -2,9 +2,9 @@ package accounts.transactions.fees;
 
 import accounts.transactions.Comment;
 import currency.CurrencyAmount;
+import currency.CurrencyConversionNeededException;
 
 import java.time.LocalDateTime;
-import java.util.Currency;
 
 public class MinimumBalanceFee extends Fee {
 
@@ -57,6 +57,9 @@ public class MinimumBalanceFee extends Fee {
         if (advisory == null) {
             String excMsg = "Amount, advisory should not be null";
             throw new NullPointerException(excMsg);
+        }
+        if (!amount.getCurrency().equals(advisory.getCurrency())) {
+            throw new CurrencyConversionNeededException(amount, advisory);
         }
         if (amount.isPositive()) {
             String excMsg = "Amount " + amount
